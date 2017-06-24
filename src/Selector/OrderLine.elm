@@ -1,14 +1,13 @@
 module Selector.OrderLine exposing (..)
 
-import Data.OrderLine exposing (OrderLine, OrderLineId)
+import Data.OrderLine exposing (OrderLine, OrderLineErr(..), OrderLineId)
 import Data.Product exposing (Product, defaultProduct)
 import Store.Main exposing (Store)
 import Store.OrderLineStore exposing (getOrderLine)
 import Store.ProductStore exposing (getProduct)
-import Util exposing ((=>))
 
 
-orderLineSelector : OrderLineId -> Store -> Maybe ( OrderLine, Product )
+orderLineSelector : OrderLineId -> Store -> Result OrderLineErr ( OrderLine, Product )
 orderLineSelector orderLineId store =
     let
         orderLine : Maybe OrderLine
@@ -23,4 +22,15 @@ orderLineSelector orderLineId store =
                         getProduct orderLine.productId store.products
                     )
     in
-    Maybe.map2 (=>) orderLine product
+    case ( orderLine, product ) of
+        ( Nothing, Nothing ) ->
+            Err OrderLineNotFound
+
+        ( Nothing, Just _ ) ->
+            Err OrderLineNotFound
+
+        ( Just _, Nothing ) ->
+            Err ProductNotFound
+
+        ( Just orderLine, Just product ) ->
+            Ok ( orderLine, product )

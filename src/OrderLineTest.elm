@@ -18,4 +18,4 @@ product =
 
 main : Html msg
 main =
-    view ( orderLine, product )
+    view <| Just ( orderLine, product )

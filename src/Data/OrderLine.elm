@@ -16,6 +16,11 @@ type alias OrderLine =
     }
 
 
+type OrderLineErr
+    = OrderLineNotFound
+    | ProductNotFound
+
+
 orderLineIdToString : OrderLineId -> String
 orderLineIdToString (OrderLineId orderLineId) =
     orderLineId
