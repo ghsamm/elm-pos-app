@@ -1,5 +1,7 @@
 module Util exposing (..)
 
+import Dict exposing (Dict)
+
 
 (=>) : a -> b -> ( a, b )
 (=>) =
@@ -10,3 +12,10 @@ module Util exposing (..)
 meaning you can use it at the end of a pipeline and have the precedence work out.
 -}
 infixl 0 =>
+
+
+storeFromList : (v -> comparable) -> List v -> Dict comparable v
+storeFromList keyGetter list =
+    list
+        |> List.map (\el -> ( keyGetter el, el ))
+        |> Dict.fromList
