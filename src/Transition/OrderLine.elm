@@ -9,3 +9,15 @@ applyDiscount discount orderLine =
     { orderLine
         | discount = Just discount
     }
+
+
+setProductQuantity : Int -> OrderLine -> OrderLine
+setProductQuantity newQuantity orderLine =
+    { orderLine
+        | quantity = newQuantity
+    }
+
+
+incrementQuantity : OrderLine -> OrderLine
+incrementQuantity orderLine =
+    setProductQuantity (orderLine.quantity + 1) orderLine

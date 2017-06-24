@@ -10,3 +10,8 @@ type alias Product =
     , name : String
     , price : Float
     }
+
+
+defaultProduct : Product
+defaultProduct =
+    Product (ProductId "-1") "(no name)" 0
