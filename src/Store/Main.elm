@@ -6,5 +6,5 @@ import Store.ProductStore exposing (ProductStore)
 
 type alias Store =
     { products : ProductStore
-    , orderlines : OrderLineStore
+    , orderLines : OrderLineStore
     }

@@ -14,3 +14,8 @@ type alias OrderLine =
     , quantity : Int
     , discount : Maybe Discount
     }
+
+
+orderLineIdToString : OrderLineId -> String
+orderLineIdToString (OrderLineId orderLineId) =
+    orderLineId

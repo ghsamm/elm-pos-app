@@ -1,15 +1,26 @@
 module Selector.OrderLine exposing (..)
 
-import Data.OrderLine exposing (OrderLine)
+import Data.OrderLine exposing (OrderLine, OrderLineId)
 import Data.Product exposing (Product, defaultProduct)
-import Dict exposing (get)
 import Store.Main exposing (Store)
+import Store.OrderLineStore exposing (getOrderLine)
+import Store.ProductStore exposing (getProduct)
+import Util exposing ((=>))
 
 
-orderLineSelector : OrderLine -> Store -> ( OrderLine, Product )
-orderLineSelector orderLine store =
+orderLineSelector : OrderLineId -> Store -> Maybe ( OrderLine, Product )
+orderLineSelector orderLineId store =
     let
+        orderLine : Maybe OrderLine
+        orderLine =
+            getOrderLine orderLineId store.orderLines
+
+        product : Maybe Product
         product =
-            Maybe.withDefault Produt.defaultProduct Dict.get orderLine.productId store.products
+            orderLine
+                |> Maybe.andThen
+                    (\orderLine ->
+                        getProduct orderLine.productId store.products
+                    )
     in
-    ( orderLine, product )
+    Maybe.map2 (=>) orderLine product
