@@ -28,10 +28,6 @@ viewTotal store =
 
 view : Store -> Html msg
 view store =
-    let
-        s =
-            Debug.log "getToal store " <| getTotal store
-    in
     div []
         [ OrderLineList.view store.orderLines store
         , viewTotal store

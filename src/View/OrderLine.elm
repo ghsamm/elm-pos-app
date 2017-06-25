@@ -100,10 +100,6 @@ view viewData =
             div [] [ Html.text "this line is invalid" ]
 
         Ok ( orderLine, product ) ->
-            let
-                f =
-                    Debug.log "product" product
-            in
             div [ class "order-line__content" ]
                 [ div [ class "order-line__row order-line__top-row" ]
                     [ viewName product.name
