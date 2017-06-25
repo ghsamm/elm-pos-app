@@ -1,6 +1,6 @@
 module View.OrderLine exposing (view)
 
-import Data.Discount exposing (Discount(..), discountToString)
+import Data.Discount exposing (Discount(..), applyDiscount, discountToString)
 import Data.OrderLine exposing (OrderLine, OrderLineErr)
 import Data.Product exposing (Product)
 import Html exposing (..)
@@ -18,33 +18,55 @@ formatPrice price =
     toString price ++ " DT"
 
 
-viewPrice : Float -> Html msg
-viewPrice price =
-    div [ class "order-line__product-price order-line__text--bold" ]
+viewUnitPrice : Float -> Html msg
+viewUnitPrice price =
+    div [ class "order-line__unit-price order-line__text--bold" ]
         [ Html.text <| formatPrice price ]
 
 
-viewDiscount : Maybe Discount -> Html msg
+viewDiscount : Discount -> Html msg
 viewDiscount discount =
-    case discount of
-        Just discount ->
-            text <| " with a discount of " ++ discountToString discount
+    let
+        textData =
+            case discount of
+                NoDiscount ->
+                    text ""
 
-        Nothing ->
-            text ""
+                _ ->
+                    span []
+                        [ text "*with a discount of "
+                        , span [ class "order-line__text--bold" ]
+                            [ text <| discountToString discount ]
+                        ]
+    in
+    div [ class "order-line__discount" ] [ textData ]
 
 
-viewInfo : Int -> Float -> Maybe Discount -> Html msg
-viewInfo quantity unitPrice discount =
-    div [ class "order-line__info" ]
-        [ span
-            [ class "order-line__text--bold" ]
-            [ Html.text <| toString quantity ]
-        , text " x "
+viewTotalPrice : Int -> Float -> Discount -> Html msg
+viewTotalPrice quantity unitPrice discount =
+    span
+        [ class "order-line__total-price order-line__text--bold" ]
+        [ text <| formatPrice <| applyDiscount discount <| toFloat quantity * unitPrice ]
+
+
+viewBottomLine : Int -> Float -> Discount -> Html msg
+viewBottomLine quantity unitPrice discount =
+    div [ class "order-line__bottom-line" ]
+        [ text " x "
         , span
             [ class "order-line__text--bold" ]
-            [ Html.text <| formatPrice unitPrice ]
-        , viewDiscount discount
+            [ Html.text <| toString quantity ]
+        , text " = "
+        , viewTotalPrice quantity unitPrice discount
+        ]
+
+
+viewInfo : Int -> Float -> Discount -> Html msg
+viewInfo quantity unitPrice discount =
+    div
+        [ class "order-line__info order-line__row" ]
+        [ viewDiscount discount
+        , viewBottomLine quantity unitPrice discount
         ]
 
 
@@ -60,9 +82,9 @@ view viewData =
                     Debug.log "product" product
             in
             div [ class "order-line__content" ]
-                [ div [ class "order-line__first-row" ]
+                [ div [ class "order-line__row" ]
                     [ viewName product.name
-                    , viewPrice product.price
+                    , viewUnitPrice product.price
                     ]
                 , viewInfo orderLine.quantity product.price orderLine.discount
                 ]

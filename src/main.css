@@ -25,16 +25,21 @@ body {
   align-items: stretch;
 }
 
-.order-line__first-row {
+.order-line__row {
   display: flex;
+  flex: 1;
 }
 
 .order-line__product-name {
     flex: 1;
 }
 
-.order-line__product-price {
-}
 .order-line__info {
-  width: 100%;
+  align-items: baseline;
+}
+
+.order-line__discount {
+  flex: 1;
+  font-size: 0.8em;
+  font-style: italic;
 }

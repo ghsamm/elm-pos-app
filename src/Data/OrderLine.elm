@@ -12,7 +12,7 @@ type alias OrderLine =
     { id : OrderLineId
     , productId : ProductId
     , quantity : Int
-    , discount : Maybe Discount
+    , discount : Discount
     }
 
 

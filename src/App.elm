@@ -1,5 +1,6 @@
 module App exposing (..)
 
+import Data.Discount exposing (Discount(..))
 import Data.OrderLine exposing (OrderLine, OrderLineId(..))
 import Data.Product exposing (Product, ProductId(..))
 import Html exposing (..)
@@ -12,7 +13,7 @@ import View.OrderLineContainer as OrderLineContainer
 
 orderLine : OrderLine
 orderLine =
-    OrderLine (OrderLineId "order-line-id") (ProductId "product-id") 1 Nothing
+    OrderLine (OrderLineId "order-line-id") (ProductId "product-id") 1 (PercentageDiscount 12)
 
 
 product : Product
