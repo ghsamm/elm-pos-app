@@ -9,6 +9,8 @@ body {
   flex: 1;
 }
 
+/* OrderLine */
+
 .order-line-list__container {
   width: 400px;
   display: flex;
@@ -74,4 +76,35 @@ body {
   flex: 1;
   font-size: 0.8em;
   font-style: italic;
+}
+
+/* Product */
+
+.product__content {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  border: 1px solid #eee;
+}
+
+.product__price {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.8em;
+  color: white;
+  background-color: #d4d4d4;
+  padding: 2px;
+  margin: 2px;
+}
+
+.product__name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 0.7em;
+  text-align: center;
+  padding: 2px;
+  background-color: #eee;
 }
