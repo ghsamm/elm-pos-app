@@ -1,5 +1,6 @@
 module View.OrderLine exposing (view)
 
+import Data.Discount exposing (Discount(..), discountToString)
 import Data.OrderLine exposing (OrderLine, OrderLineErr)
 import Data.Product exposing (Product)
 import Html exposing (..)
@@ -12,16 +13,38 @@ viewName name =
         [ Html.text <| name ]
 
 
+formatPrice : Float -> String
+formatPrice price =
+    toString price ++ " DT"
+
+
 viewPrice : Float -> Html msg
 viewPrice price =
-    div [ class "order-line__product-price" ]
-        [ Html.text <| toString price ++ " DT" ]
+    div [ class "order-line__product-price order-line__text--bold" ]
+        [ Html.text <| formatPrice price ]
 
 
-viewInfo : OrderLine -> Product -> Html msg
-viewInfo orderLine product =
+viewDiscount : Maybe Discount -> Html msg
+viewDiscount discount =
+    case discount of
+        Just discount ->
+            text <| " with a discount of " ++ discountToString discount
+
+        Nothing ->
+            text ""
+
+
+viewInfo : Int -> Float -> Maybe Discount -> Html msg
+viewInfo quantity unitPrice discount =
     div [ class "order-line__info" ]
-        [ Html.text "info for the product"
+        [ span
+            [ class "order-line__text--bold" ]
+            [ Html.text <| toString quantity ]
+        , text " x "
+        , span
+            [ class "order-line__text--bold" ]
+            [ Html.text <| formatPrice unitPrice ]
+        , viewDiscount discount
         ]
 
 
@@ -41,5 +64,5 @@ view viewData =
                     [ viewName product.name
                     , viewPrice product.price
                     ]
-                , viewInfo orderLine product
+                , viewInfo orderLine.quantity product.price orderLine.discount
                 ]

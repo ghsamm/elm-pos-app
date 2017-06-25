@@ -15,6 +15,10 @@ body {
   height: 40px;
 }
 
+.order-line__text--bold {
+  font-weight: bold;
+}
+
 .order-line__content {
   display: flex;
   flex-direction: column;
@@ -30,7 +34,6 @@ body {
 }
 
 .order-line__product-price {
-  font-weight: bold;
 }
 .order-line__info {
   width: 100%;
