@@ -14,4 +14,5 @@ type alias Store =
     { products : ProductStore
     , orderLines : OrderLineStore
     , selectedOrderLine : Selection OrderLineId
+    , productSearchString : String
     }

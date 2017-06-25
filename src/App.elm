@@ -10,30 +10,35 @@ import Store.Main exposing (Selection(..), Store)
 import Store.OrderLineStore as OrderLineStore
 import Store.ProductStore as ProductStore
 import View.OrderLineListContainer as OrderLineListContainer
-import View.ProductContainer as ProductContainer
-import View.ProductList as ProductList
+import View.ProductListContainer as ProductListContainer
 
 
 orderLine1 : OrderLine
 orderLine1 =
-    OrderLine (OrderLineId "order-line-id-1") (ProductId "product-id") 3 (PercentageDiscount 12)
+    OrderLine (OrderLineId "order-line-id-1") (ProductId "product-id-1") 3 (PercentageDiscount 12)
 
 
 orderLine2 : OrderLine
 orderLine2 =
-    OrderLine (OrderLineId "order-line-id-2") (ProductId "product-id") 4 NoDiscount
+    OrderLine (OrderLineId "order-line-id-2") (ProductId "product-id-1") 4 NoDiscount
 
 
-product : Product
-product =
-    Product (ProductId "product-id") "Clavier AZERTY" 22.5
+product1 : Product
+product1 =
+    Product (ProductId "product-id-1") "Clavier AZERTY" 22.5
+
+
+product2 : Product
+product2 =
+    Product (ProductId "product-id-2") "Souris Gamer" 41.2
 
 
 store : Store
 store =
-    { products = ProductStore.fromList [ product ]
+    { products = ProductStore.fromList [ product1, product2 ]
     , orderLines = OrderLineStore.fromList [ orderLine1, orderLine2 ]
     , selectedOrderLine = NoSelection
+    , productSearchString = ""
     }
 
 
@@ -48,7 +53,7 @@ view : Model -> Html Msg
 view model =
     container <|
         [ OrderLineListContainer.view model
-        , ProductList.view model.products model
+        , ProductListContainer.view model
         ]
 
 
@@ -73,6 +78,9 @@ update msg model =
 
         SelectOrderLine orderLineId ->
             ( { model | selectedOrderLine = SingleSelection orderLineId }, Cmd.none )
+
+        SearchProduct searchString ->
+            ( { model | productSearchString = searchString }, Cmd.none )
 
 
 main : Program Never Model Msg
