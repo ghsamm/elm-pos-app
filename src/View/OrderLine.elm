@@ -5,6 +5,7 @@ import Data.OrderLine exposing (OrderLine, OrderLineErr)
 import Data.Product exposing (Product)
 import Html exposing (..)
 import Html.Attributes exposing (class)
+import Round exposing (round)
 
 
 viewName : String -> Html msg
@@ -15,7 +16,7 @@ viewName name =
 
 formatPrice : Float -> String
 formatPrice price =
-    toString price ++ " DT"
+    Round.round 3 price ++ " DT"
 
 
 viewUnitPrice : Float -> Html msg
