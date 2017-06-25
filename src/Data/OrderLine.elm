@@ -24,3 +24,8 @@ type OrderLineErr
 orderLineIdToString : OrderLineId -> String
 orderLineIdToString (OrderLineId orderLineId) =
     orderLineId
+
+
+stringToOrderLineId : String -> OrderLineId
+stringToOrderLineId orderLineId =
+    OrderLineId orderLineId

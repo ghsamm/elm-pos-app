@@ -8,12 +8,17 @@ import Html.Attributes exposing (class)
 import Store.Main exposing (Store)
 import Store.OrderLineStore as OrderLineStore
 import Store.ProductStore as ProductStore
-import View.OrderLineContainer as OrderLineContainer
+import View.OrderLineList as OrderLineList
 
 
-orderLine : OrderLine
-orderLine =
-    OrderLine (OrderLineId "order-line-id") (ProductId "product-id") 3 (PercentageDiscount 12)
+orderLine1 : OrderLine
+orderLine1 =
+    OrderLine (OrderLineId "order-line-id-1") (ProductId "product-id") 3 (PercentageDiscount 12)
+
+
+orderLine2 : OrderLine
+orderLine2 =
+    OrderLine (OrderLineId "order-line-id-2") (ProductId "product-id") 4 NoDiscount
 
 
 product : Product
@@ -24,7 +29,7 @@ product =
 store : Store
 store =
     { products = ProductStore.fromList [ product ]
-    , orderLines = OrderLineStore.fromList [ orderLine ]
+    , orderLines = OrderLineStore.fromList [ orderLine1, orderLine2 ]
     }
 
 
@@ -40,7 +45,7 @@ container content =
 view : Model -> Html Msg
 view model =
     container <|
-        OrderLineContainer.view (OrderLineId "order-line-id") store
+        OrderLineList.view store.orderLines store
 
 
 
