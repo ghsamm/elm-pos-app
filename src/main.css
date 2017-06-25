@@ -80,9 +80,14 @@ body {
 
 /* Product */
 
-.product__content {
+.product__container {
   width: 120px;
   height: 120px;
+  margin: 5px 10px;
+}
+.product__content {
+  width: 100%;
+  height: 100%;
   position: relative;
   border: 1px solid #eee;
 }
@@ -92,8 +97,8 @@ body {
   top: 0;
   right: 0;
   font-size: 0.8em;
-  color: white;
-  background-color: #d4d4d4;
+  color: black;
+  background-color: #eee;
   padding: 2px;
   margin: 2px;
 }
