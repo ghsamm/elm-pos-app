@@ -19,10 +19,37 @@ formatPrice price =
     Round.round 3 price ++ " DT"
 
 
-viewUnitPrice : Float -> Html msg
-viewUnitPrice price =
+viewUnitPriceBeforeDiscount : Float -> Discount -> Html msg
+viewUnitPriceBeforeDiscount price discount =
+    case discount of
+        NoDiscount ->
+            span [ class "order-line__unit-price--new" ] [ text <| formatPrice price ]
+
+        _ ->
+            span [ class "order-line__unit-price--old" ] [ text <| formatPrice price ]
+
+
+viewUnitPriceAfterDiscount : Float -> Discount -> Html msg
+viewUnitPriceAfterDiscount price discount =
+    case discount of
+        NoDiscount ->
+            text ""
+
+        _ ->
+            span [ class "order-line__unit-price--new" ] [ text <| formatPrice <| applyDiscount discount price ]
+
+
+viewUnitPrice : Float -> Discount -> Html msg
+viewUnitPrice price discount =
     div [ class "order-line__unit-price order-line__text--bold" ]
-        [ Html.text <| formatPrice price ]
+        [ viewUnitPriceBeforeDiscount price discount
+        , text " "
+        , viewUnitPriceAfterDiscount price discount
+        ]
+
+
+
+-- ,Html.text <| formatPrice price ]
 
 
 viewDiscount : Discount -> Html msg
@@ -83,9 +110,9 @@ view viewData =
                     Debug.log "product" product
             in
             div [ class "order-line__content" ]
-                [ div [ class "order-line__row" ]
+                [ div [ class "order-line__row order-line__top-row" ]
                     [ viewName product.name
-                    , viewUnitPrice product.price
+                    , viewUnitPrice product.price orderLine.discount
                     ]
                 , hr [] []
                 , viewInfo orderLine.quantity product.price orderLine.discount

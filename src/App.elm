@@ -13,12 +13,12 @@ import View.OrderLineContainer as OrderLineContainer
 
 orderLine : OrderLine
 orderLine =
-    OrderLine (OrderLineId "order-line-id") (ProductId "product-id") 1 (PercentageDiscount 12)
+    OrderLine (OrderLineId "order-line-id") (ProductId "product-id") 3 (PercentageDiscount 12)
 
 
 product : Product
 product =
-    Product (ProductId "product-id") "Divers" 22.5
+    Product (ProductId "product-id") "Clavier AZERTY" 22.5
 
 
 store : Store

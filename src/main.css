@@ -29,6 +29,10 @@ body {
   align-items: stretch;
 }
 
+.order-line__top-row {
+  align-items: center;
+}
+
 .order-line__row {
   display: flex;
   flex: 1;
@@ -36,10 +40,17 @@ body {
 
 .order-line__product-name {
     flex: 1;
+    padding-right: 10px;
+}
+
+.order-line__unit-price--old {
+  text-decoration: line-through;
+  font-size: 0.8em;
+  font-weight: normal;
 }
 
 .order-line__info {
-  align-items: baseline;
+  align-items: flex-end;
 }
 
 .order-line__discount {
