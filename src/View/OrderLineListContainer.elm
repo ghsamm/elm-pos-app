@@ -2,6 +2,7 @@ module View.OrderLineListContainer exposing (view)
 
 import Dict
 import Html exposing (..)
+import Html.Attributes exposing (..)
 import Selector.OrderLine exposing (orderLinePrice)
 import Store.Main exposing (Store)
 import Util exposing (formatPrice)
@@ -19,7 +20,10 @@ getTotal store =
 
 viewTotal : Store -> Html msg
 viewTotal store =
-    text <| formatPrice <| getTotal <| store
+    div [ class "order-line-list__total" ]
+        [ text "TOTAL : "
+        , text <| formatPrice <| getTotal <| store
+        ]
 
 
 view : Store -> Html msg
