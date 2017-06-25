@@ -1,5 +1,6 @@
 module View.OrderLineContainer exposing (view)
 
+import Data.Msg exposing (..)
 import Data.OrderLine exposing (OrderLine, OrderLineId)
 import Html exposing (..)
 import Html.Attributes exposing (class, classList)
@@ -8,7 +9,7 @@ import Store.Main exposing (Selection(..), Store)
 import View.OrderLine as View exposing (view)
 
 
-view : OrderLineId -> Store -> Html msg
+view : OrderLineId -> Store -> Html Msg
 view orderLineId store =
     let
         isSelected =

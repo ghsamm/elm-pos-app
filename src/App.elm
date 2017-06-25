@@ -1,6 +1,7 @@
 module App exposing (..)
 
 import Data.Discount exposing (Discount(..))
+import Data.Msg exposing (Msg(..))
 import Data.OrderLine exposing (OrderLine, OrderLineId(..))
 import Data.Product exposing (Product, ProductId(..))
 import Html exposing (..)
@@ -30,7 +31,7 @@ store : Store
 store =
     { products = ProductStore.fromList [ product ]
     , orderLines = OrderLineStore.fromList [ orderLine1, orderLine2 ]
-    , selectedOrderLine = SingleSelection orderLine2.id
+    , selectedOrderLine = NoSelection
     }
 
 
@@ -46,7 +47,7 @@ container content =
 view : Model -> Html Msg
 view model =
     container <|
-        OrderLineListContainer.view store
+        OrderLineListContainer.view model
 
 
 
@@ -54,21 +55,22 @@ view model =
 
 
 type alias Model =
-    {}
+    Store
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( {}, Cmd.none )
-
-
-type Msg
-    = NoOp
+    ( store, Cmd.none )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( model, Cmd.none )
+    case msg of
+        NoOp ->
+            ( model, Cmd.none )
+
+        SelectOrderLine orderLineId ->
+            ( { model | selectedOrderLine = SingleSelection orderLineId }, Cmd.none )
 
 
 main : Program Never Model Msg

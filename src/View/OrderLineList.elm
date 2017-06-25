@@ -1,5 +1,6 @@
 module View.OrderLineList exposing (view)
 
+import Data.Msg exposing (Msg)
 import Data.OrderLine exposing (stringToOrderLineId)
 import Dict exposing (keys)
 import Html exposing (..)
@@ -9,7 +10,7 @@ import Store.OrderLineStore exposing (OrderLineStore)
 import View.OrderLineContainer as OrderLineContainer exposing (view)
 
 
-view : OrderLineStore -> Store -> Html msg
+view : OrderLineStore -> Store -> Html Msg
 view orderLineStore store =
     div [ class "order-line-list__container" ] <|
         List.map

@@ -1,5 +1,6 @@
 module View.OrderLineListContainer exposing (view)
 
+import Data.Msg exposing (..)
 import Dict
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -18,7 +19,7 @@ getTotal store =
     List.foldl (+) 0 lineTotals
 
 
-viewTotal : Store -> Html msg
+viewTotal : Store -> Html Msg
 viewTotal store =
     div [ class "order-line-list__total" ]
         [ text "TOTAL : "
@@ -26,7 +27,7 @@ viewTotal store =
         ]
 
 
-view : Store -> Html msg
+view : Store -> Html Msg
 view store =
     div []
         [ OrderLineList.view store.orderLines store
