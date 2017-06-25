@@ -1,6 +1,7 @@
 module Util exposing (..)
 
 import Dict exposing (Dict)
+import Round
 
 
 (=>) : a -> b -> ( a, b )
@@ -12,6 +13,11 @@ import Dict exposing (Dict)
 meaning you can use it at the end of a pipeline and have the precedence work out.
 -}
 infixl 0 =>
+
+
+formatPrice : Float -> String
+formatPrice price =
+    Round.round 3 price ++ " DT"
 
 
 storeFromList : (v -> comparable) -> List v -> Dict comparable v

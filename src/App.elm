@@ -8,7 +8,7 @@ import Html.Attributes exposing (class)
 import Store.Main exposing (Selection(..), Store)
 import Store.OrderLineStore as OrderLineStore
 import Store.ProductStore as ProductStore
-import View.OrderLineList as OrderLineList
+import View.OrderLineListContainer as OrderLineListContainer
 
 
 orderLine1 : OrderLine
@@ -46,7 +46,7 @@ container content =
 view : Model -> Html Msg
 view model =
     container <|
-        OrderLineList.view store.orderLines store
+        OrderLineListContainer.view store
 
 
 

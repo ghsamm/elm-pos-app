@@ -1,10 +1,25 @@
 module Selector.OrderLine exposing (..)
 
+import Data.Discount exposing (applyDiscount)
 import Data.OrderLine exposing (OrderLine, OrderLineErr(..), OrderLineId)
 import Data.Product exposing (Product, defaultProduct)
 import Store.Main exposing (Store)
 import Store.OrderLineStore exposing (getOrderLine)
 import Store.ProductStore exposing (getProduct)
+
+
+orderLinePrice : OrderLineId -> Store -> Float
+orderLinePrice orderLineId store =
+    let
+        orderLine =
+            orderLineSelector orderLineId store
+    in
+    case orderLine of
+        Err _ ->
+            0
+
+        Ok ( orderLine, product ) ->
+            toFloat orderLine.quantity * applyDiscount orderLine.discount product.price
 
 
 orderLineSelector : OrderLineId -> Store -> Result OrderLineErr ( OrderLine, Product )

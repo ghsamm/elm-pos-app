@@ -5,18 +5,13 @@ import Data.OrderLine exposing (OrderLine, OrderLineErr)
 import Data.Product exposing (Product)
 import Html exposing (..)
 import Html.Attributes exposing (class)
-import Round exposing (round)
+import Util exposing (formatPrice)
 
 
 viewName : String -> Html msg
 viewName name =
     div [ class "order-line__product-name" ]
         [ Html.text <| name ]
-
-
-formatPrice : Float -> String
-formatPrice price =
-    Round.round 3 price ++ " DT"
 
 
 viewUnitPriceBeforeDiscount : Float -> Discount -> Html msg
