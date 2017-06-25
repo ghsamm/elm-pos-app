@@ -12,7 +12,11 @@ body {
 
 .order-line__container {
   padding: 10px;
-  height: 40px;
+  border-bottom: 1px solid #eee;
+}
+
+.order-line__container--selected {
+  background-color: #eee;
 }
 
 .order-line__text--bold {

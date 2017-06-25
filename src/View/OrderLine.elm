@@ -34,7 +34,7 @@ viewDiscount discount =
 
                 _ ->
                     span []
-                        [ text "*with a discount of "
+                        [ text "* with a discount of "
                         , span [ class "order-line__text--bold" ]
                             [ text <| discountToString discount ]
                         ]
@@ -86,5 +86,6 @@ view viewData =
                     [ viewName product.name
                     , viewUnitPrice product.price
                     ]
+                , hr [] []
                 , viewInfo orderLine.quantity product.price orderLine.discount
                 ]
