@@ -1,8 +1,7 @@
 module View.OrderLine exposing (view)
 
 import Data.Discount exposing (Discount(..), applyDiscount, discountToString)
-import Data.Msg exposing (Msg(..))
-import Data.OrderLine exposing (OrderLine, OrderLineErr)
+import Data.OrderLine exposing (OrderLine, OrderLineErr, OrderLineId)
 import Data.Product exposing (Product)
 import Html exposing (..)
 import Html.Attributes exposing (class)
@@ -95,8 +94,8 @@ viewInfo quantity unitPrice discount =
         ]
 
 
-view : Result OrderLineErr ( OrderLine, Product ) -> Html Msg
-view viewData =
+view : (OrderLineId -> msg) -> Result OrderLineErr ( OrderLine, Product ) -> Html msg
+view handleClick viewData =
     case viewData of
         Err _ ->
             div [] [ Html.text "this line is invalid" ]
@@ -104,7 +103,7 @@ view viewData =
         Ok ( orderLine, product ) ->
             div
                 [ class "order-line__content"
-                , onClick (SelectOrderLine orderLine.id)
+                , onClick (handleClick orderLine.id)
                 ]
                 [ div
                     [ class "order-line__row order-line__top-row"

@@ -26,4 +26,4 @@ view orderLineId store =
             , ( "order-line__container--selected", isSelected )
             ]
         ]
-        [ View.view <| orderLineSelector orderLineId store ]
+        [ View.view SelectOrderLine <| orderLineSelector orderLineId store ]

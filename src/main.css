@@ -24,6 +24,7 @@ body {
 .order-line__container {
   padding: 10px;
   border-bottom: 1px solid #eee;
+  cursor: pointer;
 }
 
 .order-line__container--selected {
