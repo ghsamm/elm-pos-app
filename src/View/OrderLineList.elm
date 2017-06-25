@@ -12,7 +12,7 @@ import View.OrderLineContainer as OrderLineContainer exposing (view)
 
 view : OrderLineStore -> Store -> Html Msg
 view orderLineStore store =
-    div [ class "order-line-list__container" ] <|
+    div [ class "order-line-list__content" ] <|
         List.map
             (\orderLineId -> OrderLineContainer.view orderLineId store)
             (List.map stringToOrderLineId <| keys orderLineStore)

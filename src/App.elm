@@ -10,6 +10,7 @@ import Store.Main exposing (Selection(..), Store)
 import Store.OrderLineStore as OrderLineStore
 import Store.ProductStore as ProductStore
 import View.OrderLineListContainer as OrderLineListContainer
+import View.Product as ProductView
 
 
 orderLine1 : OrderLine
@@ -35,19 +36,19 @@ store =
     }
 
 
-container : Html msg -> Html msg
+container : List (Html msg) -> Html msg
 container content =
     div
-        [ class "app-container"
-        ]
-        [ content
-        ]
+        [ class "app-container" ]
+        content
 
 
 view : Model -> Html Msg
 view model =
     container <|
-        OrderLineListContainer.view model
+        [ OrderLineListContainer.view model
+        , ProductView.view product
+        ]
 
 
 

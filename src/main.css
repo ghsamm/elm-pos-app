@@ -4,10 +4,16 @@ body {
 }
 
 .app-container {
-  width: 400px;
   height: 100vh;
-  border-right: 2px solid #eee;
+  display: flex;
+  flex: 1;
+}
 
+.order-line-list__container {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid #eee;
 }
 
 .order-line-list__total {
@@ -18,7 +24,6 @@ body {
     align-items: center;
     padding: 10px;
     border-top: 2px solid black;
-    margin-top: 10px;
 }
 
 .order-line__container {

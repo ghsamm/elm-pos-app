@@ -29,7 +29,7 @@ viewTotal store =
 
 view : Store -> Html Msg
 view store =
-    div []
+    div [ class "order-line-list__container" ]
         [ OrderLineList.view store.orderLines store
         , viewTotal store
         ]
