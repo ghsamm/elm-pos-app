@@ -3,6 +3,7 @@ module App exposing (..)
 import Data.OrderLine exposing (OrderLine, OrderLineId(..))
 import Data.Product exposing (Product, ProductId(..))
 import Html exposing (..)
+import Html.Attributes exposing (class)
 import Store.Main exposing (Store)
 import Store.OrderLineStore as OrderLineStore
 import Store.ProductStore as ProductStore
@@ -16,7 +17,7 @@ orderLine =
 
 product : Product
 product =
-    Product (ProductId "product-id") "first-product" 22.5
+    Product (ProductId "product-id") "Divers" 22.5
 
 
 store : Store
@@ -26,9 +27,23 @@ store =
     }
 
 
+container : Html msg -> Html msg
+container content =
+    div
+        [ class "app-container"
+        ]
+        [ content
+        ]
+
+
 view : Model -> Html Msg
 view model =
-    OrderLineContainer.view (OrderLineId "order-line-id") store
+    container <|
+        OrderLineContainer.view (OrderLineId "order-line-id") store
+
+
+
+-- BOILERPLATE CODE
 
 
 type alias Model =
