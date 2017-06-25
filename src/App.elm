@@ -5,7 +5,7 @@ import Data.OrderLine exposing (OrderLine, OrderLineId(..))
 import Data.Product exposing (Product, ProductId(..))
 import Html exposing (..)
 import Html.Attributes exposing (class)
-import Store.Main exposing (Store)
+import Store.Main exposing (Selection(..), Store)
 import Store.OrderLineStore as OrderLineStore
 import Store.ProductStore as ProductStore
 import View.OrderLineList as OrderLineList
@@ -30,6 +30,7 @@ store : Store
 store =
     { products = ProductStore.fromList [ product ]
     , orderLines = OrderLineStore.fromList [ orderLine1, orderLine2 ]
+    , selectedOrderLine = SingleSelection orderLine2.id
     }
 
 
