@@ -11,6 +11,7 @@ import Store.OrderLineStore as OrderLineStore
 import Store.ProductStore as ProductStore
 import View.OrderLineListContainer as OrderLineListContainer
 import View.ProductContainer as ProductContainer
+import View.ProductList as ProductList
 
 
 orderLine1 : OrderLine
@@ -47,7 +48,7 @@ view : Model -> Html Msg
 view model =
     container <|
         [ OrderLineListContainer.view model
-        , ProductContainer.view product
+        , ProductList.view model.products model
         ]
 
 
