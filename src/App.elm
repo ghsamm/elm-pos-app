@@ -4,10 +4,10 @@ import Data.Discount exposing (Discount(..))
 import Data.Model exposing (Model, Selection(..))
 import Data.Msg exposing (Msg(..))
 import Data.OrderLine exposing (OrderLine, OrderLineId(..))
+import Data.OrderLineStore as OrderLineStore
 import Data.Product exposing (Product, ProductId(..))
 import Html exposing (..)
-import Html.Attributes exposing (class)
-import Store.OrderLineStore as OrderLineStore
+import Html.Attributes exposing (..)
 import Store.ProductStore as ProductStore
 import View.OrderLineListContainer as OrderLineListContainer
 import View.ProductListContainer as ProductListContainer

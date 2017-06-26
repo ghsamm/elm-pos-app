@@ -1,4 +1,4 @@
-module Store.OrderLineStore exposing (..)
+module Data.OrderLineStore exposing (..)
 
 import Data.Discount exposing (Discount(..))
 import Data.OrderLine exposing (OrderLine, OrderLineId(..), orderLineIdToString)
