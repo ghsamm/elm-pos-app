@@ -57,10 +57,6 @@ view model =
         ]
 
 
-
--- BOILERPLATE CODE
-
-
 type alias Model =
     Store
 
@@ -81,6 +77,9 @@ update msg model =
 
         SearchProduct searchString ->
             ( { model | productSearchString = searchString }, Cmd.none )
+
+        AddProductToLineOrderList _ ->
+            Debug.crash "TODO"
 
 
 main : Program Never Model Msg

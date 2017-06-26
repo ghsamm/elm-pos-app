@@ -7,7 +7,7 @@ import Data.OrderLine exposing (OrderLine)
 applyDiscount : Discount -> OrderLine -> OrderLine
 applyDiscount discount orderLine =
     { orderLine
-        | discount = Just discount
+        | discount = discount
     }
 
 
