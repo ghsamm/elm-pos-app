@@ -1,12 +1,12 @@
 module App exposing (..)
 
 import Data.Discount exposing (Discount(..))
+import Data.Model exposing (Model, Selection(..))
 import Data.Msg exposing (Msg(..))
 import Data.OrderLine exposing (OrderLine, OrderLineId(..))
 import Data.Product exposing (Product, ProductId(..))
 import Html exposing (..)
 import Html.Attributes exposing (class)
-import Store.Main exposing (Model, Selection(..))
 import Store.OrderLineStore as OrderLineStore
 import Store.ProductStore as ProductStore
 import View.OrderLineListContainer as OrderLineListContainer

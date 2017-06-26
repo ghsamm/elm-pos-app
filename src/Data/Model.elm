@@ -1,4 +1,4 @@
-module Store.Main exposing (..)
+module Data.Model exposing (..)
 
 import Data.OrderLine exposing (OrderLineId)
 import Store.OrderLineStore exposing (OrderLineStore)

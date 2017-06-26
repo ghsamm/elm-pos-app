@@ -5,7 +5,7 @@ import Data.Product exposing (stringToProductId)
 import Dict exposing (keys)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Store.Main exposing (Model)
+import Data.Model exposing (Model)
 import Store.ProductStore exposing (ProductStore)
 import View.ProductContainer as ProductContainer exposing (view)
 

@@ -5,7 +5,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Selector.Product exposing (searchProductSelector)
-import Store.Main exposing (Model)
+import Data.Model exposing (Model)
 import View.ProductList as ProductList
 
 

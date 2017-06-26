@@ -5,7 +5,7 @@ import Dict
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Selector.OrderLine exposing (orderLinePrice)
-import Store.Main exposing (Model)
+import Data.Model exposing (Model)
 import Util exposing (formatPrice)
 import View.OrderLineList as OrderLineList
 

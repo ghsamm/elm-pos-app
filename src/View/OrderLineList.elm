@@ -5,7 +5,7 @@ import Data.OrderLine exposing (stringToOrderLineId)
 import Dict exposing (keys)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Store.Main exposing (Model)
+import Data.Model exposing (Model)
 import Store.OrderLineStore exposing (OrderLineStore)
 import View.OrderLineContainer as OrderLineContainer exposing (view)
 

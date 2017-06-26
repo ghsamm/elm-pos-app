@@ -5,7 +5,7 @@ import Data.Product exposing (Product, ProductId, productIdToString)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Selector.Product exposing (productSelector)
-import Store.Main exposing (Model)
+import Data.Model exposing (Model)
 import View.Product as ProductView
 
 

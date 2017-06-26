@@ -5,7 +5,7 @@ import Data.OrderLine exposing (OrderLine, OrderLineId)
 import Html exposing (..)
 import Html.Attributes exposing (class, classList)
 import Selector.OrderLine exposing (orderLineSelector)
-import Store.Main exposing (Selection(..), Model)
+import Data.Model exposing (Selection(..), Model)
 import View.OrderLine as View exposing (view)
 
 
