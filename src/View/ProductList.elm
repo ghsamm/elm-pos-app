@@ -1,12 +1,12 @@
 module View.ProductList exposing (view)
 
+import Data.Model exposing (Model)
 import Data.Msg exposing (Msg)
 import Data.Product exposing (stringToProductId)
+import Data.ProductStore exposing (ProductStore)
 import Dict exposing (keys)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Data.Model exposing (Model)
-import Store.ProductStore exposing (ProductStore)
 import View.ProductContainer as ProductContainer exposing (view)
 
 

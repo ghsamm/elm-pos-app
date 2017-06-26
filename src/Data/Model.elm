@@ -2,7 +2,7 @@ module Data.Model exposing (..)
 
 import Data.OrderLine exposing (OrderLineId)
 import Data.OrderLineStore exposing (OrderLineStore)
-import Store.ProductStore exposing (ProductStore)
+import Data.ProductStore exposing (ProductStore)
 
 
 type Selection id

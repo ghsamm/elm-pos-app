@@ -1,11 +1,11 @@
 module Selector.OrderLine exposing (..)
 
 import Data.Discount exposing (applyDiscount)
-import Data.OrderLine exposing (OrderLine, OrderLineErr(..), OrderLineId)
-import Data.Product exposing (Product, defaultProduct)
 import Data.Model exposing (Model)
+import Data.OrderLine exposing (OrderLine, OrderLineErr(..), OrderLineId)
 import Data.OrderLineStore exposing (getOrderLine)
-import Store.ProductStore exposing (getProduct)
+import Data.Product exposing (Product, defaultProduct)
+import Data.ProductStore exposing (getProduct)
 
 
 orderLinePrice : OrderLineId -> Model -> Float

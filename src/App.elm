@@ -6,9 +6,9 @@ import Data.Msg exposing (Msg(..))
 import Data.OrderLine exposing (OrderLine, OrderLineId(..))
 import Data.OrderLineStore as OrderLineStore
 import Data.Product exposing (Product, ProductId(..))
+import Data.ProductStore as ProductStore
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Store.ProductStore as ProductStore
 import View.OrderLineListContainer as OrderLineListContainer
 import View.ProductListContainer as ProductListContainer
 

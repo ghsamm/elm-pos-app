@@ -1,9 +1,9 @@
 module Selector.Product exposing (..)
 
-import Data.Product exposing (Product, ProductErr(..), ProductId)
-import Dict exposing (Dict)
 import Data.Model exposing (Model)
-import Store.ProductStore exposing (getProduct)
+import Data.Product exposing (Product, ProductErr(..), ProductId)
+import Data.ProductStore exposing (getProduct)
+import Dict exposing (Dict)
 import String exposing (contains, toLower, trim)
 
 

@@ -1,4 +1,4 @@
-module Store.ProductStore exposing (..)
+module Data.ProductStore exposing (..)
 
 import Data.Product exposing (Product, ProductId(..), productIdToString)
 import Dict exposing (Dict)
