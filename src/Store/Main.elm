@@ -10,7 +10,7 @@ type Selection id
     | SingleSelection id
 
 
-type alias Store =
+type alias Model =
     { products : ProductStore
     , orderLines : OrderLineStore
     , selectedOrderLine : Selection OrderLineId

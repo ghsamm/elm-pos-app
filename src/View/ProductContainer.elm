@@ -5,11 +5,11 @@ import Data.Product exposing (Product, ProductId, productIdToString)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Selector.Product exposing (productSelector)
-import Store.Main exposing (Store)
+import Store.Main exposing (Model)
 import View.Product as ProductView
 
 
-view : ProductId -> Store -> Html Msg
+view : ProductId -> Model -> Html Msg
 view productId store =
     let
         product =

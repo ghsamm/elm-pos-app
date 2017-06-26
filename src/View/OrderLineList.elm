@@ -5,12 +5,12 @@ import Data.OrderLine exposing (stringToOrderLineId)
 import Dict exposing (keys)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Store.Main exposing (Store)
+import Store.Main exposing (Model)
 import Store.OrderLineStore exposing (OrderLineStore)
 import View.OrderLineContainer as OrderLineContainer exposing (view)
 
 
-view : OrderLineStore -> Store -> Html Msg
+view : OrderLineStore -> Model -> Html Msg
 view orderLineStore store =
     div [ class "order-line-list__content" ] <|
         List.map

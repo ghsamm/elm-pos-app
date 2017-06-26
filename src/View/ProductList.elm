@@ -5,12 +5,12 @@ import Data.Product exposing (stringToProductId)
 import Dict exposing (keys)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Store.Main exposing (Store)
+import Store.Main exposing (Model)
 import Store.ProductStore exposing (ProductStore)
 import View.ProductContainer as ProductContainer exposing (view)
 
 
-view : ProductStore -> Store -> Html Msg
+view : ProductStore -> Model -> Html Msg
 view productStore store =
     div [ class "product-list__content" ] <|
         List.map

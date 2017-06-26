@@ -5,7 +5,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Selector.Product exposing (searchProductSelector)
-import Store.Main exposing (Store)
+import Store.Main exposing (Model)
 import View.ProductList as ProductList
 
 
@@ -21,7 +21,7 @@ viewProductListSearch =
         ]
 
 
-view : Store -> Html Msg
+view : Model -> Html Msg
 view store =
     div [ class "product-list__container" ]
         [ viewProductListSearch

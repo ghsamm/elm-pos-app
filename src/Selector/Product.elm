@@ -2,12 +2,12 @@ module Selector.Product exposing (..)
 
 import Data.Product exposing (Product, ProductErr(..), ProductId)
 import Dict exposing (Dict)
-import Store.Main exposing (Store)
+import Store.Main exposing (Model)
 import Store.ProductStore exposing (getProduct)
 import String exposing (contains, toLower, trim)
 
 
-productSelector : ProductId -> Store -> Result ProductErr Product
+productSelector : ProductId -> Model -> Result ProductErr Product
 productSelector productId store =
     let
         product =
@@ -33,7 +33,7 @@ isSearchProduct productSearchString product =
     contains searchString productName
 
 
-searchProductSelector : Store -> Dict String Product
+searchProductSelector : Model -> Dict String Product
 searchProductSelector store =
     let
         { productSearchString, products } =

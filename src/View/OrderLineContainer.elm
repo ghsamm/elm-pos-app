@@ -5,11 +5,11 @@ import Data.OrderLine exposing (OrderLine, OrderLineId)
 import Html exposing (..)
 import Html.Attributes exposing (class, classList)
 import Selector.OrderLine exposing (orderLineSelector)
-import Store.Main exposing (Selection(..), Store)
+import Store.Main exposing (Selection(..), Model)
 import View.OrderLine as View exposing (view)
 
 
-view : OrderLineId -> Store -> Html Msg
+view : OrderLineId -> Model -> Html Msg
 view orderLineId store =
     let
         isSelected =

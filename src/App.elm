@@ -6,7 +6,7 @@ import Data.OrderLine exposing (OrderLine, OrderLineId(..))
 import Data.Product exposing (Product, ProductId(..))
 import Html exposing (..)
 import Html.Attributes exposing (class)
-import Store.Main exposing (Selection(..), Store)
+import Store.Main exposing (Model, Selection(..))
 import Store.OrderLineStore as OrderLineStore
 import Store.ProductStore as ProductStore
 import View.OrderLineListContainer as OrderLineListContainer
@@ -33,7 +33,7 @@ product2 =
     Product (ProductId "product-id-2") "Souris Gamer" 41.2
 
 
-store : Store
+store : Model
 store =
     { products = ProductStore.fromList [ product1, product2 ]
     , orderLines = OrderLineStore.fromList [ orderLine1, orderLine2 ]
@@ -55,10 +55,6 @@ view model =
         [ OrderLineListContainer.view model
         , ProductListContainer.view model
         ]
-
-
-type alias Model =
-    Store
 
 
 init : ( Model, Cmd Msg )

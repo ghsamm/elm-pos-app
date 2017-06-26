@@ -5,12 +5,12 @@ import Dict
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Selector.OrderLine exposing (orderLinePrice)
-import Store.Main exposing (Store)
+import Store.Main exposing (Model)
 import Util exposing (formatPrice)
 import View.OrderLineList as OrderLineList
 
 
-getTotal : Store -> Float
+getTotal : Model -> Float
 getTotal store =
     let
         lineTotals =
@@ -19,7 +19,7 @@ getTotal store =
     List.foldl (+) 0 lineTotals
 
 
-viewTotal : Store -> Html Msg
+viewTotal : Model -> Html Msg
 viewTotal store =
     div [ class "order-line-list__total" ]
         [ text "TOTAL : "
@@ -27,7 +27,7 @@ viewTotal store =
         ]
 
 
-view : Store -> Html Msg
+view : Model -> Html Msg
 view store =
     div [ class "order-line-list__container" ]
         [ OrderLineList.view store.orderLines store
