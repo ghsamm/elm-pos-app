@@ -3,7 +3,7 @@ module App exposing (..)
 import Data.Discount exposing (Discount(..))
 import Data.Model exposing (Model, Selection(..))
 import Data.Msg exposing (Msg(..))
-import Data.OrderLine exposing (OrderLine, OrderLineId(..))
+import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId(..))
 import Data.OrderLineStore as OrderLineStore
 import Data.Product as Product exposing (Product, ProductId(..))
 import Data.ProductStore as ProductStore
@@ -29,12 +29,17 @@ product2 =
 
 orderLine1 : OrderLine
 orderLine1 =
-    OrderLine (OrderLineId "order-line-id-1") (product1 |> Product.toId) 3 (PercentageDiscount 12)
+    OrderLine.fromId "order-line-id-1"
+        |> OrderLine.withProductId (product1 |> Product.toId)
+        |> OrderLine.withQuantity 3
+        |> OrderLine.withDiscount (PercentageDiscount 12)
 
 
 orderLine2 : OrderLine
 orderLine2 =
-    OrderLine (OrderLineId "order-line-id-2") (product2 |> Product.toId) 4 NoDiscount
+    OrderLine.fromId "order-line-id-2"
+        |> OrderLine.withProductId (product2 |> Product.toId)
+        |> OrderLine.withQuantity 4
 
 
 store : Model

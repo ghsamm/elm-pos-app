@@ -1,11 +1,12 @@
 module View.OrderLineListContainer exposing (view)
 
+import Data.Model exposing (Model)
 import Data.Msg exposing (..)
+import Data.OrderLine as OrderLine
 import Dict
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Selector.OrderLine exposing (orderLinePrice)
-import Data.Model exposing (Model)
 import Util exposing (formatPrice)
 import View.OrderLineList as OrderLineList
 
@@ -14,7 +15,12 @@ getTotal : Model -> Float
 getTotal store =
     let
         lineTotals =
-            Dict.values <| Dict.map (\str orderLine -> orderLinePrice orderLine.id store) store.orderLines
+            Dict.values <|
+                Dict.map
+                    (\str orderLine ->
+                        orderLinePrice (orderLine |> OrderLine.toId) store
+                    )
+                    store.orderLines
     in
     List.foldl (+) 0 lineTotals
 

@@ -2,7 +2,7 @@ module Selector.OrderLine exposing (..)
 
 import Data.Discount exposing (applyDiscount)
 import Data.Model exposing (Model)
-import Data.OrderLine exposing (OrderLine, OrderLineErr(..), OrderLineId)
+import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineErr(..), OrderLineId)
 import Data.OrderLineStore exposing (getOrderLine)
 import Data.Product as Product exposing (Product)
 import Data.ProductStore exposing (getProduct)
@@ -20,9 +20,9 @@ orderLinePrice orderLineId store =
 
         Ok ( orderLine, product ) ->
             toFloat
-                orderLine.quantity
+                (orderLine |> OrderLine.toQuantity)
                 * applyDiscount
-                    orderLine.discount
+                    (orderLine |> OrderLine.toDiscount)
                     (product |> Product.toPrice)
 
 
@@ -38,7 +38,7 @@ orderLineSelector orderLineId store =
             orderLine
                 |> Maybe.andThen
                     (\orderLine ->
-                        getProduct orderLine.productId store.products
+                        getProduct (orderLine |> OrderLine.toProductId) store.products
                     )
     in
     case ( orderLine, product ) of

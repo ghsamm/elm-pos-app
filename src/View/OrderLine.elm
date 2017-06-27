@@ -1,7 +1,7 @@
 module View.OrderLine exposing (view)
 
 import Data.Discount exposing (Discount(..), applyDiscount, discountToString)
-import Data.OrderLine exposing (OrderLine, OrderLineErr, OrderLineId)
+import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineErr, OrderLineId)
 import Data.Product as Product exposing (Product)
 import Html exposing (..)
 import Html.Attributes exposing (class)
@@ -103,14 +103,17 @@ view handleClick viewData =
         Ok ( orderLine, product ) ->
             div
                 [ class "order-line__content"
-                , onClick (handleClick orderLine.id)
+                , onClick <| handleClick (orderLine |> OrderLine.toId)
                 ]
                 [ div
                     [ class "order-line__row order-line__top-row"
                     ]
                     [ viewName <| Product.toName product
-                    , viewUnitPrice (product |> Product.toPrice) orderLine.discount
+                    , viewUnitPrice (product |> Product.toPrice) (orderLine |> OrderLine.toDiscount)
                     ]
                 , hr [] []
-                , viewInfo orderLine.quantity (product |> Product.toPrice) orderLine.discount
+                , viewInfo
+                    (orderLine |> OrderLine.toQuantity)
+                    (product |> Product.toPrice)
+                    (orderLine |> OrderLine.toDiscount)
                 ]

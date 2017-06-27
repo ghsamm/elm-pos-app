@@ -2,7 +2,7 @@ module Data.Product
     exposing
         ( Product
         , ProductErr(..)
-        , ProductId
+        , ProductId(..)
         , fromId
         , productIdToString
         , stringToProductId
