@@ -1,7 +1,7 @@
 module Selector.Product exposing (..)
 
 import Data.Model exposing (Model)
-import Data.Product exposing (Product, ProductErr(..), ProductId)
+import Data.Product as Product exposing (Product, ProductErr(..), ProductId)
 import Data.ProductStore exposing (getProduct)
 import Dict exposing (Dict)
 import String exposing (contains, toLower, trim)
@@ -28,7 +28,7 @@ isSearchProduct productSearchString product =
             toLower productSearchString
 
         productName =
-            toLower product.name
+            product |> Product.toName |> toLower
     in
     contains searchString productName
 

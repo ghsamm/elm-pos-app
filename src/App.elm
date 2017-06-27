@@ -5,7 +5,7 @@ import Data.Model exposing (Model, Selection(..))
 import Data.Msg exposing (Msg(..))
 import Data.OrderLine exposing (OrderLine, OrderLineId(..))
 import Data.OrderLineStore as OrderLineStore
-import Data.Product exposing (Product, ProductId(..))
+import Data.Product as Product exposing (Product, ProductId(..))
 import Data.ProductStore as ProductStore
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -13,24 +13,28 @@ import View.OrderLineListContainer as OrderLineListContainer
 import View.ProductListContainer as ProductListContainer
 
 
-orderLine1 : OrderLine
-orderLine1 =
-    OrderLine (OrderLineId "order-line-id-1") (ProductId "product-id-1") 3 (PercentageDiscount 12)
-
-
-orderLine2 : OrderLine
-orderLine2 =
-    OrderLine (OrderLineId "order-line-id-2") (ProductId "product-id-1") 4 NoDiscount
-
-
 product1 : Product
 product1 =
-    Product (ProductId "product-id-1") "Clavier AZERTY" 22.5
+    Product.fromId "product-id-1"
+        |> Product.withName "Clavier AZERTY"
+        |> Product.withPrice 22.5
 
 
 product2 : Product
 product2 =
-    Product (ProductId "product-id-2") "Souris Gamer" 41.2
+    Product.fromId "product-id-2"
+        |> Product.withName "Souris Gamer"
+        |> Product.withPrice 41.2
+
+
+orderLine1 : OrderLine
+orderLine1 =
+    OrderLine (OrderLineId "order-line-id-1") (product1 |> Product.toId) 3 (PercentageDiscount 12)
+
+
+orderLine2 : OrderLine
+orderLine2 =
+    OrderLine (OrderLineId "order-line-id-2") (product2 |> Product.toId) 4 NoDiscount
 
 
 store : Model

@@ -4,7 +4,7 @@ import Data.Discount exposing (applyDiscount)
 import Data.Model exposing (Model)
 import Data.OrderLine exposing (OrderLine, OrderLineErr(..), OrderLineId)
 import Data.OrderLineStore exposing (getOrderLine)
-import Data.Product exposing (Product, defaultProduct)
+import Data.Product as Product exposing (Product)
 import Data.ProductStore exposing (getProduct)
 
 
@@ -19,7 +19,11 @@ orderLinePrice orderLineId store =
             0
 
         Ok ( orderLine, product ) ->
-            toFloat orderLine.quantity * applyDiscount orderLine.discount product.price
+            toFloat
+                orderLine.quantity
+                * applyDiscount
+                    orderLine.discount
+                    (product |> Product.toPrice)
 
 
 orderLineSelector : OrderLineId -> Model -> Result OrderLineErr ( OrderLine, Product )

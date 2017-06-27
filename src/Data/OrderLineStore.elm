@@ -2,7 +2,7 @@ module Data.OrderLineStore exposing (..)
 
 import Data.Discount exposing (Discount(..))
 import Data.OrderLine exposing (OrderLine, OrderLineId(..), orderLineIdToString)
-import Data.Product exposing (Product)
+import Data.Product as Product exposing (Product)
 import Dict exposing (Dict, insert)
 import Util exposing (storeFromList)
 
@@ -25,6 +25,6 @@ addProduct : Product -> OrderLineStore -> OrderLineStore
 addProduct product orderLineStore =
     let
         newOrderLine =
-            OrderLine (OrderLineId "fff") product.id 1 NoDiscount
+            OrderLine (OrderLineId "fff") (product |> Product.toId) 1 NoDiscount
     in
     Dict.insert "ffff" newOrderLine orderLineStore

@@ -2,7 +2,7 @@ module View.OrderLine exposing (view)
 
 import Data.Discount exposing (Discount(..), applyDiscount, discountToString)
 import Data.OrderLine exposing (OrderLine, OrderLineErr, OrderLineId)
-import Data.Product exposing (Product)
+import Data.Product as Product exposing (Product)
 import Html exposing (..)
 import Html.Attributes exposing (class)
 import Html.Events exposing (..)
@@ -108,9 +108,9 @@ view handleClick viewData =
                 [ div
                     [ class "order-line__row order-line__top-row"
                     ]
-                    [ viewName product.name
-                    , viewUnitPrice product.price orderLine.discount
+                    [ viewName <| Product.toName product
+                    , viewUnitPrice (product |> Product.toPrice) orderLine.discount
                     ]
                 , hr [] []
-                , viewInfo orderLine.quantity product.price orderLine.discount
+                , viewInfo orderLine.quantity (product |> Product.toPrice) orderLine.discount
                 ]
