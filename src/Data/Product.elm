@@ -6,12 +6,16 @@ module Data.Product
         , fromId
         , productIdToString
         , stringToProductId
+        , toDiscount
         , toId
         , toName
         , toPrice
+        , withDiscount
         , withName
         , withPrice
         )
+
+import Data.Discount exposing (Discount(..))
 
 
 type Product
@@ -19,6 +23,7 @@ type Product
         { id : ProductId
         , name : String
         , price : Float
+        , discount : Discount
         }
 
 
@@ -65,6 +70,16 @@ toPrice (Product product) =
     product.price
 
 
+withDiscount : Discount -> Product -> Product
+withDiscount newDiscount (Product product) =
+    Product { product | discount = newDiscount }
+
+
+toDiscount : Product -> Discount
+toDiscount (Product product) =
+    product.discount
+
+
 productIdToString : ProductId -> String
 productIdToString (ProductId productId) =
     productId
@@ -85,4 +100,5 @@ defaultProduct =
         { id = ProductId "default-product"
         , name = "(no name)"
         , price = 0
+        , discount = NoDiscount
         }
