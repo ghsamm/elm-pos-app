@@ -132,6 +132,10 @@ body {
   background-color: #eee;
 }
 
+/************************
+    View.Breadcrumb
+*************************/
+
 .breadcrumb__container {
     display: flex;
     width: 400px;
@@ -151,4 +155,36 @@ body {
 
 .breadcrumb__section--active {
     border-bottom: 2px solid white;
+}
+
+/************************
+    View.Numpad
+*************************/
+
+.numpad__container {
+    background-color: #BBBBBB;
+    width: 150px;
+    height: 200px;
+}
+.numpad__content {
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.numpad__number {
+    display: flex;
+    flex: 0 1 33.33%;
+    border: 1px solid white;
+    align-items: center;
+    justify-content: center;
+}
+
+.numpad__number--large {
+    flex-basis: 66.66%;
 }
