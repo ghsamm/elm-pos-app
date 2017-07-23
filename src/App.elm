@@ -10,7 +10,7 @@ import Data.ProductStore as ProductStore
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import View.MainPanel as MainPanel
-import View.OrderLineListContainer as OrderLineListContainer
+import View.MainSidebar as MainSidebar
 
 
 product1 : Product
@@ -61,7 +61,7 @@ container content =
 view : Model -> Html Msg
 view model =
     container <|
-        [ OrderLineListContainer.view model
+        [ MainSidebar.view model
         , MainPanel.view model
         ]
 

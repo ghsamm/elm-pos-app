@@ -1,4 +1,4 @@
-module View.OrderLineListContainer exposing (view)
+module View.MainSidebar exposing (view)
 
 import Data.Model exposing (Model)
 import Data.Msg exposing (..)
@@ -35,7 +35,7 @@ viewTotal store =
 
 view : Model -> Html Msg
 view store =
-    div [ class "order-line-list__container" ]
+    div [ class "main-sidebar" ]
         [ OrderLineList.view store.orderLines store
         , viewTotal store
         ]

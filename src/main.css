@@ -12,13 +12,14 @@ body {
   grid-template-columns: 400px 1fr;
 }
 
-/* OrderLine */
+/* MainSidebar */
 
-.order-line-list__container {
-  display: flex;
-  flex-direction: column;
+.main-sidebar {
+  display: grid;
   border-right: 2px solid #eee;
 }
+
+/* OrderLine */
 
 .order-line-list__total {
     height: 30px;
