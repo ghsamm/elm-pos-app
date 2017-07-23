@@ -27,7 +27,7 @@ getTotal store =
 
 viewTotal : Model -> Html Msg
 viewTotal store =
-    div [ class "order-line-list__total" ]
+    div [ class "order-lines-total" ]
         [ text "TOTAL : "
         , text <| formatPrice <| getTotal <| store
         ]

@@ -21,7 +21,7 @@ body {
 
 /* OrderLine */
 
-.order-line-list__total {
+.order-lines-total {
     height: 30px;
     font-size: 1.2em;
     display: flex;
