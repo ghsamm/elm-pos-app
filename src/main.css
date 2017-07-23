@@ -17,6 +17,8 @@ body {
 .main-sidebar {
   display: grid;
   border-right: 2px solid #eee;
+  grid-template-rows: 1fr 30px 250px;
+  overflow-y: hidden;
 }
 
 /* Main Panel*/
@@ -28,6 +30,9 @@ body {
 
 /* OrderLine */
 
+.order-line-list {
+    overflow-y: auto;
+}
 .order-lines-total {
     height: 30px;
     font-size: 1.2em;

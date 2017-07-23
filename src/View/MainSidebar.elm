@@ -8,6 +8,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Selector.OrderLine exposing (orderLinePrice)
 import Util exposing (formatPrice)
+import View.Numpad as Numpad
 import View.OrderLineList as OrderLineList
 
 
@@ -38,4 +39,5 @@ view store =
     div [ class "main-sidebar" ]
         [ OrderLineList.view store.orderLines store
         , viewTotal store
+        , Numpad.view
         ]
