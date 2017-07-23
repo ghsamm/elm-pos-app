@@ -19,6 +19,13 @@ body {
   border-right: 2px solid #eee;
 }
 
+/* Main Panel*/
+
+.main-panel {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
 /* OrderLine */
 
 .order-lines-total {
@@ -68,21 +75,9 @@ body {
   font-weight: normal;
 }
 
-.order-line__info {
-  align-items: flex-end;
-}
-
 .order-line__discount {
-  flex: 1;
   font-size: 0.8em;
   font-style: italic;
-}
-
-/* Main Panel*/
-
-.main-panel {
-  display: grid;
-  grid-template-rows: auto 1fr;
 }
 
 /* Product */
