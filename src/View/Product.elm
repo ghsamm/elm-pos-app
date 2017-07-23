@@ -15,7 +15,7 @@ view handleClick product =
 
         Ok product ->
             div
-                [ class "product__content"
+                [ class "product"
                 , onClick <| handleClick (product |> Product.toId)
                 ]
                 [ div [ class "product__price" ]
