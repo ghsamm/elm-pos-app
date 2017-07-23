@@ -80,11 +80,14 @@ body {
   font-style: italic;
 }
 
-/* Product */
+/* Main Panel*/
 
-.product-list__container {
-  flex: 1
+.main-panel {
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
+
+/* Product */
 
 .product-list__search-container {
   display: flex;

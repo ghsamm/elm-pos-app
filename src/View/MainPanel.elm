@@ -1,11 +1,11 @@
-module View.ProductListContainer exposing (view)
+module View.MainPanel exposing (view)
 
+import Data.Model exposing (Model)
 import Data.Msg exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Selector.Product exposing (searchProductSelector)
-import Data.Model exposing (Model)
 import View.ProductList as ProductList
 
 
@@ -23,7 +23,7 @@ viewProductListSearch =
 
 view : Model -> Html Msg
 view store =
-    div [ class "product-list__container" ]
+    div [ class "main-panel" ]
         [ viewProductListSearch
         , ProductList.view (searchProductSelector store) store
         ]
