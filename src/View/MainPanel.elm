@@ -11,7 +11,7 @@ import View.ProductList as ProductList
 
 viewProductListSearch : Html Msg
 viewProductListSearch =
-    div [ class "product-list__search-container" ]
+    div [ class "product-search" ]
         [ input
             [ type_ "text"
             , placeholder "Search for products"

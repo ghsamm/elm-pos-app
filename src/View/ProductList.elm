@@ -12,7 +12,7 @@ import View.ProductContainer as ProductContainer exposing (view)
 
 view : ProductStore -> Model -> Html Msg
 view productStore store =
-    div [ class "product-list__content" ] <|
+    div [ class "product-list" ] <|
         List.map
             (\productId -> ProductContainer.view productId store)
             (List.map stringToProductId <| keys productStore)

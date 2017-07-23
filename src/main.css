@@ -87,14 +87,12 @@ body {
 
 /* Product */
 
-.product-list__search-container {
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
+.product-search {
+  justify-self: flex-end;
   padding: 10px;
 }
 
-.product-list__content {
+.product-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, 120px);
   grid-auto-rows: 120px;
