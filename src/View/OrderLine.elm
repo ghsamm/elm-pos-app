@@ -101,19 +101,28 @@ view handleClick viewData =
             div [] [ Html.text "this line is invalid" ]
 
         Ok ( orderLine, product ) ->
+            let
+                id =
+                    orderLine |> OrderLine.toId
+
+                name =
+                    product |> Product.toName
+
+                price =
+                    product |> Product.toPrice
+
+                quantity =
+                    orderLine |> OrderLine.toQuantity
+
+                discount =
+                    orderLine |> OrderLine.toDiscount
+            in
             div
-                [ class "order-line__content"
-                , onClick <| handleClick (orderLine |> OrderLine.toId)
+                [ class "order-line"
+                , onClick <| handleClick id
                 ]
-                [ div
-                    [ class "order-line__row order-line__top-row"
-                    ]
-                    [ viewName <| Product.toName product
-                    , viewUnitPrice (product |> Product.toPrice) (orderLine |> OrderLine.toDiscount)
-                    ]
-                , hr [] []
-                , viewInfo
-                    (orderLine |> OrderLine.toQuantity)
-                    (product |> Product.toPrice)
-                    (orderLine |> OrderLine.toDiscount)
+                [ viewName name
+                , viewUnitPrice price discount
+                , viewDiscount discount
+                , viewBottomLine quantity price discount
                 ]
