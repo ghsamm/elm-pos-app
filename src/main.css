@@ -7,14 +7,14 @@ body {
 
 .app-container {
   height: 100vh;
-  display: flex;
   flex: 1;
+  display: grid;
+  grid-template-columns: 400px 1fr;
 }
 
 /* OrderLine */
 
 .order-line-list__container {
-  width: 400px;
   display: flex;
   flex-direction: column;
   border-right: 2px solid #eee;
