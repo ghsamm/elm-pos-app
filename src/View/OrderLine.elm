@@ -4,7 +4,7 @@ import Data.Discount exposing (Discount(..), applyDiscount, discountToString)
 import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineErr, OrderLineId)
 import Data.Product as Product exposing (Product)
 import Html exposing (..)
-import Html.Attributes exposing (class)
+import Html.Attributes exposing (class, classList)
 import Html.Events exposing (..)
 import Util exposing (formatPrice)
 
@@ -94,8 +94,8 @@ viewInfo quantity unitPrice discount =
         ]
 
 
-view : (OrderLineId -> msg) -> Result OrderLineErr ( OrderLine, Product ) -> Html msg
-view handleClick viewData =
+view : (OrderLineId -> msg) -> Result OrderLineErr ( OrderLine, Product ) -> Bool -> Html msg
+view handleClick viewData isSelected =
     case viewData of
         Err _ ->
             div [] [ Html.text "this line is invalid" ]
@@ -118,7 +118,10 @@ view handleClick viewData =
                     orderLine |> OrderLine.toDiscount
             in
             div
-                [ class "order-line"
+                [ classList
+                    [ ( "order-line", True )
+                    , ( "order-line--selected", isSelected )
+                    ]
                 , onClick <| handleClick id
                 ]
                 [ viewName name

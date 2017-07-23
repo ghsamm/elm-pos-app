@@ -31,9 +31,6 @@ body {
     border-top: 2px solid black;
 }
 
-.order-line__container--selected {
-  background-color: #eee;
-}
 
 .order-line__text--bold {
   font-weight: bold;
@@ -51,13 +48,8 @@ body {
   cursor: pointer;
 }
 
-.order-line__top-row {
-  align-items: center;
-}
-
-.order-line__row {
-  display: flex;
-  flex: 1;
+.order-line--selected {
+  background-color: #eee;
 }
 
 .order-line__product-name {
