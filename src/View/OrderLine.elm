@@ -160,6 +160,15 @@ view handleClick viewData isSelected =
                         backgroundColor (hex "eee")
                       else
                         backgroundColor initial
+                    , Css.property "display" "grid"
+                    , Css.property "grid-template-rows" "1fr 1fr"
+                    , Css.property "grid-template-columns" "1fr auto"
+                    , Css.property "grid-gap" "5px"
+                    , minHeight (px 50)
+                    , padding (px 10)
+                    , alignItems center
+                    , borderBottom3 (px 1) solid (hex "eee")
+                    , cursor pointer
                     ]
                 , Attributes.class "order-line"
                 , onClick <| handleClick id

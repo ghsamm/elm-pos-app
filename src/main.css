@@ -19,19 +19,6 @@ body {
     overflow-y: auto;
 }
 
-.order-line {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  min-height: 50px;
-  grid-template-columns: 1fr auto;
-  grid-gap: 5px;
-  padding: 10px;
-  align-items: center;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-}
-
-
 /* Product */
 
 .product-search {
