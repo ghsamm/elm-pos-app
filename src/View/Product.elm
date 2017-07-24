@@ -21,7 +21,11 @@ view handleClick product =
 
         Ok product ->
             div
-                [ Attributes.class "product"
+                [ styles
+                    [ position relative
+                    , border3 (px 1) solid (hex "eee")
+                    ]
+                , Attributes.class "product"
                 , onClick <| handleClick (product |> Product.toId)
                 ]
                 [ div
