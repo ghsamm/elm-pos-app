@@ -36,17 +36,6 @@ body {
   margin: 2px;
 }
 
-.product__name {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  font-size: 0.7em;
-  text-align: center;
-  padding: 2px;
-  background-color: #eee;
-}
-
 /************************
     View.Breadcrumb
 *************************/
