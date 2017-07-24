@@ -40,20 +40,9 @@ body {
   background-color: #eee;
 }
 
-.order-line__product-name {
-    flex: 1;
-    padding-right: 10px;
-}
-
 .order-line__unit-price,
 .order-line__bottom-line {
   justify-self: flex-end;
-}
-
-.order-line__unit-price--old {
-  text-decoration: line-through;
-  font-size: 0.8em;
-  font-weight: normal;
 }
 
 .order-line__discount {
