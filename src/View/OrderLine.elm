@@ -53,7 +53,10 @@ viewUnitPriceAfterDiscount price discount =
 
 viewUnitPrice : Float -> Discount -> Html msg
 viewUnitPrice price discount =
-    div [ Attributes.class "order-line__unit-price order-line__text--bold" ]
+    div
+        [ styles [ Css.property "justify-self" "flex-end" ]
+        , Attributes.class "order-line__unit-price order-line__text--bold"
+        ]
         [ viewUnitPriceBeforeDiscount price discount
         , Html.text " "
         , viewUnitPriceAfterDiscount price discount
@@ -91,7 +94,10 @@ viewTotalPrice quantity unitPrice discount =
 
 viewBottomLine : Int -> Float -> Discount -> Html msg
 viewBottomLine quantity unitPrice discount =
-    div [ Attributes.class "order-line__bottom-line" ]
+    div
+        [ styles [ Css.property "justify-self" "flex-end" ]
+        , Attributes.class "order-line__bottom-line"
+        ]
         [ Html.text " x "
         , span
             [ Attributes.class "order-line__text--bold" ]
