@@ -1,5 +1,6 @@
 module App exposing (..)
 
+import Css exposing (..)
 import Data.Discount exposing (Discount(..))
 import Data.Model exposing (Model, Selection(..))
 import Data.Msg exposing (Msg(..))
@@ -8,9 +9,14 @@ import Data.OrderLineStore as OrderLineStore
 import Data.Product as Product exposing (Product, ProductId(..))
 import Data.ProductStore as ProductStore
 import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html.Attributes as Attributes exposing (..)
 import View.MainPanel as MainPanel
 import View.MainSidebar as MainSidebar
+
+
+styles : List Mixin -> Attribute msg
+styles =
+    Css.asPairs >> Attributes.style
 
 
 product1 : Product
@@ -54,7 +60,14 @@ store =
 container : List (Html msg) -> Html msg
 container content =
     div
-        [ class "app-container" ]
+        [ Attributes.class "app-container"
+        , styles
+            [ Css.height (vh 100)
+            , flex (int 1)
+            , Css.property "display" "grid"
+            , Css.property "grid-template-columns" "400px 1fr"
+            ]
+        ]
         content
 
 
