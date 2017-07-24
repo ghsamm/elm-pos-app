@@ -82,7 +82,14 @@ viewDiscount discount =
                             [ Html.text <| discountToString discount ]
                         ]
     in
-    div [ Attributes.class "order-line__discount" ] [ textData ]
+    div
+        [ styles
+            [ fontSize (Css.em 0.8)
+            , fontStyle italic
+            ]
+        , Attributes.class "order-line__discount"
+        ]
+        [ textData ]
 
 
 viewTotalPrice : Int -> Float -> Discount -> Html msg
