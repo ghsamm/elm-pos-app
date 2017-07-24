@@ -5,14 +5,6 @@ body {
   margin: 0;
 }
 
-/* MainSidebar */
-
-.main-sidebar {
-  display: grid;
-  border-right: 2px solid #eee;
-  grid-template-rows: 1fr 30px 250px;
-  overflow-y: hidden;
-}
 
 /* Main Panel*/
 
