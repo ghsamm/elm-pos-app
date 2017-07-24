@@ -24,7 +24,19 @@ view handleClick product =
                 [ Attributes.class "product"
                 , onClick <| handleClick (product |> Product.toId)
                 ]
-                [ div [ Attributes.class "product__price" ]
+                [ div
+                    [ styles
+                        [ position absolute
+                        , top zero
+                        , right zero
+                        , fontSize (Css.em 0.8)
+                        , color (hex "000")
+                        , backgroundColor (hex "eee")
+                        , padding (px 2)
+                        , margin (px 2)
+                        ]
+                    , Attributes.class "product__price"
+                    ]
                     [ Html.text <| formatPrice (product |> Product.toPrice) ]
                 , div
                     [ styles

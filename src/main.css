@@ -25,17 +25,6 @@ body {
   border: 1px solid #eee;
 }
 
-.product__price {
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 0.8em;
-  color: black;
-  background-color: #eee;
-  padding: 2px;
-  margin: 2px;
-}
-
 /************************
     View.Breadcrumb
 *************************/
