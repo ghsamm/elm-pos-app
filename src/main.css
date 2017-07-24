@@ -13,12 +13,6 @@ body {
   grid-template-rows: auto 1fr;
 }
 
-/* OrderLine */
-
-.order-line-list {
-    overflow-y: auto;
-}
-
 /* Product */
 
 .product-search {
