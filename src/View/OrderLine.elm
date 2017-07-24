@@ -140,10 +140,13 @@ view handleClick viewData isSelected =
                     orderLine |> OrderLine.toDiscount
             in
             div
-                [ classList
-                    [ ( "order-line", True )
-                    , ( "order-line--selected", isSelected )
+                [ styles
+                    [ if isSelected then
+                        backgroundColor (hex "eee")
+                      else
+                        backgroundColor initial
                     ]
+                , Attributes.class "order-line"
                 , onClick <| handleClick id
                 ]
                 [ viewName name

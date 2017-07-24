@@ -36,9 +36,6 @@ body {
   cursor: pointer;
 }
 
-.order-line--selected {
-  background-color: #eee;
-}
 
 .order-line__discount {
   font-size: 0.8em;
