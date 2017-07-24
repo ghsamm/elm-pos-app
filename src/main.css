@@ -29,19 +29,3 @@ body {
 .breadcrumb__section--active {
     border-bottom: 2px solid white;
 }
-
-/************************
-    View.Numpad
-*************************/
-
-
-.numpad__number {
-    background-color: #BBBBBB;
-    display: grid;
-    justify-content: center;
-    align-content: center;
-}
-
-.numpad__number--large {
-  grid-column-end: span 2;
-}

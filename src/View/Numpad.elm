@@ -12,6 +12,23 @@ styles =
 
 view : Html msg
 view =
+    let
+        renderNumber number =
+            div
+                [ styles
+                    [ if number == "0" then
+                        Css.property "grid-column-end" "span 2"
+                      else
+                        Css.property "grid-column-end" "initial"
+                    , Css.property "display" "grid"
+                    , Css.property "justify-content" "center"
+                    , Css.property "align-content" "center"
+                    , backgroundColor (hex "BBB")
+                    ]
+                , Attributes.class "numpad__number"
+                ]
+                [ Html.text number ]
+    in
     div
         [ styles
             [ Css.property "display" "grid"
@@ -28,15 +45,15 @@ view =
             ]
         , Attributes.class "numpad"
         ]
-        [ div [ Attributes.class "numpad__number" ] [ Html.text "1" ]
-        , div [ Attributes.class "numpad__number" ] [ Html.text "2" ]
-        , div [ Attributes.class "numpad__number" ] [ Html.text "3" ]
-        , div [ Attributes.class "numpad__number" ] [ Html.text "4" ]
-        , div [ Attributes.class "numpad__number" ] [ Html.text "5" ]
-        , div [ Attributes.class "numpad__number" ] [ Html.text "6" ]
-        , div [ Attributes.class "numpad__number" ] [ Html.text "7" ]
-        , div [ Attributes.class "numpad__number" ] [ Html.text "8" ]
-        , div [ Attributes.class "numpad__number" ] [ Html.text "9" ]
-        , div [ Attributes.class "numpad__number numpad__number--large" ] [ Html.text "0" ]
-        , div [ Attributes.class "numpad__number" ] [ Html.text "." ]
+        [ renderNumber "1"
+        , renderNumber "2"
+        , renderNumber "3"
+        , renderNumber "4"
+        , renderNumber "5"
+        , renderNumber "6"
+        , renderNumber "7"
+        , renderNumber "8"
+        , renderNumber "9"
+        , renderNumber "0"
+        , renderNumber "."
         ]
