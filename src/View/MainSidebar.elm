@@ -34,7 +34,18 @@ getTotal store =
 
 viewTotal : Model -> Html Msg
 viewTotal store =
-    div [ Attributes.class "order-lines-total" ]
+    div
+        [ Attributes.class "order-lines-total"
+        , styles
+            [ Css.property "display" "grid"
+            , fontSize (Css.em 1.2)
+            , Css.property "justify-self" "stretch"
+            , Css.property "align-self" "center"
+            , textAlign right
+            , borderTop3 (px 2) solid (hex "000")
+            , padding2 (px 5) (px 10)
+            ]
+        ]
         [ Html.text "TOTAL : "
         , Html.text <| formatPrice <| getTotal <| store
         ]
