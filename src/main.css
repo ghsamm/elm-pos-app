@@ -19,11 +19,6 @@ body {
     overflow-y: auto;
 }
 
-
-.order-line__text--bold {
-  font-weight: bold;
-}
-
 .order-line {
   display: grid;
   grid-template-rows: 1fr 1fr;

@@ -15,6 +15,12 @@ styles =
     Css.asPairs >> Attributes.style
 
 
+mixins : { boldText : Mixin }
+mixins =
+    { boldText = fontWeight bold
+    }
+
+
 viewName : String -> Html msg
 viewName name =
     div [ Attributes.class "order-line__product-name" ]
@@ -54,8 +60,8 @@ viewUnitPriceAfterDiscount price discount =
 viewUnitPrice : Float -> Discount -> Html msg
 viewUnitPrice price discount =
     div
-        [ styles [ Css.property "justify-self" "flex-end" ]
-        , Attributes.class "order-line__unit-price order-line__text--bold"
+        [ styles [ mixins.boldText, Css.property "justify-self" "flex-end" ]
+        , Attributes.class "order-line__unit-price"
         ]
         [ viewUnitPriceBeforeDiscount price discount
         , Html.text " "
@@ -78,7 +84,7 @@ viewDiscount discount =
                 _ ->
                     span []
                         [ Html.text "* with a discount of "
-                        , span [ Attributes.class "order-line__text--bold" ]
+                        , span [ styles [ mixins.boldText ] ]
                             [ Html.text <| discountToString discount ]
                         ]
     in
@@ -95,7 +101,9 @@ viewDiscount discount =
 viewTotalPrice : Int -> Float -> Discount -> Html msg
 viewTotalPrice quantity unitPrice discount =
     span
-        [ Attributes.class "order-line__total-price order-line__text--bold" ]
+        [ styles [ mixins.boldText ]
+        , Attributes.class "order-line__total-price"
+        ]
         [ Html.text <| formatPrice <| applyDiscount discount <| toFloat quantity * unitPrice ]
 
 
@@ -107,7 +115,7 @@ viewBottomLine quantity unitPrice discount =
         ]
         [ Html.text " x "
         , span
-            [ Attributes.class "order-line__text--bold" ]
+            [ styles [ mixins.boldText ] ]
             [ Html.text <| toString quantity ]
         , Html.text " = "
         , viewTotalPrice quantity unitPrice discount
