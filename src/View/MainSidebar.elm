@@ -84,6 +84,22 @@ viewOrderActionPanel model =
                 [ renderButton "Next" "next"
                 , renderButton "Cancel" "cancel"
                 ]
+
+        viewRightActions =
+            div
+                [ styles
+                    [ Css.property "display" "grid"
+                    , Css.property "gridArea" "action-right"
+                    , Css.property "grid-template-rows" "repeat(4, 1fr)"
+                    , Css.property "grid-template-columns" "1fr 1fr"
+                    , Css.property "grid-template-areas" "'minus plus' '. .' '. .' 'delete delete'"
+                    ]
+                , Attributes.class "order-action-panel__right-actions"
+                ]
+                [ renderButton "-" "minus"
+                , renderButton "+" "plus"
+                , renderButton "Delete" "delete"
+                ]
     in
     div
         [ styles
@@ -98,6 +114,7 @@ viewOrderActionPanel model =
         ]
         [ Breadcrumb.view (SelectList.fromLists [ "Edit" ] "Method" [ "Payment" ])
         , viewNavigation
+        , viewRightActions
         , Numpad.view
         ]
 
