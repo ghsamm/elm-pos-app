@@ -4,14 +4,3 @@ body {
   font-family: 'Source Sans Pro', 'Trebuchet MS', 'Lucida Grande', 'Bitstream Vera Sans', 'Helvetica Neue', sans-serif;
   margin: 0;
 }
-
-/************************
-    View.Breadcrumb
-*************************/
-
-.breadcrumb__section {
-  min-width: max-content;
-}
-.breadcrumb__section--active {
-    border-bottom: 2px solid white;
-}

@@ -22,11 +22,20 @@ view names =
             SelectList.selected names
 
         nameToSection name =
+            let
+                isSelected =
+                    name == selected
+            in
             div
-                [ classList
-                    [ ( "breadcrumb__section", True )
-                    , ( "breadcrumb__section--active", name == selected )
-                    ]
+                [ styles
+                    (if isSelected then
+                        [ borderBottom3 (px 2) solid (hex "000")
+                        , fontWeight bold
+                        ]
+                     else
+                        []
+                    )
+                , Attributes.class "breadcrumb__section"
                 ]
                 [ Html.text name ]
 
@@ -39,6 +48,7 @@ view names =
             , Css.property "grid-auto-flow" "column"
             , Css.property "grid-gap" "10px"
             , Css.property "justify-items" "center"
+            , Css.property "align-items" "baseline"
             , margin2 auto (px 60)
             ]
         , Attributes.class "breadcrumb"
