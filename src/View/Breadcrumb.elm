@@ -29,7 +29,7 @@ view names =
             div
                 [ styles
                     (if isSelected then
-                        [ borderBottom3 (px 2) solid (hex "000")
+                        [ borderBottom3 (px 2) solid (hex "fff")
                         , fontWeight bold
                         ]
                      else

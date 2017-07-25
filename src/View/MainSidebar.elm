@@ -41,11 +41,10 @@ viewTotal store =
         , styles
             [ Css.property "display" "grid"
             , fontSize (Css.em 1.2)
-            , Css.property "justify-self" "stretch"
-            , Css.property "align-self" "center"
             , textAlign right
-            , borderTop3 (px 2) solid (hex "000")
+            , borderTop3 (px 2) solid (hex "fff")
             , padding2 (px 5) (px 10)
+            , backgroundColor (hex "bbb")
             ]
         ]
         [ Html.text "TOTAL : "
@@ -64,8 +63,8 @@ viewOrderActionPanel model =
                     , Css.property "display" "grid"
                     , Css.property "align-content" "center"
                     , Css.property "justify-content" "center"
-                    , border3 (px 2) solid (hex "bbb")
-                    , color (hex "bbb")
+                    , border3 (px 2) solid (hex "fff")
+                    , backgroundColor (hex "bbb")
                     , borderRadius (px 5)
                     , fontWeight bold
                     ]
@@ -108,7 +107,9 @@ viewOrderActionPanel model =
             , Css.property "grid-template-columns" "2fr 1fr 1fr"
             , Css.property "grid-template-areas" "'breadcrumb breadcrumb breadcrumb' 'action-left action-right navigation'"
             , Css.property "grid-column-gap" "10px"
-            , margin (px 10)
+            , backgroundColor (hex "bbb")
+            , padding (px 10)
+            , color (hex "fff")
             ]
         , Attributes.class "order-action-panel"
         ]

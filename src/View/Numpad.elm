@@ -33,12 +33,13 @@ view =
             , Css.property "grid-template-rows" "repeat(3, 50px)"
             , Css.property "grid-gap" "2px"
             , borderRadius (px 5)
-            , color (hex "fff")
             , alignItems stretch
             , Css.property "justify-items" "stretch"
             , Css.property "justify-self" "center"
             , Css.property "align-self" "center"
             , overflow Css.hidden
+            , backgroundColor (hex "fff")
+            , border3 (px 2) solid (hex "fff")
             ]
         , Attributes.class "numpad"
         ]
