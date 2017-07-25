@@ -1,16 +1,22 @@
 module View.Breadcrumb exposing (..)
 
+import Css exposing (..)
 import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html.Attributes as Attributes exposing (..)
 import SelectList exposing (SelectList)
+
+
+styles : List Mixin -> Attribute msg
+styles =
+    Css.asPairs >> Attributes.style
 
 
 view : SelectList String -> Html msg
 view names =
     let
         divider =
-            div [ class "breadcrumb__divider" ]
-                [ text ">" ]
+            div [ Attributes.class "breadcrumb__divider" ]
+                [ Html.text ">" ]
 
         selected =
             SelectList.selected names
@@ -22,10 +28,18 @@ view names =
                     , ( "breadcrumb__section--active", name == selected )
                     ]
                 ]
-                [ text name ]
+                [ Html.text name ]
 
         sections =
             SelectList.map nameToSection names
     in
-    div [ class "breadcrumb__content" ] <|
+    div
+        [ styles
+            [ displayFlex
+            , alignItems flexStart
+            , overflowX auto
+            ]
+        , Attributes.class "breadcrumb"
+        ]
+    <|
         List.intersperse divider (sections |> SelectList.toList)

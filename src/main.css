@@ -9,23 +9,9 @@ body {
     View.Breadcrumb
 *************************/
 
-.breadcrumb__container {
-    display: flex;
-    width: 400px;
-    height: 80px;
+.breadcrumb__section {
+  min-width: max-content;
 }
-
-.breadcrumb__content {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #ccc;
-    color: white;
-}
-
 .breadcrumb__section--active {
     border-bottom: 2px solid white;
 }

@@ -37,6 +37,7 @@ view store =
             , Css.property "grid-template-rows" "auto 1fr"
             , Css.property "grid-template-columns" "1fr auto"
             , Css.property "grid-gap" "10px"
+            , overflow Css.hidden
             , padding (px 10)
             ]
         , Attributes.class "main-panel"
