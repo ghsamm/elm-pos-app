@@ -66,6 +66,6 @@ view store =
         ]
         [ OrderLineList.view store.orderLines store
         , viewTotal store
-        , Breadcrumb.view (SelectList.fromLists [ " qdslmfjqslm djfs" ] "fsdfsd fs df" [ "qjm dfsdm f", " qdslmfjqslm djfs" ])
+        , Breadcrumb.view (SelectList.fromLists [ "Edit" ] "Method" [ "Payment" ])
         , Numpad.view
         ]

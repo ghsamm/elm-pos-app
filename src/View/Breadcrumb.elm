@@ -35,9 +35,11 @@ view names =
     in
     div
         [ styles
-            [ displayFlex
-            , overflow Css.hidden
-            , alignSelf center
+            [ Css.property "display" "grid"
+            , Css.property "grid-auto-flow" "column"
+            , Css.property "grid-gap" "10px"
+            , Css.property "justify-items" "center"
+            , margin2 auto (px 60)
             ]
         , Attributes.class "breadcrumb"
         ]
