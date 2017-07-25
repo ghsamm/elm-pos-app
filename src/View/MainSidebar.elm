@@ -55,16 +55,48 @@ viewTotal store =
 
 viewOrderActionPanel : Model -> Html Msg
 viewOrderActionPanel model =
+    let
+        renderButton : String -> String -> Html Msg
+        renderButton text gridArea =
+            div
+                [ styles
+                    [ Css.property "grid-area" gridArea
+                    , Css.property "display" "grid"
+                    , Css.property "align-content" "center"
+                    , Css.property "justify-content" "center"
+                    , border3 (px 2) solid (hex "bbb")
+                    , color (hex "bbb")
+                    , borderRadius (px 5)
+                    , fontWeight bold
+                    ]
+                ]
+                [ Html.text text ]
+
+        viewNavigation =
+            div
+                [ styles
+                    [ Css.property "display" "grid"
+                    , Css.property "grid-template-rows" "repeat(4, 1fr)"
+                    , Css.property "grid-template-areas" "'next' 'next' '.' 'cancel'"
+                    ]
+                ]
+                [ renderButton "Next" "next"
+                , renderButton "Cancel" "cancel"
+                ]
+    in
     div
         [ styles
             [ Css.property "display" "grid"
             , Css.property "grid-template-rows" "50px 1fr"
-            , Css.property "grid-template-columns" "2fr 1fr"
+            , Css.property "grid-template-columns" "3fr 1fr"
             , Css.property "grid-template-areas" "'breadcrumb breadcrumb' 'action navigation'"
+            , Css.property "grid-column-gap" "10 px"
+            , margin (px 10)
             ]
         , Attributes.class "order-action-panel"
         ]
         [ Breadcrumb.view (SelectList.fromLists [ "Edit" ] "Method" [ "Payment" ])
+        , viewNavigation
         , Numpad.view
         ]
 
