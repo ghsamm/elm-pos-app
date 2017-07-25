@@ -17,7 +17,12 @@ styles =
 
 viewProductSearch : Html Msg
 viewProductSearch =
-    div [ Attributes.class "product-search" ]
+    div
+        [ styles
+            [ Css.property "grid-area" "product-search"
+            ]
+        , Attributes.class "product-search"
+        ]
         [ input
             [ type_ "text"
             , placeholder "Search for products"
@@ -34,6 +39,7 @@ view store =
             [ Css.property "display" "grid"
             , Css.property "grid-template-rows" "auto 1fr"
             , Css.property "grid-template-columns" "1fr auto"
+            , Css.property "grid-template-areas" "'. product-search' 'product-list product-list'"
             , Css.property "grid-gap" "10px"
             , overflow Css.hidden
             , padding (px 10)

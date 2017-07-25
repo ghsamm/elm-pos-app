@@ -24,7 +24,7 @@ view productStore store =
             , Css.property "grid-template-columns" "repeat(auto-fit, 120px)"
             , Css.property "grid-auto-rows" "120px"
             , Css.property "grid-gap" "5px 10px"
-            , Css.property "grid-column-end" "span 2"
+            , Css.property "grid-area" "product-list"
             ]
         , Attributes.class "product-list"
         ]
