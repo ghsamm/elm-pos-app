@@ -6,9 +6,7 @@ import Data.Msg exposing (..)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events exposing (..)
-import SelectList
 import Selector.Product exposing (searchProductSelector)
-import View.Breadcrumb as Breadcrumb
 import View.ProductList as ProductList
 
 
@@ -42,7 +40,6 @@ view store =
             ]
         , Attributes.class "main-panel"
         ]
-        [ Breadcrumb.view (SelectList.singleton "fsdfsd fs df")
-        , viewProductSearch
+        [ viewProductSearch
         , ProductList.view (searchProductSelector store) store
         ]

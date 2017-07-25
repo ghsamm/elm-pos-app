@@ -7,8 +7,10 @@ import Data.OrderLine as OrderLine
 import Dict
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import SelectList
 import Selector.OrderLine exposing (orderLinePrice)
 import Util exposing (formatPrice)
+import View.Breadcrumb as Breadcrumb
 import View.Numpad as Numpad
 import View.OrderLineList as OrderLineList
 
@@ -58,11 +60,12 @@ view store =
         , styles
             [ Css.property "display" "grid"
             , borderRight3 (px 2) solid (hex "eee")
-            , Css.property "grid-template-rows" "1fr 30px 250px"
+            , Css.property "grid-template-rows" "1fr 40px 50px 250px"
             , overflowY Css.hidden
             ]
         ]
         [ OrderLineList.view store.orderLines store
         , viewTotal store
+        , Breadcrumb.view (SelectList.fromLists [ " qdslmfjqslm djfs" ] "fsdfsd fs df" [ "qjm dfsdm f", " qdslmfjqslm djfs" ])
         , Numpad.view
         ]

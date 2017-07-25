@@ -36,8 +36,8 @@ view names =
     div
         [ styles
             [ displayFlex
-            , alignItems flexStart
-            , overflowX auto
+            , overflow Css.hidden
+            , alignSelf center
             ]
         , Attributes.class "breadcrumb"
         ]
