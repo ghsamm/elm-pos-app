@@ -53,6 +53,22 @@ viewTotal store =
         ]
 
 
+viewOrderActionPanel : Model -> Html Msg
+viewOrderActionPanel model =
+    div
+        [ styles
+            [ Css.property "display" "grid"
+            , Css.property "grid-template-rows" "50px 1fr"
+            , Css.property "grid-template-columns" "2fr 1fr"
+            , Css.property "grid-template-areas" "'breadcrumb breadcrumb' 'action navigation'"
+            ]
+        , Attributes.class "order-action-panel"
+        ]
+        [ Breadcrumb.view (SelectList.fromLists [ "Edit" ] "Method" [ "Payment" ])
+        , Numpad.view
+        ]
+
+
 view : Model -> Html Msg
 view store =
     div
@@ -60,12 +76,11 @@ view store =
         , styles
             [ Css.property "display" "grid"
             , borderRight3 (px 2) solid (hex "eee")
-            , Css.property "grid-template-rows" "1fr 40px 50px 250px"
+            , Css.property "grid-template-rows" "1fr 40px 300px"
             , overflowY Css.hidden
             ]
         ]
         [ OrderLineList.view store.orderLines store
         , viewTotal store
-        , Breadcrumb.view (SelectList.fromLists [ "Edit" ] "Method" [ "Payment" ])
-        , Numpad.view
+        , viewOrderActionPanel store
         ]

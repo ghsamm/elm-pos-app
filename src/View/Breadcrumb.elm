@@ -45,6 +45,7 @@ view names =
     div
         [ styles
             [ Css.property "display" "grid"
+            , Css.property "grid-area" "breadcrumb"
             , Css.property "grid-auto-flow" "column"
             , Css.property "grid-gap" "10px"
             , Css.property "justify-items" "center"
