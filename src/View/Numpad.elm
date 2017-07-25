@@ -28,7 +28,7 @@ view =
     div
         [ styles
             [ Css.property "display" "grid"
-            , Css.property "grid-area" "action"
+            , Css.property "grid-area" "action-left"
             , Css.property "grid-template-columns" "repeat(3, 50px)"
             , Css.property "grid-template-rows" "repeat(3, 50px)"
             , Css.property "grid-gap" "2px"

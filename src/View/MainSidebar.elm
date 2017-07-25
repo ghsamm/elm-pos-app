@@ -76,6 +76,7 @@ viewOrderActionPanel model =
             div
                 [ styles
                     [ Css.property "display" "grid"
+                    , Css.property "grid-area" "navigation"
                     , Css.property "grid-template-rows" "repeat(4, 1fr)"
                     , Css.property "grid-template-areas" "'next' 'next' '.' 'cancel'"
                     ]
@@ -87,10 +88,10 @@ viewOrderActionPanel model =
     div
         [ styles
             [ Css.property "display" "grid"
-            , Css.property "grid-template-rows" "50px 1fr"
-            , Css.property "grid-template-columns" "3fr 1fr"
-            , Css.property "grid-template-areas" "'breadcrumb breadcrumb' 'action navigation'"
-            , Css.property "grid-column-gap" "10 px"
+            , Css.property "grid-template-rows" "50px 200px"
+            , Css.property "grid-template-columns" "2fr 1fr 1fr"
+            , Css.property "grid-template-areas" "'breadcrumb breadcrumb breadcrumb' 'action-left action-right navigation'"
+            , Css.property "grid-column-gap" "10px"
             , margin (px 10)
             ]
         , Attributes.class "order-action-panel"
@@ -108,7 +109,7 @@ view store =
         , styles
             [ Css.property "display" "grid"
             , borderRight3 (px 2) solid (hex "eee")
-            , Css.property "grid-template-rows" "1fr 40px 300px"
+            , Css.property "grid-template-rows" "1fr 40px auto"
             , overflowY Css.hidden
             ]
         ]
