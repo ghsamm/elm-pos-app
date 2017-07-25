@@ -17,8 +17,8 @@ styles =
     Css.asPairs >> Attributes.style
 
 
-viewProductListSearch : Html Msg
-viewProductListSearch =
+viewProductSearch : Html Msg
+viewProductSearch =
     div [ Attributes.class "product-search" ]
         [ input
             [ type_ "text"
@@ -42,6 +42,6 @@ view store =
         , Attributes.class "main-panel"
         ]
         [ Breadcrumb.view (SelectList.singleton "fsdfsd fs df")
-        , viewProductListSearch
+        , viewProductSearch
         , ProductList.view (searchProductSelector store) store
         ]
