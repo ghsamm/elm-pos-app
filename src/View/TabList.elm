@@ -23,8 +23,8 @@ type alias Tab =
     }
 
 
-viewTab : Tab -> Html msg
-viewTab tab =
+viewTab : Tab -> Bool -> Html msg
+viewTab tab isSelected =
     div
         [ styles
             [ color (hex "636363")
@@ -32,6 +32,13 @@ viewTab tab =
             , displayFlex
             , alignItems center
             , justifyContent center
+            , if isSelected then
+                mixin
+                    [ color (hex "fff")
+                    , backgroundColor (hex "faa")
+                    ]
+              else
+                mixin []
             ]
         ]
         [ Html.text tab.text ]
@@ -46,6 +53,8 @@ view tabs =
             , Css.property "grid-column-gap" "2px"
             , backgroundColor (hex "eee")
             , padding (px 2)
+            , paddingBottom zero
+            , borderBottom3 (px 2) solid (hex "faa")
             , Css.height (pct 100)
             , Css.property "justify-items" "stretch"
             , Css.property "align-items" "stretch"
@@ -53,4 +62,4 @@ view tabs =
         ]
     <|
         SelectList.toList <|
-            SelectList.map viewTab tabs
+            SelectList.map (\tab -> viewTab tab (SelectList.selected tabs == tab)) tabs

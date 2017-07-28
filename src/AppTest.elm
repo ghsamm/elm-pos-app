@@ -14,7 +14,7 @@ styles =
 
 tabs : SelectList Tab
 tabs =
-    SelectList.fromLists [] (Tab "#1520" Editing) [ Tab "#1521" Waiting ]
+    SelectList.fromLists [] (Tab "#1520" Editing) [ Tab "#1521" Waiting, Tab "#1511" Done ]
 
 
 main : Html msg
