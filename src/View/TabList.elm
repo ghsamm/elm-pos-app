@@ -11,6 +11,22 @@ styles =
     Css.asPairs >> Attributes.style
 
 
+colors :
+    { mainBg : Color
+    , mainText : Color
+    , secondaryBg : Color
+    , secondaryText : Color
+    , accentBackground : Color
+    }
+colors =
+    { mainText = hex "636363"
+    , secondaryText = hex "fff"
+    , mainBg = hex "fff"
+    , secondaryBg = hex "eee"
+    , accentBackground = hex "0086AF"
+    }
+
+
 type TabState
     = Editing
     | Waiting
@@ -27,15 +43,15 @@ viewTab : Tab -> Bool -> Html msg
 viewTab tab isSelected =
     div
         [ styles
-            [ color (hex "636363")
-            , backgroundColor (hex "fff")
+            [ color colors.mainText
+            , backgroundColor colors.mainBg
             , displayFlex
             , alignItems center
             , justifyContent center
             , if isSelected then
                 mixin
-                    [ color (hex "fff")
-                    , backgroundColor (hex "faa")
+                    [ color colors.secondaryText
+                    , backgroundColor colors.accentBackground
                     ]
               else
                 mixin []
@@ -51,10 +67,10 @@ view tabs =
             [ Css.property "display" "grid"
             , Css.property "grid-template-columns" "repeat(auto-fill, 140px)"
             , Css.property "grid-column-gap" "2px"
-            , backgroundColor (hex "eee")
+            , backgroundColor colors.secondaryBg
             , padding (px 2)
             , paddingBottom zero
-            , borderBottom3 (px 2) solid (hex "faa")
+            , borderBottom3 (px 2) solid colors.accentBackground
             , Css.height (pct 100)
             , Css.property "justify-items" "stretch"
             , Css.property "align-items" "stretch"
