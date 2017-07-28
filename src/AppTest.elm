@@ -14,11 +14,16 @@ styles =
 
 tabs : SelectList Tab
 tabs =
-    SelectList.fromLists [] (Tab "#1520" Waiting) []
+    SelectList.fromLists [] (Tab "#1520" Editing) [ Tab "#1521" Waiting ]
 
 
 main : Html msg
 main =
-    div [ styles [] ]
+    div
+        [ styles
+            [ Css.width (px 500)
+            , Css.height (px 40)
+            ]
+        ]
         [ TabList.view tabs
         ]
