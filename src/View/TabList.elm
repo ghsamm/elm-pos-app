@@ -56,6 +56,7 @@ viewTab tab isSelected =
               else
                 mixin []
             ]
+        , Attributes.class "tab"
         ]
         [ Html.text tab.text ]
 
@@ -65,6 +66,7 @@ view tabs =
     div
         [ styles
             [ Css.property "display" "grid"
+            , Css.property "grid-area" "tab-list"
             , Css.property "grid-template-columns" "repeat(auto-fill, 140px)"
             , Css.property "grid-column-gap" "2px"
             , backgroundColor colors.secondaryBg
@@ -75,6 +77,7 @@ view tabs =
             , Css.property "justify-items" "stretch"
             , Css.property "align-items" "stretch"
             ]
+        , Attributes.class "tab-list"
         ]
     <|
         SelectList.toList <|

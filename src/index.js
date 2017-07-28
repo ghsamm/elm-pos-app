@@ -1,6 +1,6 @@
 require('./main.css')
-const Elm = require('./AppTest.elm')
+const Elm = require('./App.elm')
 
 const root = document.getElementById('root')
 
-Elm.AppTest.embed(root)
+Elm.App.embed(root)
