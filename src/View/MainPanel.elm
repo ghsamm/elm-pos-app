@@ -8,6 +8,7 @@ import Html.Attributes as Attributes exposing (..)
 import Html.Events exposing (..)
 import SelectList
 import Selector.Product exposing (searchProductSelector)
+import View.Colors as Colors
 import View.ProductList as ProductList
 import View.TabList as TabList exposing (Tab, TabState(..))
 

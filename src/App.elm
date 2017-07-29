@@ -10,6 +10,7 @@ import Data.Product as Product exposing (Product, ProductId(..))
 import Data.ProductStore as ProductStore
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import View.Colors as Colors
 import View.MainPanel as MainPanel
 import View.MainSidebar as MainSidebar
 
@@ -66,6 +67,8 @@ container content =
             , flex (int 1)
             , Css.property "display" "grid"
             , Css.property "grid-template-columns" "400px 1fr"
+            , color Colors.mainText
+            , backgroundColor Colors.secondaryBg
             ]
         ]
         content

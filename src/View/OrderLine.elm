@@ -8,6 +8,7 @@ import Html exposing (..)
 import Html.Attributes as Attributes exposing (class, classList)
 import Html.Events exposing (..)
 import Util exposing (formatPrice)
+import View.Colors as Colors
 
 
 styles : List Mixin -> Attribute msg
@@ -157,9 +158,12 @@ view handleClick viewData isSelected =
             div
                 [ styles
                     [ if isSelected then
-                        backgroundColor (hex "eee")
+                        mixin
+                            [ backgroundColor Colors.accentBg
+                            , color Colors.secondaryText
+                            ]
                       else
-                        backgroundColor initial
+                        mixin []
                     , Css.property "display" "grid"
                     , Css.property "grid-template-rows" "1fr 1fr"
                     , Css.property "grid-template-columns" "1fr auto"
@@ -167,7 +171,7 @@ view handleClick viewData isSelected =
                     , minHeight (px 50)
                     , padding (px 10)
                     , alignItems center
-                    , borderBottom3 (px 1) solid (hex "eee")
+                    , borderBottom3 (px 1) solid Colors.secondaryBg
                     , cursor pointer
                     ]
                 , Attributes.class "order-line"

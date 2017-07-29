@@ -11,6 +11,7 @@ import SelectList
 import Selector.OrderLine exposing (orderLinePrice)
 import Util exposing (formatPrice)
 import View.Breadcrumb as Breadcrumb
+import View.Colors as Colors
 import View.Numpad as Numpad
 import View.OrderLineList as OrderLineList
 
@@ -44,7 +45,7 @@ viewTotal store =
             , textAlign right
             , borderTop3 (px 2) solid (hex "fff")
             , padding2 (px 5) (px 10)
-            , backgroundColor (hex "bbb")
+            , backgroundColor Colors.mainBg
             ]
         ]
         [ Html.text "TOTAL : "
@@ -107,9 +108,8 @@ viewOrderActionPanel model =
             , Css.property "grid-template-columns" "2fr 1fr 1fr"
             , Css.property "grid-template-areas" "'breadcrumb breadcrumb breadcrumb' 'action-left action-right navigation'"
             , Css.property "grid-column-gap" "10px"
-            , backgroundColor (hex "bbb")
+            , backgroundColor Colors.mainBg
             , padding (px 10)
-            , color (hex "fff")
             ]
         , Attributes.class "order-action-panel"
         ]

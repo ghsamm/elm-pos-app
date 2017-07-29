@@ -23,6 +23,6 @@ secondaryBg =
     hex "eee"
 
 
-accentBackground : Color
-accentBackground =
+accentBg : Color
+accentBg =
     hex "0086AF"

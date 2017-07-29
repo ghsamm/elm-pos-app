@@ -6,6 +6,7 @@ import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events exposing (..)
 import Util exposing (formatPrice)
+import View.Colors as Colors
 
 
 styles : List Mixin -> Attribute msg

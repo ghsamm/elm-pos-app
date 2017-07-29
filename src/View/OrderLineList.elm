@@ -8,6 +8,7 @@ import Data.OrderLineStore exposing (OrderLineStore)
 import Dict exposing (keys)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import View.Colors as Colors
 import View.OrderLineContainer as OrderLineContainer exposing (view)
 
 
@@ -19,7 +20,10 @@ styles =
 view : OrderLineStore -> Model -> Html Msg
 view orderLineStore store =
     div
-        [ styles [ overflowY auto ]
+        [ styles
+            [ overflowY auto
+            , backgroundColor Colors.mainBg
+            ]
         , Attributes.class "order-line-list"
         ]
     <|

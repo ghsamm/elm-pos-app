@@ -28,15 +28,14 @@ viewTab : Tab -> Bool -> Html msg
 viewTab tab isSelected =
     div
         [ styles
-            [ color Colors.mainText
-            , backgroundColor Colors.mainBg
+            [ backgroundColor Colors.mainBg
             , displayFlex
             , alignItems center
             , justifyContent center
             , if isSelected then
                 mixin
                     [ color Colors.secondaryText
-                    , backgroundColor Colors.accentBackground
+                    , backgroundColor Colors.accentBg
                     ]
               else
                 mixin []
@@ -54,10 +53,9 @@ view tabs =
             , Css.property "grid-area" "tab-list"
             , Css.property "grid-template-columns" "repeat(auto-fill, 140px)"
             , Css.property "grid-column-gap" "2px"
-            , backgroundColor Colors.secondaryBg
             , padding (px 2)
             , paddingBottom zero
-            , borderBottom3 (px 2) solid Colors.accentBackground
+            , borderBottom3 (px 2) solid Colors.accentBg
             , Css.height (pct 100)
             , Css.property "justify-items" "stretch"
             , Css.property "align-items" "stretch"
