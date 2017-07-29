@@ -60,7 +60,7 @@ view store =
         , styles
             [ Css.property "display" "grid"
             , Css.property "grid-template-rows" "1fr 40px auto"
-            , Css.property "grid-row-gap" "4px"
+            , Css.property "grid-row-gap" "5px"
             , overflowY Css.hidden
             ]
         ]

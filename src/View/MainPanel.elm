@@ -8,7 +8,6 @@ import Html.Attributes as Attributes exposing (..)
 import Html.Events exposing (..)
 import SelectList
 import Selector.Product exposing (searchProductSelector)
-import View.Colors as Colors
 import View.ProductList as ProductList
 import View.TabList as TabList exposing (Tab, TabState(..))
 
@@ -45,9 +44,9 @@ view store =
             , Css.property
                 "grid-template-areas"
                 "'tab-list tab-list' '. product-search' 'product-list product-list'"
-            , Css.property "grid-gap" "10px"
+            , Css.property "grid-gap" "5px"
             , overflow Css.hidden
-            , padding (px 10)
+            , padding (px 5)
             ]
         , Attributes.class "main-panel"
         ]

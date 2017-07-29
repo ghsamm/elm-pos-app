@@ -36,6 +36,7 @@ viewTab tab isSelected =
                 mixin
                     [ color Colors.secondaryText
                     , backgroundColor Colors.accentBg
+                    , marginBottom (px -2)
                     ]
               else
                 mixin []
@@ -54,7 +55,6 @@ view tabs =
             , Css.property "grid-template-columns" "repeat(auto-fill, 140px)"
             , Css.property "grid-column-gap" "2px"
             , padding (px 2)
-            , paddingBottom zero
             , borderBottom3 (px 2) solid Colors.accentBg
             , Css.height (pct 100)
             , Css.property "justify-items" "stretch"
