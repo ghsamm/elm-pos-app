@@ -3,6 +3,7 @@ module View.Numpad exposing (view)
 import Css exposing (..)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import View.Colors as Colors
 
 
 styles : List Mixin -> Attribute msg
@@ -19,7 +20,8 @@ view =
                     [ Css.property "display" "grid"
                     , Css.property "justify-content" "center"
                     , Css.property "align-content" "center"
-                    , backgroundColor (hex "BBB")
+                    , fontWeight bold
+                    , backgroundColor Colors.secondaryBg
                     ]
                 , Attributes.class "numpad__number"
                 ]
@@ -38,8 +40,8 @@ view =
             , Css.property "justify-self" "center"
             , Css.property "align-self" "center"
             , overflow Css.hidden
-            , backgroundColor (hex "fff")
-            , border3 (px 2) solid (hex "fff")
+            , backgroundColor Colors.secondaryText
+            , border3 (px 2) solid Colors.secondaryText
             ]
         , Attributes.class "numpad"
         ]

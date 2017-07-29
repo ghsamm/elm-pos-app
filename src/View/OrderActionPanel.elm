@@ -25,8 +25,7 @@ view =
                     , Css.property "display" "grid"
                     , Css.property "align-content" "center"
                     , Css.property "justify-content" "center"
-                    , border3 (px 2) solid (hex "fff")
-                    , backgroundColor (hex "bbb")
+                    , backgroundColor Colors.secondaryBg
                     , borderRadius (px 5)
                     , fontWeight bold
                     ]

@@ -4,6 +4,7 @@ import Css exposing (..)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import SelectList exposing (SelectList)
+import View.Colors as Colors
 
 
 styles : List Mixin -> Attribute msg
@@ -29,7 +30,7 @@ view names =
             div
                 [ styles
                     (if isSelected then
-                        [ borderBottom3 (px 2) solid (hex "fff")
+                        [ borderBottom3 (px 2) solid Colors.accentBg
                         , fontWeight bold
                         ]
                      else
