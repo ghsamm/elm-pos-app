@@ -43,7 +43,6 @@ viewTotal store =
             [ Css.property "display" "grid"
             , fontSize (Css.em 1.2)
             , textAlign right
-            , borderTop3 (px 2) solid (hex "fff")
             , padding2 (px 5) (px 10)
             , backgroundColor Colors.mainBg
             ]
@@ -126,8 +125,8 @@ view store =
         [ Attributes.class "main-sidebar"
         , styles
             [ Css.property "display" "grid"
-            , borderRight3 (px 2) solid (hex "eee")
             , Css.property "grid-template-rows" "1fr 40px auto"
+            , Css.property "grid-row-gap" "2px"
             , overflowY Css.hidden
             ]
         ]

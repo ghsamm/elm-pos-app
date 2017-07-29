@@ -23,6 +23,7 @@ view orderLineStore store =
         [ styles
             [ overflowY auto
             , backgroundColor Colors.mainBg
+            , padding (px 5)
             ]
         , Attributes.class "order-line-list"
         ]

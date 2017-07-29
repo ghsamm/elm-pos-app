@@ -169,7 +169,7 @@ view handleClick viewData isSelected =
                     , Css.property "grid-template-columns" "1fr auto"
                     , Css.property "grid-gap" "5px"
                     , minHeight (px 50)
-                    , padding (px 10)
+                    , padding (px 5)
                     , alignItems center
                     , borderBottom3 (px 1) solid Colors.secondaryBg
                     , cursor pointer
