@@ -1,70 +1,77 @@
 module View.OrderActionPanel exposing (view)
 
 import Css exposing (..)
+import Data.Model exposing (Model)
+import Data.OrderLine as OrderLine
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import SelectList
+import Selector.OrderLine as OrderLineSelector exposing (orderLineSelector)
 import View.Breadcrumb as Breadcrumb
 import View.Colors as Colors
 import View.Numpad as Numpad
 import View.Utils exposing (styles)
 
 
-view : Html msg
-view =
-    let
-        renderButton : String -> String -> Html msg
-        renderButton text gridArea =
-            a
-                [ styles
-                    [ Css.property "grid-area" gridArea
-                    , Css.property "display" "grid"
-                    , Css.property "align-content" "center"
-                    , Css.property "justify-content" "center"
-                    , border zero
-                    , backgroundColor Colors.secondaryBg
-                    , fontWeight bold
-                    , padding (px 5)
-                    , textAlign center
-                    , textDecoration none
-                    , color inherit
-                    ]
-                , Attributes.class "order-action-panel__button"
-                , href "#"
-                ]
-                [ Html.text text ]
+renderButton : String -> String -> Html msg
+renderButton text gridArea =
+    a
+        [ styles
+            [ Css.property "grid-area" gridArea
+            , Css.property "display" "grid"
+            , Css.property "align-content" "center"
+            , Css.property "justify-content" "center"
+            , border zero
+            , backgroundColor Colors.secondaryBg
+            , fontWeight bold
+            , padding (px 5)
+            , textAlign center
+            , textDecoration none
+            , color inherit
+            ]
+        , Attributes.class "order-action-panel__button"
+        , href "#"
+        ]
+        [ Html.text text ]
 
-        viewNavigation =
-            div
-                [ styles
-                    [ Css.property "display" "grid"
-                    , Css.property "grid-area" "navigation"
-                    , Css.property "grid-template-rows" "repeat(3, 1fr)"
-                    , Css.property "grid-template-areas" "'next' 'next' 'cancel'"
-                    , Css.property "grid-gap" "2px"
-                    ]
-                ]
-                [ renderButton "Next" "next"
-                , renderButton "Cancel" "cancel"
-                ]
 
-        viewRightActions =
-            div
-                [ styles
-                    [ Css.property "display" "grid"
-                    , Css.property "gridArea" "action-right"
-                    , Css.property "grid-template-rows" "repeat(3, 1fr)"
-                    , Css.property "grid-template-columns" "1fr 1fr"
-                    , Css.property "grid-template-areas" "'minus plus' '. .' 'delete delete'"
-                    , Css.property "grid-gap" "2px"
-                    ]
-                , Attributes.class "order-action-panel__right-actions"
-                ]
-                [ renderButton "-" "minus"
-                , renderButton "+" "plus"
-                , renderButton "Delete" "delete"
-                ]
-    in
+viewNavigation : Html msg
+viewNavigation =
+    div
+        [ styles
+            [ Css.property "display" "grid"
+            , Css.property "grid-area" "navigation"
+            , Css.property "grid-template-rows" "repeat(3, 1fr)"
+            , Css.property "grid-template-areas" "'next' 'next' 'cancel'"
+            , Css.property "grid-gap" "2px"
+            ]
+        ]
+        [ renderButton "Next" "next"
+        , renderButton "Cancel" "cancel"
+        ]
+
+
+viewRightActions : Html msg
+viewRightActions =
+    div
+        [ styles
+            [ Css.property "display" "grid"
+            , Css.property "gridArea" "action-right"
+            , Css.property "grid-template-rows" "repeat(3, 1fr)"
+            , Css.property "grid-template-columns" "1fr 1fr"
+            , Css.property "grid-template-areas" "'minus plus' '. .' 'delete delete'"
+            , Css.property "grid-gap" "2px"
+            ]
+        , Attributes.class "order-action-panel__right-actions"
+        ]
+        [ renderButton "-" "minus"
+        , renderButton "+" "plus"
+        , renderButton "Delete" "delete"
+        ]
+
+
+view : Model -> Html msg
+view model =
     div
         [ styles
             [ Css.property "display" "grid"
@@ -80,5 +87,8 @@ view =
         [ Breadcrumb.view (SelectList.fromLists [] "Edit" [ "Method", "Payment" ])
         , viewNavigation
         , viewRightActions
-        , Numpad.view
+        , Numpad.view <|
+            (OrderLineSelector.selectedOrderLine model
+                |> Maybe.map OrderLine.toQuantity
+            )
         ]
