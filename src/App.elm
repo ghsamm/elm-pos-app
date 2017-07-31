@@ -2,12 +2,13 @@ module App exposing (..)
 
 import Css exposing (..)
 import Data.Discount exposing (Discount(..))
-import Data.Model exposing (Model, Selection(..))
+import Data.Model exposing (Model)
 import Data.Msg exposing (Msg(..))
 import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId(..))
 import Data.OrderLineStore as OrderLineStore
 import Data.Product as Product exposing (Product, ProductId(..))
 import Data.ProductStore as ProductStore
+import Data.Selection exposing (Selection(..))
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import View.Colors as Colors

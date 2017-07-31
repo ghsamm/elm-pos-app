@@ -1,10 +1,10 @@
 module View.OrderLineContainer exposing (view)
 
-import Data.Model exposing (Model, Selection(..))
+import Data.Model exposing (Model)
 import Data.Msg exposing (..)
 import Data.OrderLine exposing (OrderLine, OrderLineId)
+import Data.Selection exposing (Selection(..))
 import Html exposing (..)
-import Html.Attributes exposing (class, classList)
 import Selector.OrderLine exposing (orderLineSelector)
 import View.OrderLine as View exposing (view)
 

@@ -3,20 +3,7 @@ module Data.Model exposing (..)
 import Data.OrderLine exposing (OrderLineId)
 import Data.OrderLineStore exposing (OrderLineStore)
 import Data.ProductStore exposing (ProductStore)
-
-
-type Selection id
-    = NoSelection
-    | SingleSelection id
-
-
-
--- type Store s id
---     = Store s Selection id
---
---
--- type alias DummyStore =
---     Store ProductStore ProductId
+import Data.Selection as Selection exposing (Selection(..))
 
 
 type alias Model =
