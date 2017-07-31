@@ -15,16 +15,22 @@ view =
     let
         renderButton : String -> String -> Html msg
         renderButton text gridArea =
-            div
+            a
                 [ styles
                     [ Css.property "grid-area" gridArea
                     , Css.property "display" "grid"
                     , Css.property "align-content" "center"
                     , Css.property "justify-content" "center"
+                    , border zero
                     , backgroundColor Colors.secondaryBg
-                    , borderRadius (px 5)
                     , fontWeight bold
+                    , padding (px 5)
+                    , textAlign center
+                    , textDecoration none
+                    , color inherit
                     ]
+                , Attributes.class "order-action-panel__button"
+                , href "#"
                 ]
                 [ Html.text text ]
 
@@ -33,8 +39,9 @@ view =
                 [ styles
                     [ Css.property "display" "grid"
                     , Css.property "grid-area" "navigation"
-                    , Css.property "grid-template-rows" "repeat(4, 1fr)"
-                    , Css.property "grid-template-areas" "'next' 'next' '.' 'cancel'"
+                    , Css.property "grid-template-rows" "repeat(3, 1fr)"
+                    , Css.property "grid-template-areas" "'next' 'next' 'cancel'"
+                    , Css.property "grid-gap" "2px"
                     ]
                 ]
                 [ renderButton "Next" "next"
@@ -46,9 +53,10 @@ view =
                 [ styles
                     [ Css.property "display" "grid"
                     , Css.property "gridArea" "action-right"
-                    , Css.property "grid-template-rows" "repeat(4, 1fr)"
+                    , Css.property "grid-template-rows" "repeat(3, 1fr)"
                     , Css.property "grid-template-columns" "1fr 1fr"
-                    , Css.property "grid-template-areas" "'minus plus' '. .' '. .' 'delete delete'"
+                    , Css.property "grid-template-areas" "'minus plus' '. .' 'delete delete'"
+                    , Css.property "grid-gap" "2px"
                     ]
                 , Attributes.class "order-action-panel__right-actions"
                 ]
@@ -60,7 +68,7 @@ view =
     div
         [ styles
             [ Css.property "display" "grid"
-            , Css.property "grid-template-rows" "50px 200px"
+            , Css.property "grid-template-rows" "50px 150px"
             , Css.property "grid-template-columns" "2fr 1fr 1fr"
             , Css.property "grid-template-areas" "'breadcrumb breadcrumb breadcrumb' 'action-left action-right navigation'"
             , Css.property "grid-column-gap" "10px"
@@ -69,7 +77,7 @@ view =
             ]
         , Attributes.class "order-action-panel"
         ]
-        [ Breadcrumb.view (SelectList.fromLists [ "Edit" ] "Method" [ "Payment" ])
+        [ Breadcrumb.view (SelectList.fromLists [] "Edit" [ "Method", "Payment" ])
         , viewNavigation
         , viewRightActions
         , Numpad.view

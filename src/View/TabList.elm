@@ -28,6 +28,7 @@ viewTab tab isSelected =
             , displayFlex
             , alignItems center
             , justifyContent center
+            , padding (px 5)
             , if isSelected then
                 mixin
                     [ color Colors.secondaryText

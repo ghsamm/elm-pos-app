@@ -19,11 +19,16 @@ viewProductSearch =
     div
         [ styles
             [ Css.property "grid-area" "product-search"
+            , displayFlex
             ]
         , Attributes.class "product-search"
         ]
         [ input
-            [ type_ "text"
+            [ styles
+                [ border zero
+                , padding (px 10)
+                ]
+            , type_ "text"
             , placeholder "Search for products"
             , onInput SearchProduct
             ]

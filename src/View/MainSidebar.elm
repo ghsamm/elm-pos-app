@@ -7,12 +7,9 @@ import Data.OrderLine as OrderLine
 import Dict
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
-import SelectList
 import Selector.OrderLine exposing (orderLinePrice)
 import Util exposing (formatPrice)
-import View.Breadcrumb as Breadcrumb
 import View.Colors as Colors
-import View.Numpad as Numpad
 import View.OrderActionPanel as OrderActionPanel
 import View.OrderLineList as OrderLineList
 import View.Utils exposing (styles)
@@ -37,15 +34,18 @@ viewTotal store =
     div
         [ Attributes.class "order-lines-total"
         , styles
-            [ Css.property "display" "grid"
+            [ displayFlex
+            , alignItems center
+            , justifyContent spaceBetween
             , fontSize (Css.em 1.2)
             , textAlign right
             , padding2 (px 5) (px 10)
             , backgroundColor Colors.mainBg
+            , fontWeight bold
             ]
         ]
-        [ Html.text "TOTAL : "
-        , Html.text <| formatPrice <| getTotal <| store
+        [ div [] [ Html.text "TOTAL " ]
+        , div [] [ Html.text <| formatPrice <| getTotal <| store ]
         ]
 
 
