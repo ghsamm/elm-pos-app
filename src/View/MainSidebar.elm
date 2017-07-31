@@ -15,11 +15,7 @@ import View.Colors as Colors
 import View.Numpad as Numpad
 import View.OrderActionPanel as OrderActionPanel
 import View.OrderLineList as OrderLineList
-
-
-styles : List Mixin -> Attribute msg
-styles =
-    Css.asPairs >> Attributes.style
+import View.Utils exposing (styles)
 
 
 getTotal : Model -> Float

@@ -9,11 +9,7 @@ import Dict exposing (keys)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import View.ProductContainer as ProductContainer exposing (view)
-
-
-styles : List Mixin -> Attribute msg
-styles =
-    Css.asPairs >> Attributes.style
+import View.Utils exposing (styles)
 
 
 view : ProductStore -> Model -> Html Msg

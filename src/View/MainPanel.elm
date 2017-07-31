@@ -10,11 +10,8 @@ import SelectList
 import Selector.Product exposing (searchProductSelector)
 import View.ProductList as ProductList
 import View.TabList as TabList exposing (Tab, TabState(..))
-
-
-styles : List Mixin -> Attribute msg
-styles =
-    Css.asPairs >> Attributes.style
+import View.TagList as TagList exposing (Tag)
+import View.Utils exposing (styles)
 
 
 viewProductSearch : Html Msg

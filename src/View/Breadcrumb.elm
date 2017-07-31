@@ -5,11 +5,7 @@ import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import SelectList exposing (SelectList)
 import View.Colors as Colors
-
-
-styles : List Mixin -> Attribute msg
-styles =
-    Css.asPairs >> Attributes.style
+import View.Utils exposing (styles)
 
 
 view : SelectList String -> Html msg

@@ -9,11 +9,7 @@ import Html.Attributes as Attributes exposing (class, classList)
 import Html.Events exposing (..)
 import Util exposing (formatPrice)
 import View.Colors as Colors
-
-
-styles : List Mixin -> Attribute msg
-styles =
-    Css.asPairs >> Attributes.style
+import View.Utils exposing (styles)
 
 
 mixins : { boldText : Mixin }

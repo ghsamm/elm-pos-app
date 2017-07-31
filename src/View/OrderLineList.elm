@@ -10,11 +10,7 @@ import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import View.Colors as Colors
 import View.OrderLineContainer as OrderLineContainer exposing (view)
-
-
-styles : List Mixin -> Attribute msg
-styles =
-    Css.asPairs >> Attributes.style
+import View.Utils exposing (styles)
 
 
 view : OrderLineStore -> Model -> Html Msg

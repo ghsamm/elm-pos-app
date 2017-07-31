@@ -4,11 +4,7 @@ import Css exposing (..)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import View.Colors as Colors
-
-
-styles : List Mixin -> Attribute msg
-styles =
-    Css.asPairs >> Attributes.style
+import View.Utils exposing (styles)
 
 
 view : Html msg

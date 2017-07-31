@@ -7,11 +7,7 @@ import Html.Attributes as Attributes exposing (..)
 import Html.Events exposing (..)
 import Util exposing (formatPrice)
 import View.Colors as Colors
-
-
-styles : List Mixin -> Attribute msg
-styles =
-    Css.asPairs >> Attributes.style
+import View.Utils exposing (styles)
 
 
 viewProductPrice : Float -> Html msg

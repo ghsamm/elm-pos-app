@@ -7,11 +7,7 @@ import SelectList
 import View.Breadcrumb as Breadcrumb
 import View.Colors as Colors
 import View.Numpad as Numpad
-
-
-styles : List Mixin -> Attribute msg
-styles =
-    Css.asPairs >> Attributes.style
+import View.Utils exposing (styles)
 
 
 view : Html msg
