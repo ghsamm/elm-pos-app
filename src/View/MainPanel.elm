@@ -36,12 +36,12 @@ view store =
     div
         [ styles
             [ Css.property "display" "grid"
-            , Css.property "grid-template-rows" "50px auto 1fr"
-            , Css.property "grid-template-columns" "1fr auto"
+            , Css.property "grid-template-rows" "50px 50px 1fr"
+            , Css.property "grid-template-columns" "auto 1fr"
             , Css.property
                 "grid-template-areas"
-                "'tab-list tab-list' '. product-search' 'product-list product-list'"
-            , Css.property "grid-gap" "5px"
+                "'tab-list tab-list' 'product-search tag-list' 'product-list product-list'"
+            , Css.property "grid-gap" "10px"
             , overflow Css.hidden
             , padding (px 5)
             ]
@@ -53,5 +53,9 @@ view store =
                 (Tab "#1520" Editing)
                 [ Tab "#1521" Waiting, Tab "#1511" Done ]
         , viewProductSearch
+        , TagList.view
+            [ Tag "Pizza" (hex "faa")
+            , Tag "Déjeuner" (hex "aaf")
+            ]
         , ProductList.view (searchProductSelector store) store
         ]
