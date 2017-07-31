@@ -6,13 +6,21 @@ import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineErr(..), OrderL
 import Data.OrderLineStore exposing (getOrderLine)
 import Data.Product as Product exposing (Product)
 import Data.ProductStore exposing (getProduct)
+import Data.Selection as Selection
+
+
+selectedOrderLine : Model -> Maybe OrderLine
+selectedOrderLine model =
+    Selection.toMaybe model.selectedOrderLine
+        |> Maybe.andThen (\selectedOrderLineId -> Result.toMaybe <| orderLineSelector selectedOrderLineId model)
+        |> Maybe.map Tuple.first
 
 
 orderLinePrice : OrderLineId -> Model -> Float
-orderLinePrice orderLineId store =
+orderLinePrice orderLineId model =
     let
         orderLine =
-            orderLineSelector orderLineId store
+            orderLineSelector orderLineId model
     in
     case orderLine of
         Err _ ->
@@ -24,6 +32,20 @@ orderLinePrice orderLineId store =
                 * applyDiscount
                     (orderLine |> OrderLine.toDiscount)
                     (product |> Product.toPrice)
+
+
+orderLineQuantity : OrderLineId -> Model -> Int
+orderLineQuantity orderLineId model =
+    let
+        orderLine =
+            orderLineSelector orderLineId model
+    in
+    case orderLine of
+        Err _ ->
+            0
+
+        Ok ( orderLine, _ ) ->
+            OrderLine.toQuantity orderLine
 
 
 orderLineSelector : OrderLineId -> Model -> Result OrderLineErr ( OrderLine, Product )

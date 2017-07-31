@@ -62,5 +62,5 @@ view store =
         ]
         [ OrderLineList.view store.orderLines store
         , viewTotal store
-        , OrderActionPanel.view
+        , OrderActionPanel.view store
         ]
