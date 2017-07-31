@@ -8,7 +8,8 @@ import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId(..))
 import Data.OrderLineStore as OrderLineStore
 import Data.Product as Product exposing (Product, ProductId(..))
 import Data.ProductStore as ProductStore
-import Data.Selection exposing (Selection(..))
+import Data.Selection as Selection exposing (Selection(..))
+import Dict
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import View.Colors as Colors
@@ -99,6 +100,22 @@ update msg model =
 
         SearchProduct searchString ->
             ( { model | productSearchString = searchString }, Cmd.none )
+
+        SetCurrentOrderLineQuantity newQuantity ->
+            let
+                updatedOrderLines =
+                    Selection.toMaybe model.selectedOrderLine
+                        |> Maybe.map OrderLine.orderLineIdToString
+                        |> Maybe.map
+                            (\comparableOrderLineId ->
+                                Dict.update
+                                    comparableOrderLineId
+                                    (Maybe.map (OrderLine.withQuantity newQuantity))
+                                    model.orderLines
+                            )
+                        |> Maybe.withDefault model.orderLines
+            in
+            ( { model | orderLines = updatedOrderLines }, Cmd.none )
 
         AddProductToLineOrderList _ ->
             Debug.crash "TODO"

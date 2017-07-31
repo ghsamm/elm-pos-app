@@ -3,13 +3,14 @@ module View.Numpad exposing (view)
 import Css exposing (..)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import Html.Events exposing (..)
 import View.Colors as Colors
 import View.Utils exposing (styles)
 
 
-renderNumber : Bool -> Int -> Html msg
-renderNumber isSelected number =
-    div
+renderNumber : Bool -> Int -> msg -> Html msg
+renderNumber isSelected number handleClick =
+    a
         [ styles
             [ Css.property "display" "grid"
             , Css.property "justify-content" "center"
@@ -24,13 +25,15 @@ renderNumber isSelected number =
               else
                 mixin []
             ]
+        , href "#"
+        , onClick handleClick
         , Attributes.class "numpad__number"
         ]
         [ Html.text <| toString number ]
 
 
-view : Maybe Int -> Html msg
-view selectedNumber =
+view : Maybe Int -> (Int -> msg) -> Html msg
+view selectedNumber handleClick =
     div
         [ styles
             [ Css.property "display" "grid"
@@ -50,5 +53,5 @@ view selectedNumber =
         , Attributes.class "numpad"
         ]
         (List.range 1 9
-            |> List.map (\number -> renderNumber (Just number == selectedNumber) number)
+            |> List.map (\number -> renderNumber (Just number == selectedNumber) number (handleClick number))
         )

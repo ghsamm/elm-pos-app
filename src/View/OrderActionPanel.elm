@@ -68,8 +68,8 @@ viewRightActions =
         ]
 
 
-view : Model -> Html msg
-view model =
+view : Model -> (Int -> msg) -> Html msg
+view model handleNumpadClick =
     div
         [ styles
             [ Css.property "display" "grid"
@@ -85,8 +85,9 @@ view model =
         [ Breadcrumb.view (SelectList.fromLists [] "Edit" [ "Method", "Payment" ])
         , viewNavigation
         , viewRightActions
-        , Numpad.view <|
+        , Numpad.view
             (OrderLineSelector.selectedOrderLine model
                 |> Maybe.map OrderLine.toQuantity
             )
+            handleNumpadClick
         ]
