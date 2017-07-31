@@ -26,8 +26,6 @@ renderButton text gridArea =
             , fontWeight bold
             , padding (px 5)
             , textAlign center
-            , textDecoration none
-            , color inherit
             ]
         , Attributes.class "order-action-panel__button"
         , href "#"
