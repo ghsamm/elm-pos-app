@@ -7,29 +7,30 @@ import View.Colors as Colors
 import View.Utils exposing (styles)
 
 
+renderNumber : Bool -> Int -> Html msg
+renderNumber isSelected number =
+    div
+        [ styles
+            [ Css.property "display" "grid"
+            , Css.property "justify-content" "center"
+            , Css.property "align-content" "center"
+            , fontWeight bold
+            , backgroundColor Colors.secondaryBg
+            , if isSelected then
+                mixin
+                    [ color Colors.secondaryText
+                    , backgroundColor Colors.accentBg
+                    ]
+              else
+                mixin []
+            ]
+        , Attributes.class "numpad__number"
+        ]
+        [ Html.text <| toString number ]
+
+
 view : Maybe Int -> Html msg
 view selectedNumber =
-    let
-        renderNumber isSelected number =
-            div
-                [ styles
-                    [ Css.property "display" "grid"
-                    , Css.property "justify-content" "center"
-                    , Css.property "align-content" "center"
-                    , fontWeight bold
-                    , backgroundColor Colors.secondaryBg
-                    , if selectedNumber == Just number then
-                        mixin
-                            [ color Colors.secondaryText
-                            , backgroundColor Colors.accentBg
-                            ]
-                      else
-                        mixin []
-                    ]
-                , Attributes.class "numpad__number"
-                ]
-                [ Html.text <| toString number ]
-    in
     div
         [ styles
             [ Css.property "display" "grid"
@@ -49,5 +50,5 @@ view selectedNumber =
         , Attributes.class "numpad"
         ]
         (List.range 1 9
-            |> List.map (renderNumber (\number -> number == selectedNumber))
+            |> List.map (\number -> renderNumber (Just number == selectedNumber) number)
         )
