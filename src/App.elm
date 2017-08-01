@@ -142,22 +142,21 @@ update msg model =
             , Cmd.none
             )
 
-        SetCurrentOrderLineQuantity newQuantity ->
-            let
-                updatedOrderLineStore =
-                    Selection.toMaybe model.selectedOrderLine
-                        |> Maybe.map OrderLine.orderLineIdToString
-                        |> Maybe.map
-                            (\comparableOrderLineId ->
-                                Dict.update
-                                    comparableOrderLineId
-                                    (Maybe.map (OrderLine.withQuantity newQuantity))
-                                    model.orderLineStore
-                            )
-                        |> Maybe.withDefault model.orderLineStore
-            in
-            ( { model | orderLineStore = updatedOrderLineStore }, Cmd.none )
-
+        -- SetCurrentOrderLineQuantity newQuantity ->
+        --     let
+        --         updatedOrderLineStore =
+        --             Selection.toMaybe model.selectedOrderLine
+        --                 |> Maybe.map OrderLine.orderLineIdToString
+        --                 |> Maybe.map
+        --                     (\comparableOrderLineId ->
+        --                         Dict.update
+        --                             comparableOrderLineId
+        --                             (Maybe.map (OrderLine.withQuantity newQuantity))
+        --                             model.orderLineStore
+        --                     )
+        --                 |> Maybe.withDefault model.orderLineStore
+        --     in
+        --     ( { model | orderLineStore = updatedOrderLineStore }, Cmd.none )
         AddProductToLineOrderList _ ->
             Debug.crash "TODO"
 

@@ -26,4 +26,4 @@ view orderLineStore model =
     <|
         List.map
             (\orderLineId -> OrderLineContainer.view orderLineId model)
-            (List.map stringToOrderLineId <| keys orderLineStore)
+            (List.map stringToOrderLineId <| keys orderLineStore.orderLines)

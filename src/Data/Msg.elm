@@ -9,4 +9,7 @@ type Msg
     | SelectOrderLine OrderLineId
     | SearchProduct String
     | AddProductToLineOrderList ProductId
-    | SetCurrentOrderLineQuantity Int
+
+
+
+-- | SetCurrentOrderLineQuantity Int

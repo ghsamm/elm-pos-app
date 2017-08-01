@@ -7,17 +7,21 @@ import Util exposing (storeFromList)
 
 
 type alias OrderLineStore =
-    Dict String OrderLine
+    { orderLines : Dict String OrderLine
+    , selectedOrderLine : Maybe OrderLineId
+    }
 
 
 fromList : List OrderLine -> OrderLineStore
-fromList =
-    storeFromList (OrderLine.toId >> orderLineIdToString)
+fromList orderLineList =
+    { orderLines = storeFromList (OrderLine.toId >> orderLineIdToString) orderLineList
+    , selectedOrderLine = Nothing
+    }
 
 
 getOrderLine : OrderLineId -> OrderLineStore -> Maybe OrderLine
 getOrderLine orderLineId orderLineStore =
-    Dict.get (orderLineIdToString orderLineId) orderLineStore
+    Dict.get (orderLineIdToString orderLineId) orderLineStore.orderLines
 
 
 addProduct : Product -> OrderLineStore -> OrderLineStore
@@ -27,4 +31,4 @@ addProduct product orderLineStore =
             OrderLine.fromId "fff"
                 |> OrderLine.withProductId (product |> Product.toId)
     in
-    Dict.insert "ffff" newOrderLine orderLineStore
+    { orderLineStore | orderLines = Dict.insert "ffff" newOrderLine orderLineStore.orderLines }
