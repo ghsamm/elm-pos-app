@@ -6,12 +6,11 @@ import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineErr(..), OrderL
 import Data.OrderLineStore exposing (getOrderLine)
 import Data.Product as Product exposing (Product)
 import Data.ProductStore exposing (getProduct)
-import Data.Selection as Selection
 
 
 selectedOrderLine : Model -> Maybe OrderLine
 selectedOrderLine model =
-    Selection.toMaybe model.selectedOrderLine
+    model.orderLineStore.selectedOrderLine
         |> Maybe.andThen (\selectedOrderLineId -> Result.toMaybe <| orderLineSelector selectedOrderLineId model)
         |> Maybe.map Tuple.first
 

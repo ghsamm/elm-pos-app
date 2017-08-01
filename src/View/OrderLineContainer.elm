@@ -3,7 +3,7 @@ module View.OrderLineContainer exposing (view)
 import Data.Model exposing (Model)
 import Data.Msg exposing (..)
 import Data.OrderLine exposing (OrderLine, OrderLineId)
-import Data.Selection exposing (Selection(..))
+import Data.OrderLineStore exposing (OrderLineStoreMsg(..))
 import Html exposing (..)
 import Selector.OrderLine exposing (orderLineSelector)
 import View.OrderLine as View exposing (view)
@@ -12,14 +12,12 @@ import View.OrderLine as View exposing (view)
 view : OrderLineId -> Model -> Html Msg
 view orderLineId model =
     let
+        isSelected : Bool
         isSelected =
-            case model.selectedOrderLine of
-                NoSelection ->
-                    False
-
-                SingleSelection id ->
-                    id == orderLineId
+            model.orderLineStore.selectedOrderLine
+                |> Maybe.map (\anOrderLineId -> anOrderLineId == orderLineId)
+                |> Maybe.withDefault False
     in
-    View.view SelectOrderLine
+    View.view (\orderLineId -> OrderLineStoreMsg (SelectOrderLine orderLineId))
         (orderLineSelector orderLineId model)
         isSelected

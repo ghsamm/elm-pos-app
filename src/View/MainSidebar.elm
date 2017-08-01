@@ -4,6 +4,7 @@ import Css exposing (..)
 import Data.Model exposing (Model)
 import Data.Msg exposing (..)
 import Data.OrderLine as OrderLine
+import Data.OrderLineStore exposing (OrderLineStoreMsg(..))
 import Dict
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
@@ -62,5 +63,5 @@ view model =
         ]
         [ OrderLineList.view model.orderLineStore model
         , viewTotal model
-        , OrderActionPanel.view model (\_ -> NoOp)
+        , OrderActionPanel.view model (\newQuantity -> OrderLineStoreMsg (SetCurrentOrderLineQuantity newQuantity))
         ]

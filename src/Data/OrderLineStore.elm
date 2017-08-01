@@ -12,6 +12,21 @@ type alias OrderLineStore =
     }
 
 
+type OrderLineStoreMsg
+    = SetCurrentOrderLineQuantity Int
+    | SelectOrderLine OrderLineId
+
+
+update : OrderLineStoreMsg -> OrderLineStore -> OrderLineStore
+update msg orderLineStore =
+    case msg of
+        SetCurrentOrderLineQuantity newQuantity ->
+            orderLineStore
+
+        SelectOrderLine orderLineId ->
+            { orderLineStore | selectedOrderLine = Just orderLineId }
+
+
 fromList : List OrderLine -> OrderLineStore
 fromList orderLineList =
     { orderLines = storeFromList (OrderLine.toId >> orderLineIdToString) orderLineList
