@@ -21,27 +21,28 @@ productSelector productId model =
             Ok product
 
 
-isSearchProduct : String -> Product -> Bool
-isSearchProduct productSearchString product =
-    let
-        searchString =
-            toLower productSearchString
 
-        productName =
-            product |> Product.toName |> toLower
-    in
-    contains searchString productName
-
-
-searchProductSelector : Model -> ProductStore
-searchProductSelector model =
-    let
-        { productSearchString, productStore } =
-            model
-    in
-    case trim productSearchString of
-        "" ->
-            productStore
-
-        _ ->
-            { productStore | products = Dict.filter (\_ product -> isSearchProduct productSearchString product) productStore.products }
+-- isSearchProduct : String -> Product -> Bool
+-- isSearchProduct productSearchString product =
+--     let
+--         searchString =
+--             toLower productSearchString
+--
+--         productName =
+--             product |> Product.toName |> toLower
+--     in
+--     contains searchString productName
+--
+--
+-- searchProductSelector : Model -> ProductStore
+-- searchProductSelector model =
+--     let
+--         { productSearchString, productStore } =
+--             model
+--     in
+--     case trim productSearchString of
+--         "" ->
+--             productStore
+--
+--         _ ->
+--             { productStore | products = Dict.filter (\_ product -> isSearchProduct productSearchString product) productStore.products }

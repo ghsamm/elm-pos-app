@@ -7,8 +7,6 @@ import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events exposing (..)
 import SelectList
-import Selector.Product exposing (searchProductSelector)
-import View.ProductList as ProductList
 import View.TabList as TabList exposing (Tab, TabState(..))
 import View.TagList as TagList exposing (Tag)
 import View.Utils exposing (styles)
@@ -62,5 +60,6 @@ view model =
             [ Tag "Pizza" (hex "faa")
             , Tag "Déjeuner" (hex "aaf")
             ]
-        , ProductList.view (searchProductSelector model) model
+
+        -- , ProductList.view (searchProductSelector model) model
         ]
