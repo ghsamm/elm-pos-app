@@ -12,6 +12,45 @@ type alias ProductStore =
     }
 
 
+type ProductStoreMsg
+    = FilterByString String
+
+
+update : ProductStoreMsg -> ProductStore -> ProductStore
+update msg productStore =
+    case msg of
+        FilterByString searchString ->
+            { productStore
+                | visibleProducts =
+                    Set.filter
+                        (\productIdString ->
+                            case searchString of
+                                "" ->
+                                    True
+
+                                _ ->
+                                    let
+                                        productName : String
+                                        productName =
+                                            getProduct (Product.stringToProductId productIdString) productStore
+                                                |> Maybe.map Product.toName
+                                                |> Maybe.map String.toLower
+                                                |> Maybe.withDefault ""
+                                    in
+                                    String.contains (searchString |> String.toLower) productName
+                        )
+                        (productsAsSet productStore)
+            }
+
+
+productsAsSet : ProductStore -> Set String
+productsAsSet productStore =
+    productStore.products
+        |> Dict.toList
+        |> List.map Tuple.first
+        |> Set.fromList
+
+
 fromList : List Product -> ProductStore
 fromList productList =
     { products = storeFromList (Product.toId >> productIdToString) productList

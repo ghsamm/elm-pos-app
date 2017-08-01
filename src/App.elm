@@ -135,7 +135,12 @@ update msg model =
             ( { model | selectedOrderLine = SingleSelection orderLineId }, Cmd.none )
 
         SearchProduct searchString ->
-            ( { model | productSearchString = searchString }, Cmd.none )
+            ( { model
+                | productSearchString = searchString
+                , productStore = ProductStore.update (ProductStore.FilterByString searchString) model.productStore
+              }
+            , Cmd.none
+            )
 
         SetCurrentOrderLineQuantity newQuantity ->
             let
