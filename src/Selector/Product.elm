@@ -21,11 +21,6 @@ productSelector productId model =
             Ok product
 
 
-visibleProducts : Model -> List Product
-visibleProducts model =
-    Dict.filter (\productIdString -> model.productStore.visibleProducts) (Dict.Dict comparable v)
-
-
 
 -- isSearchProduct : String -> Product -> Bool
 -- isSearchProduct productSearchString product =

@@ -3,10 +3,12 @@ module View.MainPanel exposing (view)
 import Css exposing (..)
 import Data.Model exposing (Model)
 import Data.Msg exposing (..)
+import Data.ProductStore as ProductStore
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events exposing (..)
 import SelectList
+import View.ProductList as ProductList
 import View.TabList as TabList exposing (Tab, TabState(..))
 import View.TagList as TagList exposing (Tag)
 import View.Utils exposing (styles)
@@ -60,6 +62,6 @@ view model =
             [ Tag "Pizza" (hex "faa")
             , Tag "Déjeuner" (hex "aaf")
             ]
-
-        -- , ProductList.view (searchProductSelector model) model
+        , ProductList.view <|
+            ProductStore.visibleProducts model.productStore
         ]

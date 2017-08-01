@@ -14,7 +14,7 @@ type alias ProductStore =
 fromList : List Product -> ProductStore
 fromList productList =
     { products = storeFromList (Product.toId >> productIdToString) productList
-    , visibleProducts = []
+    , visibleProducts = List.map Product.toId productList
     }
 
 
