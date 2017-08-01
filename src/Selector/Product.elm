@@ -11,7 +11,7 @@ productSelector : ProductId -> Model -> Result ProductErr Product
 productSelector productId model =
     let
         product =
-            getProduct productId model.products
+            getProduct productId model.productStore
     in
     case product of
         Nothing ->
@@ -36,12 +36,12 @@ isSearchProduct productSearchString product =
 searchProductSelector : Model -> Dict String Product
 searchProductSelector model =
     let
-        { productSearchString, products } =
+        { productSearchString, productStore } =
             model
     in
     case trim productSearchString of
         "" ->
-            products
+            productStore
 
         _ ->
-            Dict.filter (\_ product -> isSearchProduct productSearchString product) products
+            Dict.filter (\_ product -> isSearchProduct productSearchString product) productStore

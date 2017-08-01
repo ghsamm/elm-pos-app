@@ -60,7 +60,7 @@ orderLineSelector orderLineId model =
             orderLine
                 |> Maybe.andThen
                     (\orderLine ->
-                        getProduct (orderLine |> OrderLine.toProductId) model.products
+                        getProduct (orderLine |> OrderLine.toProductId) model.productStore
                     )
     in
     case ( orderLine, product ) of

@@ -36,6 +36,34 @@ product2 =
         |> Product.withPrice 41.2
 
 
+product3 : Product
+product3 =
+    Product.fromId "product-id-3"
+        |> Product.withName "Souris Gamer 2"
+        |> Product.withPrice 41.2
+
+
+product4 : Product
+product4 =
+    Product.fromId "product-id-4"
+        |> Product.withName "Souris Gamer 3"
+        |> Product.withPrice 41.2
+
+
+product5 : Product
+product5 =
+    Product.fromId "product-id-5"
+        |> Product.withName "Souris Gamer 5"
+        |> Product.withPrice 41.2
+
+
+product6 : Product
+product6 =
+    Product.fromId "product-id-6"
+        |> Product.withName "Souris Gamer 6"
+        |> Product.withPrice 41.2
+
+
 orderLine1 : OrderLine
 orderLine1 =
     OrderLine.fromId "order-line-id-1"
@@ -53,7 +81,15 @@ orderLine2 =
 
 model : Model
 model =
-    { products = ProductStore.fromList [ product1, product2 ]
+    { productStore =
+        ProductStore.fromList
+            [ product1
+            , product2
+            , product3
+            , product4
+            , product5
+            , product6
+            ]
     , orderLines = OrderLineStore.fromList [ orderLine1, orderLine2 ]
     , selectedOrderLine = NoSelection
     , productSearchString = ""
