@@ -10,10 +10,10 @@ import View.OrderLine as View exposing (view)
 
 
 view : OrderLineId -> Model -> Html Msg
-view orderLineId store =
+view orderLineId model =
     let
         isSelected =
-            case store.selectedOrderLine of
+            case model.selectedOrderLine of
                 NoSelection ->
                     False
 
@@ -21,5 +21,5 @@ view orderLineId store =
                     id == orderLineId
     in
     View.view SelectOrderLine
-        (orderLineSelector orderLineId store)
+        (orderLineSelector orderLineId model)
         isSelected

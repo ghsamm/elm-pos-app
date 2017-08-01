@@ -37,7 +37,7 @@ viewProductSearch =
 
 
 view : Model -> Html Msg
-view store =
+view model =
     div
         [ styles
             [ Css.property "display" "grid"
@@ -62,5 +62,5 @@ view store =
             [ Tag "Pizza" (hex "faa")
             , Tag "Déjeuner" (hex "aaf")
             ]
-        , ProductList.view (searchProductSelector store) store
+        , ProductList.view (searchProductSelector model) model
         ]

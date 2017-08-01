@@ -13,7 +13,7 @@ import View.Utils exposing (styles)
 
 
 view : ProductStore -> Model -> Html Msg
-view productStore store =
+view productStore model =
     div
         [ styles
             [ Css.property "display" "grid"
@@ -26,5 +26,5 @@ view productStore store =
         ]
     <|
         List.map
-            (\productId -> ProductContainer.view productId store)
+            (\productId -> ProductContainer.view productId model)
             (List.map stringToProductId <| keys productStore)

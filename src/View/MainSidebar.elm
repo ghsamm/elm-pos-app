@@ -16,21 +16,21 @@ import View.Utils exposing (styles)
 
 
 getTotal : Model -> Float
-getTotal store =
+getTotal model =
     let
         lineTotals =
             Dict.values <|
                 Dict.map
                     (\str orderLine ->
-                        orderLinePrice (orderLine |> OrderLine.toId) store
+                        orderLinePrice (orderLine |> OrderLine.toId) model
                     )
-                    store.orderLines
+                    model.orderLines
     in
     List.foldl (+) 0 lineTotals
 
 
 viewTotal : Model -> Html Msg
-viewTotal store =
+viewTotal model =
     div
         [ Attributes.class "order-lines-total"
         , styles
@@ -45,12 +45,12 @@ viewTotal store =
             ]
         ]
         [ div [] [ Html.text "TOTAL " ]
-        , div [] [ Html.text <| formatPrice <| getTotal <| store ]
+        , div [] [ Html.text <| formatPrice <| getTotal <| model ]
         ]
 
 
 view : Model -> Html Msg
-view store =
+view model =
     div
         [ Attributes.class "main-sidebar"
         , styles
@@ -60,7 +60,7 @@ view store =
             , overflowY Css.hidden
             ]
         ]
-        [ OrderLineList.view store.orderLines store
-        , viewTotal store
-        , OrderActionPanel.view store SetCurrentOrderLineQuantity
+        [ OrderLineList.view model.orderLines model
+        , viewTotal model
+        , OrderActionPanel.view model SetCurrentOrderLineQuantity
         ]

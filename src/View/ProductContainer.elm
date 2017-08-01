@@ -9,9 +9,9 @@ import View.Product as ProductView
 
 
 view : ProductId -> Model -> Html Msg
-view productId store =
+view productId model =
     let
         product =
-            productSelector productId store
+            productSelector productId model
     in
     ProductView.view AddProductToLineOrderList product

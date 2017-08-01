@@ -49,18 +49,18 @@ orderLineQuantity orderLineId model =
 
 
 orderLineSelector : OrderLineId -> Model -> Result OrderLineErr ( OrderLine, Product )
-orderLineSelector orderLineId store =
+orderLineSelector orderLineId model =
     let
         orderLine : Maybe OrderLine
         orderLine =
-            getOrderLine orderLineId store.orderLines
+            getOrderLine orderLineId model.orderLines
 
         product : Maybe Product
         product =
             orderLine
                 |> Maybe.andThen
                     (\orderLine ->
-                        getProduct (orderLine |> OrderLine.toProductId) store.products
+                        getProduct (orderLine |> OrderLine.toProductId) model.products
                     )
     in
     case ( orderLine, product ) of

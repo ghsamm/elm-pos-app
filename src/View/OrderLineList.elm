@@ -14,7 +14,7 @@ import View.Utils exposing (styles)
 
 
 view : OrderLineStore -> Model -> Html Msg
-view orderLineStore store =
+view orderLineStore model =
     div
         [ styles
             [ overflowY auto
@@ -25,5 +25,5 @@ view orderLineStore store =
         ]
     <|
         List.map
-            (\orderLineId -> OrderLineContainer.view orderLineId store)
+            (\orderLineId -> OrderLineContainer.view orderLineId model)
             (List.map stringToOrderLineId <| keys orderLineStore)

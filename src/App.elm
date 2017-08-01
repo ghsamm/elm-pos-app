@@ -51,8 +51,8 @@ orderLine2 =
         |> OrderLine.withQuantity 4
 
 
-store : Model
-store =
+model : Model
+model =
     { products = ProductStore.fromList [ product1, product2 ]
     , orderLines = OrderLineStore.fromList [ orderLine1, orderLine2 ]
     , selectedOrderLine = NoSelection
@@ -86,7 +86,7 @@ view model =
 
 init : ( Model, Cmd Msg )
 init =
-    ( store, Cmd.none )
+    ( model, Cmd.none )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )

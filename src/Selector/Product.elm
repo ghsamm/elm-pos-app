@@ -8,10 +8,10 @@ import String exposing (contains, toLower, trim)
 
 
 productSelector : ProductId -> Model -> Result ProductErr Product
-productSelector productId store =
+productSelector productId model =
     let
         product =
-            getProduct productId store.products
+            getProduct productId model.products
     in
     case product of
         Nothing ->
@@ -34,10 +34,10 @@ isSearchProduct productSearchString product =
 
 
 searchProductSelector : Model -> Dict String Product
-searchProductSelector store =
+searchProductSelector model =
     let
         { productSearchString, products } =
-            store
+            model
     in
     case trim productSearchString of
         "" ->
