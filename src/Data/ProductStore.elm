@@ -8,6 +8,7 @@ import Util exposing (storeFromList)
 type alias ProductStore =
     { products : Dict String Product
     , visibleProducts : List ProductId
+    , filters : List (Product -> Bool)
     }
 
 
@@ -15,6 +16,24 @@ fromList : List Product -> ProductStore
 fromList productList =
     { products = storeFromList (Product.toId >> productIdToString) productList
     , visibleProducts = List.map Product.toId productList
+    , filters = []
+    }
+
+
+addFilter : (Product -> Bool) -> ProductStore -> ProductStore
+addFilter newFilter productStore =
+    { productStore | filters = newFilter :: productStore.filters }
+
+
+applyFilters : ProductStore -> ProductStore
+applyFilters productStore =
+    { productStore
+        | visibleProducts =
+            productStore.products
+                |> Dict.toList
+                |> List.map Tuple.second
+                |> List.filter (\product -> List.all (\filter -> filter product) productStore.filters)
+                |> List.map Product.toId
     }
 
 
