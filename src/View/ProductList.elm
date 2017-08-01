@@ -27,4 +27,4 @@ view productStore model =
     <|
         List.map
             (\productId -> ProductContainer.view productId model)
-            (List.map stringToProductId <| keys productStore)
+            (List.map stringToProductId <| keys productStore.products)

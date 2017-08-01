@@ -2,7 +2,7 @@ module Selector.Product exposing (..)
 
 import Data.Model exposing (Model)
 import Data.Product as Product exposing (Product, ProductErr(..), ProductId)
-import Data.ProductStore exposing (getProduct)
+import Data.ProductStore exposing (ProductStore, getProduct)
 import Dict exposing (Dict)
 import String exposing (contains, toLower, trim)
 
@@ -33,7 +33,7 @@ isSearchProduct productSearchString product =
     contains searchString productName
 
 
-searchProductSelector : Model -> Dict String Product
+searchProductSelector : Model -> ProductStore
 searchProductSelector model =
     let
         { productSearchString, productStore } =
@@ -44,4 +44,4 @@ searchProductSelector model =
             productStore
 
         _ ->
-            Dict.filter (\_ product -> isSearchProduct productSearchString product) productStore
+            { productStore | products = Dict.filter (\_ product -> isSearchProduct productSearchString product) productStore.products }

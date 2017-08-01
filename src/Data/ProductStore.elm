@@ -6,14 +6,18 @@ import Util exposing (storeFromList)
 
 
 type alias ProductStore =
-    Dict String Product
+    { products : Dict String Product
+    , visibleProducts : List ProductId
+    }
 
 
 fromList : List Product -> ProductStore
-fromList =
-    storeFromList (Product.toId >> productIdToString)
+fromList productList =
+    { products = storeFromList (Product.toId >> productIdToString) productList
+    , visibleProducts = []
+    }
 
 
 getProduct : ProductId -> ProductStore -> Maybe Product
 getProduct productId productStore =
-    Dict.get (productIdToString productId) productStore
+    Dict.get (productIdToString productId) productStore.products
