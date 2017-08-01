@@ -13,18 +13,36 @@ type alias OrderLineStore =
 
 
 type OrderLineStoreMsg
-    = SetCurrentOrderLineQuantity Int
-    | SelectOrderLine OrderLineId
+    = SelectOrderLine OrderLineId
+    | SetCurrentOrderLineQuantity Int
+
+
+updateSelectedOrderLine : (Maybe OrderLine -> Maybe OrderLine) -> OrderLineStore -> OrderLineStore
+updateSelectedOrderLine callback orderLineStore =
+    orderLineStore.selectedOrderLine
+        |> Maybe.map OrderLine.orderLineIdToString
+        |> Maybe.map
+            (\selectedId ->
+                { orderLineStore
+                    | orderLines = Dict.update selectedId callback orderLineStore.orderLines
+                }
+            )
+        |> Maybe.withDefault orderLineStore
 
 
 update : OrderLineStoreMsg -> OrderLineStore -> OrderLineStore
 update msg orderLineStore =
     case msg of
-        SetCurrentOrderLineQuantity newQuantity ->
-            orderLineStore
-
         SelectOrderLine orderLineId ->
             { orderLineStore | selectedOrderLine = Just orderLineId }
+
+        SetCurrentOrderLineQuantity newQuantity ->
+            updateSelectedOrderLine
+                (\maybeOrderline ->
+                    maybeOrderline
+                        |> Maybe.map (\orderLine -> OrderLine.withQuantity newQuantity orderLine)
+                )
+                orderLineStore
 
 
 fromList : List OrderLine -> OrderLineStore
