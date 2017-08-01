@@ -24,7 +24,7 @@ getTotal model =
                     (\str orderLine ->
                         orderLinePrice (orderLine |> OrderLine.toId) model
                     )
-                    model.orderLines
+                    model.orderLineStore
     in
     List.foldl (+) 0 lineTotals
 
@@ -60,7 +60,7 @@ view model =
             , overflowY Css.hidden
             ]
         ]
-        [ OrderLineList.view model.orderLines model
+        [ OrderLineList.view model.orderLineStore model
         , viewTotal model
         , OrderActionPanel.view model SetCurrentOrderLineQuantity
         ]

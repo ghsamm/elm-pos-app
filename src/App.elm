@@ -90,7 +90,7 @@ model =
             , product5
             , product6
             ]
-    , orderLines = OrderLineStore.fromList [ orderLine1, orderLine2 ]
+    , orderLineStore = OrderLineStore.fromList [ orderLine1, orderLine2 ]
     , selectedOrderLine = NoSelection
     , productSearchString = ""
     }
@@ -144,7 +144,7 @@ update msg model =
 
         SetCurrentOrderLineQuantity newQuantity ->
             let
-                updatedOrderLines =
+                updatedOrderLineStore =
                     Selection.toMaybe model.selectedOrderLine
                         |> Maybe.map OrderLine.orderLineIdToString
                         |> Maybe.map
@@ -152,11 +152,11 @@ update msg model =
                                 Dict.update
                                     comparableOrderLineId
                                     (Maybe.map (OrderLine.withQuantity newQuantity))
-                                    model.orderLines
+                                    model.orderLineStore
                             )
-                        |> Maybe.withDefault model.orderLines
+                        |> Maybe.withDefault model.orderLineStore
             in
-            ( { model | orderLines = updatedOrderLines }, Cmd.none )
+            ( { model | orderLineStore = updatedOrderLineStore }, Cmd.none )
 
         AddProductToLineOrderList _ ->
             Debug.crash "TODO"

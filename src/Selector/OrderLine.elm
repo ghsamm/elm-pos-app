@@ -53,7 +53,7 @@ orderLineSelector orderLineId model =
     let
         orderLine : Maybe OrderLine
         orderLine =
-            getOrderLine orderLineId model.orderLines
+            getOrderLine orderLineId model.orderLineStore
 
         product : Maybe Product
         product =

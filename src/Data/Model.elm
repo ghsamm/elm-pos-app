@@ -8,7 +8,7 @@ import Data.Selection as Selection exposing (Selection(..))
 
 type alias Model =
     { productStore : ProductStore
-    , orderLines : OrderLineStore
+    , orderLineStore : OrderLineStore
     , selectedOrderLine : Selection OrderLineId
     , productSearchString : String
     }
