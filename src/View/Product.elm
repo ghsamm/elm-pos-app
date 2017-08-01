@@ -39,24 +39,19 @@ viewProductName productName =
         [ Html.text productName ]
 
 
-view : (ProductId -> msg) -> Result ProductErr Product -> Html msg
+view : (ProductId -> msg) -> Product -> Html msg
 view handleClick product =
-    case product of
-        Err _ ->
-            Html.text "this product is unavailable"
-
-        Ok product ->
-            div
-                [ styles
-                    [ position relative
-                    , backgroundColor Colors.mainBg
-                    , displayFlex
-                    , alignItems center
-                    , justifyContent center
-                    ]
-                , Attributes.class "product"
-                , onClick <| handleClick (product |> Product.toId)
-                ]
-                [ viewProductPrice (product |> Product.toPrice)
-                , viewProductName (product |> Product.toName)
-                ]
+    div
+        [ styles
+            [ position relative
+            , backgroundColor Colors.mainBg
+            , displayFlex
+            , alignItems center
+            , justifyContent center
+            ]
+        , Attributes.class "product"
+        , onClick <| handleClick (product |> Product.toId)
+        ]
+        [ viewProductPrice (product |> Product.toPrice)
+        , viewProductName (product |> Product.toName)
+        ]

@@ -1,19 +1,16 @@
 module View.ProductList exposing (view)
 
 import Css exposing (..)
-import Data.Model exposing (Model)
-import Data.Msg exposing (Msg)
-import Data.Product exposing (stringToProductId)
-import Data.ProductStore exposing (ProductStore)
-import Dict exposing (keys)
+import Data.Msg exposing (Msg(AddProductToLineOrderList))
+import Data.Product exposing (Product, stringToProductId)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
-import View.ProductContainer as ProductContainer exposing (view)
+import View.Product as ProductView exposing (view)
 import View.Utils exposing (styles)
 
 
-view : ProductStore -> Model -> Html Msg
-view productStore model =
+view : List Product -> Html Msg
+view productList =
     div
         [ styles
             [ Css.property "display" "grid"
@@ -26,5 +23,7 @@ view productStore model =
         ]
     <|
         List.map
-            (\productId -> ProductContainer.view productId model)
-            (List.map stringToProductId <| keys productStore.products)
+            (ProductView.view
+                AddProductToLineOrderList
+            )
+            productList

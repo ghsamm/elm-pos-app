@@ -21,3 +21,15 @@ fromList productList =
 getProduct : ProductId -> ProductStore -> Maybe Product
 getProduct productId productStore =
     Dict.get (productIdToString productId) productStore.products
+
+
+isProductVisible : ProductId -> ProductStore -> Bool
+isProductVisible productId productStore =
+    List.member productId productStore.visibleProducts
+
+
+visibleProducts : ProductStore -> List Product
+visibleProducts productStore =
+    Dict.filter (\_ product -> isProductVisible (product |> Product.toId) productStore) productStore.products
+        |> Dict.toList
+        |> List.map Tuple.second
