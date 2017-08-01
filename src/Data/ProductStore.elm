@@ -2,19 +2,22 @@ module Data.ProductStore exposing (..)
 
 import Data.Product as Product exposing (Product, ProductId(..), productIdToString)
 import Dict exposing (Dict)
+import Set exposing (Set)
 import Util exposing (storeFromList)
 
 
 type alias ProductStore =
     { products : Dict String Product
-    , visibleProducts : List ProductId
+    , visibleProducts : Set String
     }
 
 
 fromList : List Product -> ProductStore
 fromList productList =
     { products = storeFromList (Product.toId >> productIdToString) productList
-    , visibleProducts = List.map Product.toId productList
+    , visibleProducts =
+        List.map (Product.toId >> productIdToString) productList
+            |> Set.fromList
     }
 
 
@@ -25,7 +28,7 @@ getProduct productId productStore =
 
 isProductVisible : ProductId -> ProductStore -> Bool
 isProductVisible productId productStore =
-    List.member productId productStore.visibleProducts
+    Set.member (productId |> productIdToString) productStore.visibleProducts
 
 
 visibleProducts : ProductStore -> List Product
