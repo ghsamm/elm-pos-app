@@ -24,17 +24,14 @@ updateOderLine (OrderLineId orderLineId) updater orderLineStore =
     }
 
 
-updateSelectedOrderLine : (Maybe OrderLine -> Maybe OrderLine) -> OrderLineStore -> OrderLineStore
-updateSelectedOrderLine callback orderLineStore =
-    orderLineStore.selectedOrderLine
-        |> Maybe.map OrderLine.orderLineIdToString
-        |> Maybe.map
-            (\selectedId ->
-                { orderLineStore
-                    | orderLines = Dict.update selectedId callback orderLineStore.orderLines
-                }
-            )
-        |> Maybe.withDefault orderLineStore
+updateSelectedOrderLine : (OrderLine -> OrderLine) -> OrderLineStore -> OrderLineStore
+updateSelectedOrderLine updater orderLineStore =
+    case orderLineStore.selectedOrderLine of
+        Just selectedOrderLine ->
+            updateOderLine selectedOrderLine updater orderLineStore
+
+        Nothing ->
+            orderLineStore
 
 
 update : OrderLineStoreMsg -> OrderLineStore -> OrderLineStore
@@ -45,10 +42,7 @@ update msg orderLineStore =
 
         SetCurrentOrderLineQuantity newQuantity ->
             updateSelectedOrderLine
-                (\maybeOrderline ->
-                    maybeOrderline
-                        |> Maybe.map (\orderLine -> OrderLine.withQuantity newQuantity orderLine)
-                )
+                (OrderLine.withQuantity newQuantity)
                 orderLineStore
 
 
