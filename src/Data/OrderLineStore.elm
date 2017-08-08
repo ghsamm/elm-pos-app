@@ -17,6 +17,13 @@ type OrderLineStoreMsg
     | SetCurrentOrderLineQuantity Int
 
 
+updateOderLine : OrderLineId -> (OrderLine -> OrderLine) -> OrderLineStore -> OrderLineStore
+updateOderLine (OrderLineId orderLineId) updater orderLineStore =
+    { orderLineStore
+        | orderLines = Dict.update orderLineId (Maybe.map updater) orderLineStore.orderLines
+    }
+
+
 updateSelectedOrderLine : (Maybe OrderLine -> Maybe OrderLine) -> OrderLineStore -> OrderLineStore
 updateSelectedOrderLine callback orderLineStore =
     orderLineStore.selectedOrderLine

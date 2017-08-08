@@ -2,7 +2,7 @@ module Data.OrderLine
     exposing
         ( OrderLine
         , OrderLineErr(..)
-        , OrderLineId
+        , OrderLineId(..)
         , fromId
         , orderLineIdToString
         , stringToOrderLineId
