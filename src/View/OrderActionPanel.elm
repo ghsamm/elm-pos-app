@@ -5,6 +5,7 @@ import Data.Model exposing (Model)
 import Data.OrderLine as OrderLine
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import Html.Events exposing (..)
 import SelectList
 import Selector.OrderLine as OrderLineSelector exposing (orderLineSelector)
 import Util exposing (styles)
@@ -13,23 +14,45 @@ import View.Colors as Colors
 import View.Numpad as Numpad
 
 
+type alias ViewListeners msg =
+    { onNumpadClick : Int -> msg
+    , onDecrement : msg
+    , onIncrement : msg
+    }
+
+
+buttonAttributs : String -> List (Attribute msg)
+buttonAttributs gridArea =
+    [ styles
+        [ Css.property "grid-area" gridArea
+        , Css.property "display" "grid"
+        , Css.property "align-content" "center"
+        , Css.property "justify-content" "center"
+        , border zero
+        , backgroundColor Colors.secondaryBg
+        , fontWeight bold
+        , padding (px 5)
+        , textAlign center
+        ]
+    , Attributes.class "order-action-panel__button"
+    , href "#"
+    ]
+
+
 renderButton : String -> String -> Html msg
 renderButton text gridArea =
     a
-        [ styles
-            [ Css.property "grid-area" gridArea
-            , Css.property "display" "grid"
-            , Css.property "align-content" "center"
-            , Css.property "justify-content" "center"
-            , border zero
-            , backgroundColor Colors.secondaryBg
-            , fontWeight bold
-            , padding (px 5)
-            , textAlign center
-            ]
-        , Attributes.class "order-action-panel__button"
-        , href "#"
-        ]
+        (buttonAttributs gridArea)
+        [ Html.text text ]
+
+
+renderButtonWithListener : String -> String -> msg -> Html msg
+renderButtonWithListener text gridArea handleClick =
+    a
+        (List.append
+            (buttonAttributs gridArea)
+            [ onClick handleClick ]
+        )
         [ Html.text text ]
 
 
@@ -49,8 +72,8 @@ viewNavigation =
         ]
 
 
-viewRightActions : Html msg
-viewRightActions =
+viewRightActions : msg -> msg -> Html msg
+viewRightActions onDecrement onIncrement =
     div
         [ styles
             [ Css.property "display" "grid"
@@ -62,14 +85,14 @@ viewRightActions =
             ]
         , Attributes.class "order-action-panel__right-actions"
         ]
-        [ renderButton "-" "minus"
-        , renderButton "+" "plus"
+        [ renderButtonWithListener "-" "minus" onDecrement
+        , renderButtonWithListener "+" "plus" onIncrement
         , renderButton "Delete" "delete"
         ]
 
 
-view : Model -> (Int -> msg) -> Html msg
-view model handleNumpadClick =
+view : Model -> ViewListeners msg -> Html msg
+view model { onNumpadClick, onDecrement, onIncrement } =
     div
         [ styles
             [ Css.property "display" "grid"
@@ -84,10 +107,10 @@ view model handleNumpadClick =
         ]
         [ Breadcrumb.view (SelectList.fromLists [] "Edit" [ "Method", "Payment" ])
         , viewNavigation
-        , viewRightActions
+        , viewRightActions onDecrement onIncrement
         , Numpad.view
             (OrderLineSelector.selectedOrderLine model
                 |> Maybe.map OrderLine.toQuantity
             )
-            handleNumpadClick
+            onNumpadClick
         ]

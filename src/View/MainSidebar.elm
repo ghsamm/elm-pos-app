@@ -62,5 +62,9 @@ view model =
         ]
         [ OrderLineList.view model.orderLineStore model
         , viewTotal model
-        , OrderActionPanel.view model (\newQuantity -> OrderLineStoreMsg (SetCurrentOrderLineQuantity newQuantity))
+        , OrderActionPanel.view model
+            { onNumpadClick = \newQuantity -> OrderLineStoreMsg (SetCurrentOrderLineQuantity newQuantity)
+            , onDecrement = OrderLineStoreMsg DecrementCurrentOrderLineQunatity
+            , onIncrement = OrderLineStoreMsg IncrementCurrentOrderLineQunatity
+            }
         ]
