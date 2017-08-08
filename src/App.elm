@@ -84,7 +84,7 @@ tag1 : Tag
 tag1 =
     Tag.fromId (TagId "tag-id-1")
         |> Tag.withName "Tag number one"
-        |> Tag.withColor (hex "faa")
+        |> Tag.withColor (hex "11b34c")
 
 
 tag2 : Tag
@@ -156,9 +156,6 @@ update msg model =
 
         OrderLineStoreMsg msg ->
             ( { model | orderLineStore = OrderLineStore.update msg model.orderLineStore }, Cmd.none )
-
-        AddProductToLineOrderList _ ->
-            Debug.crash "TODO"
 
 
 main : Program Never Model Msg

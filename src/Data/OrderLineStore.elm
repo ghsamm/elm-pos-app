@@ -3,6 +3,7 @@ module Data.OrderLineStore exposing (..)
 -- import Data.Product as Product exposing (Product)
 
 import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId(..))
+import Data.Product as Product exposing (Product)
 import Dict exposing (Dict, insert)
 import Util exposing (listToDict)
 
@@ -19,6 +20,12 @@ type OrderLineStoreMsg
     | IncrementCurrentOrderLineQunatity
     | DecrementCurrentOrderLineQunatity
     | DeleteCurrentOrderLine
+    | AddProduct Product
+
+
+selectOrderLine : OrderLineId -> OrderLineStore -> OrderLineStore
+selectOrderLine orderLineId orderLineStore =
+    { orderLineStore | selectedOrderLine = Just orderLineId }
 
 
 updateOderLine : OrderLineId -> (OrderLine -> OrderLine) -> OrderLineStore -> OrderLineStore
@@ -55,11 +62,27 @@ deleteCurrentOrderLine orderLineStore =
             orderLineStore
 
 
+addProduct : Product -> OrderLineStore -> OrderLineStore
+addProduct product orderLineStore =
+    let
+        maybeOrderLine =
+            findOrderLine
+                (\orderLine -> OrderLine.toProductId orderLine == Product.toId product)
+                orderLineStore
+    in
+    case maybeOrderLine of
+        Just orderLine ->
+            selectOrderLine (OrderLine.toId orderLine) orderLineStore
+
+        Nothing ->
+            orderLineStore
+
+
 update : OrderLineStoreMsg -> OrderLineStore -> OrderLineStore
 update msg orderLineStore =
     case msg of
         SelectOrderLine orderLineId ->
-            { orderLineStore | selectedOrderLine = Just orderLineId }
+            selectOrderLine orderLineId orderLineStore
 
         SetCurrentOrderLineQuantity newQuantity ->
             updateSelectedOrderLine
@@ -79,6 +102,9 @@ update msg orderLineStore =
         DeleteCurrentOrderLine ->
             deleteCurrentOrderLine orderLineStore
 
+        AddProduct product ->
+            addProduct product orderLineStore
+
 
 fromList : List OrderLine -> OrderLineStore
 fromList orderLineList =
@@ -90,6 +116,24 @@ fromList orderLineList =
 getOrderLine : OrderLineId -> OrderLineStore -> Maybe OrderLine
 getOrderLine (OrderLineId orderLineId) orderLineStore =
     Dict.get orderLineId orderLineStore.orderLines
+
+
+findOrderLine : (OrderLine -> Bool) -> OrderLineStore -> Maybe OrderLine
+findOrderLine predicate orderLineStore =
+    Dict.foldl
+        (\_ product result ->
+            case result of
+                Just _ ->
+                    result
+
+                Nothing ->
+                    if predicate product then
+                        Just product
+                    else
+                        Nothing
+        )
+        Nothing
+        orderLineStore.orderLines
 
 
 

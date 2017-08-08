@@ -39,7 +39,7 @@ viewProductName productName =
         [ Html.text productName ]
 
 
-view : (ProductId -> msg) -> ( Product, Maybe Tag ) -> Html msg
+view : (Product -> msg) -> ( Product, Maybe Tag ) -> Html msg
 view handleClick ( product, maybeTag ) =
     let
         tagStyle =
@@ -60,7 +60,7 @@ view handleClick ( product, maybeTag ) =
             , mixin tagStyle
             ]
         , Attributes.class "product"
-        , onClick <| handleClick (product |> Product.toId)
+        , onClick <| handleClick product
         ]
         [ viewProductPrice (product |> Product.toPrice)
         , viewProductName (product |> Product.toName)

@@ -1,7 +1,8 @@
 module View.ProductList exposing (view)
 
 import Css exposing (..)
-import Data.Msg exposing (Msg(AddProductToLineOrderList))
+import Data.Msg exposing (Msg(..))
+import Data.OrderLineStore exposing (OrderLineStoreMsg(..))
 import Data.Product exposing (Product, stringToProductId)
 import Data.Tag exposing (Tag)
 import Html exposing (..)
@@ -25,6 +26,6 @@ view productList =
     <|
         List.map
             (ProductView.view
-                AddProductToLineOrderList
+                (\product -> OrderLineStoreMsg (AddProduct product))
             )
             productList
