@@ -66,5 +66,6 @@ view model =
             { onNumpadClick = \newQuantity -> OrderLineStoreMsg (SetCurrentOrderLineQuantity newQuantity)
             , onDecrement = OrderLineStoreMsg DecrementCurrentOrderLineQunatity
             , onIncrement = OrderLineStoreMsg IncrementCurrentOrderLineQunatity
+            , onDelete = OrderLineStoreMsg DeleteCurrentOrderLine
             }
         ]

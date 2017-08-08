@@ -18,6 +18,7 @@ type OrderLineStoreMsg
     | SetCurrentOrderLineQuantity Int
     | IncrementCurrentOrderLineQunatity
     | DecrementCurrentOrderLineQunatity
+    | DeleteCurrentOrderLine
 
 
 updateOderLine : OrderLineId -> (OrderLine -> OrderLine) -> OrderLineStore -> OrderLineStore
@@ -32,6 +33,23 @@ updateSelectedOrderLine updater orderLineStore =
     case orderLineStore.selectedOrderLine of
         Just selectedOrderLine ->
             updateOderLine selectedOrderLine updater orderLineStore
+
+        Nothing ->
+            orderLineStore
+
+
+deleteOrderLine : OrderLineId -> OrderLineStore -> OrderLineStore
+deleteOrderLine (OrderLineId orderLineId) orderLineStore =
+    { orderLineStore
+        | orderLines = Dict.remove orderLineId orderLineStore.orderLines
+    }
+
+
+deleteCurrentOrderLine : OrderLineStore -> OrderLineStore
+deleteCurrentOrderLine orderLineStore =
+    case orderLineStore.selectedOrderLine of
+        Just selectedOrderLine ->
+            deleteOrderLine selectedOrderLine orderLineStore
 
         Nothing ->
             orderLineStore
@@ -57,6 +75,9 @@ update msg orderLineStore =
             updateSelectedOrderLine
                 OrderLine.decrementQuantity
                 orderLineStore
+
+        DeleteCurrentOrderLine ->
+            deleteCurrentOrderLine orderLineStore
 
 
 fromList : List OrderLine -> OrderLineStore

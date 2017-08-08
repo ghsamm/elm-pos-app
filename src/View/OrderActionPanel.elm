@@ -18,6 +18,14 @@ type alias ViewListeners msg =
     { onNumpadClick : Int -> msg
     , onDecrement : msg
     , onIncrement : msg
+    , onDelete : msg
+    }
+
+
+type alias ViewRightActionsListener msg =
+    { onDecrement : msg
+    , onIncrement : msg
+    , onDelete : msg
     }
 
 
@@ -72,8 +80,8 @@ viewNavigation =
         ]
 
 
-viewRightActions : msg -> msg -> Html msg
-viewRightActions onDecrement onIncrement =
+viewRightActions : ViewRightActionsListener msg -> Html msg
+viewRightActions { onDecrement, onIncrement, onDelete } =
     div
         [ styles
             [ Css.property "display" "grid"
@@ -87,12 +95,12 @@ viewRightActions onDecrement onIncrement =
         ]
         [ renderButtonWithListener "-" "minus" onDecrement
         , renderButtonWithListener "+" "plus" onIncrement
-        , renderButton "Delete" "delete"
+        , renderButtonWithListener "Delete" "delete" onDelete
         ]
 
 
 view : Model -> ViewListeners msg -> Html msg
-view model { onNumpadClick, onDecrement, onIncrement } =
+view model { onNumpadClick, onDecrement, onIncrement, onDelete } =
     div
         [ styles
             [ Css.property "display" "grid"
@@ -107,7 +115,11 @@ view model { onNumpadClick, onDecrement, onIncrement } =
         ]
         [ Breadcrumb.view (SelectList.fromLists [] "Edit" [ "Method", "Payment" ])
         , viewNavigation
-        , viewRightActions onDecrement onIncrement
+        , viewRightActions
+            { onDecrement = onDecrement
+            , onIncrement = onIncrement
+            , onDelete = onDelete
+            }
         , Numpad.view
             (OrderLineSelector.selectedOrderLine model
                 |> Maybe.map OrderLine.toQuantity
