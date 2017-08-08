@@ -1,4 +1,12 @@
-module Data.ProductStore exposing (..)
+module Data.ProductStore
+    exposing
+        ( ProductStore
+        , ProductStoreMsg(..)
+        , fromList
+        , getProduct
+        , update
+        , visibleProducts
+        )
 
 import Data.Product as Product exposing (Product, ProductId(..), productIdToString)
 import Dict exposing (Dict)
@@ -22,32 +30,16 @@ update msg productStore =
         FilterByString searchString ->
             { productStore
                 | visibleProducts =
-                    Set.filter
-                        (\productIdString ->
-                            case searchString of
-                                "" ->
-                                    True
-
-                                _ ->
-                                    let
-                                        productName : String
-                                        productName =
-                                            getProduct (Product.stringToProductId productIdString) productStore
-                                                |> Maybe.map Product.toName
-                                                |> Maybe.map String.toLower
-                                                |> Maybe.withDefault ""
-                                    in
-                                    String.contains (searchString |> String.toLower) productName
-                        )
-                        (productIdsAsSet productStore)
+                    filterProductsToSet
+                        (Product.doesTitleMatch searchString)
+                        productStore
             }
 
 
-productIdsAsSet : ProductStore -> Set String
-productIdsAsSet productStore =
-    productStore.products
-        |> Dict.toList
-        |> List.map Tuple.first
+filterProductsToSet : (Product -> Bool) -> ProductStore -> Set String
+filterProductsToSet predicate productStore =
+    Dict.filter (\_ product -> predicate product) productStore.products
+        |> Dict.keys
         |> Set.fromList
 
 

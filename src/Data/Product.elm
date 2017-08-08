@@ -3,6 +3,7 @@ module Data.Product
         ( Product
         , ProductErr(..)
         , ProductId(..)
+        , doesTitleMatch
         , fromId
         , productIdToString
         , stringToProductId
@@ -88,6 +89,23 @@ productIdToString (ProductId productId) =
 stringToProductId : String -> ProductId
 stringToProductId productId =
     ProductId productId
+
+
+doesTitleMatch : String -> Product -> Bool
+doesTitleMatch searchString product =
+    case searchString of
+        "" ->
+            True
+
+        _ ->
+            let
+                normalizedProductName =
+                    product |> toName |> String.toLower
+
+                normalizedSearchString =
+                    searchString |> String.trim |> String.toLower
+            in
+            String.contains normalizedSearchString normalizedProductName
 
 
 
