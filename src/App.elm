@@ -155,6 +155,9 @@ update msg model =
         OrderLineStoreMsg msg ->
             ( { model | orderLineStore = OrderLineStore.update msg model.orderLineStore }, Cmd.none )
 
+        ProductStoreMsg msg ->
+            ( { model | productStore = ProductStore.update msg model.productStore }, Cmd.none )
+
 
 main : Program Never Model Msg
 main =

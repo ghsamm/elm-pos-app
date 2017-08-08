@@ -1,9 +1,10 @@
 module Data.Msg exposing (..)
 
 import Data.OrderLineStore exposing (OrderLineStoreMsg)
+import Data.ProductStore exposing (ProductStoreMsg)
 
 
 type Msg
     = NoOp
-      -- | SearchProduct String
+    | ProductStoreMsg ProductStoreMsg
     | OrderLineStoreMsg OrderLineStoreMsg

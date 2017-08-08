@@ -4,7 +4,7 @@ import Css exposing (..)
 import Data.Model exposing (Model)
 import Data.Msg exposing (..)
 import Data.Product as Product
-import Data.ProductStore as ProductStore
+import Data.ProductStore as ProductStore exposing (ProductStoreMsg(..))
 import Data.TagStore as TagStore
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
@@ -32,7 +32,7 @@ viewProductSearch =
                 ]
             , type_ "text"
             , placeholder "Search for products"
-            , onInput (always NoOp)
+            , onInput (\newTitleFilter -> ProductStoreMsg (SetTitleFilter newTitleFilter))
             ]
             []
         ]
