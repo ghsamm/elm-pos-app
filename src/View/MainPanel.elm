@@ -32,7 +32,7 @@ viewProductSearch =
                 ]
             , type_ "text"
             , placeholder "Search for products"
-            , onInput SearchProduct
+            , onInput (always NoOp)
             ]
             []
         ]

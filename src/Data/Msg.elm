@@ -5,5 +5,5 @@ import Data.OrderLineStore exposing (OrderLineStoreMsg)
 
 type Msg
     = NoOp
-    | SearchProduct String
+      -- | SearchProduct String
     | OrderLineStoreMsg OrderLineStoreMsg

@@ -13,7 +13,7 @@ import View.Colors as Colors
 
 viewTag : Tag -> Html msg
 viewTag tag =
-    div
+    a
         [ styles
             [ displayFlex
             , alignItems center
@@ -24,6 +24,7 @@ viewTag tag =
             , backgroundColor Colors.mainBg
             ]
         , Attributes.class "tag"
+        , Attributes.href "#"
         ]
         [ Html.text (tag |> Tag.toName) ]
 

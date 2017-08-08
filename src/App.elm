@@ -107,7 +107,6 @@ model =
             ]
     , orderLineStore = OrderLineStore.fromList [ orderLine1, orderLine2 ]
     , tagStore = TagStore.fromList [ tag1, tag2 ]
-    , productSearchString = ""
     }
 
 
@@ -146,14 +145,13 @@ update msg model =
         NoOp ->
             ( model, Cmd.none )
 
-        SearchProduct searchString ->
-            ( { model
-                | productSearchString = searchString
-                , productStore = ProductStore.update (ProductStore.FilterByString searchString) model.productStore
-              }
-            , Cmd.none
-            )
-
+        -- SearchProduct searchString ->
+        --     ( { model
+        --         | productSearchString = searchString
+        --         , productStore = ProductStore.update (ProductStore.FilterByString searchString) model.productStore
+        --       }
+        --     , Cmd.none
+        --     )
         OrderLineStoreMsg msg ->
             ( { model | orderLineStore = OrderLineStore.update msg model.orderLineStore }, Cmd.none )
 
