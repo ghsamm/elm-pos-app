@@ -16,6 +16,8 @@ type alias OrderLineStore =
 type OrderLineStoreMsg
     = SelectOrderLine OrderLineId
     | SetCurrentOrderLineQuantity Int
+    | IncrementCurrentOrderLineQunatity
+    | DecrementCurrentOrderLineQunatity
 
 
 updateOderLine : OrderLineId -> (OrderLine -> OrderLine) -> OrderLineStore -> OrderLineStore
@@ -44,6 +46,16 @@ update msg orderLineStore =
         SetCurrentOrderLineQuantity newQuantity ->
             updateSelectedOrderLine
                 (OrderLine.withQuantity newQuantity)
+                orderLineStore
+
+        IncrementCurrentOrderLineQunatity ->
+            updateSelectedOrderLine
+                OrderLine.incrementQuantity
+                orderLineStore
+
+        DecrementCurrentOrderLineQunatity ->
+            updateSelectedOrderLine
+                OrderLine.decrementQuantity
                 orderLineStore
 
 

@@ -3,7 +3,9 @@ module Data.OrderLine
         ( OrderLine
         , OrderLineErr(..)
         , OrderLineId(..)
+        , decrementQuantity
         , fromId
+        , incrementQuantity
         , stringToOrderLineId
         , toDiscount
         , toId
@@ -75,6 +77,20 @@ toProductId (OrderLine orderLine) =
 withQuantity : Int -> OrderLine -> OrderLine
 withQuantity newQuantity (OrderLine orderLine) =
     OrderLine { orderLine | quantity = newQuantity }
+
+
+incrementQuantity : OrderLine -> OrderLine
+incrementQuantity orderLine =
+    withQuantity
+        (toQuantity orderLine + 1)
+        orderLine
+
+
+decrementQuantity : OrderLine -> OrderLine
+decrementQuantity orderLine =
+    withQuantity
+        (max 1 <| toQuantity orderLine - 1)
+        orderLine
 
 
 toQuantity : OrderLine -> Int
