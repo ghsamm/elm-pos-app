@@ -20,7 +20,7 @@ mainBg =
 
 secondaryBg : Color
 secondaryBg =
-    hex "ddd"
+    hex "e6e6e6"
 
 
 accentBg : Color

@@ -13,9 +13,11 @@ module Data.Product
         , withDiscount
         , withName
         , withPrice
+        , withTag
         )
 
 import Data.Discount exposing (Discount(..))
+import Data.Tag exposing (TagId)
 
 
 type Product
@@ -24,6 +26,7 @@ type Product
         , name : String
         , price : Float
         , discount : Discount
+        , tag : Maybe TagId
         }
 
 
@@ -80,9 +83,14 @@ toDiscount (Product product) =
     product.discount
 
 
-withTag : Maybe TagId -> Product -> Product
+withTag : TagId -> Product -> Product
 withTag newTag (Product product) =
-    Product { product | tag = newTag }
+    Product { product | tag = Just newTag }
+
+
+withoutTag : Product -> Product
+withoutTag (Product product) =
+    Product { product | tag = Nothing }
 
 
 stringToProductId : String -> ProductId
@@ -118,4 +126,5 @@ defaultProduct =
         , name = "(no name)"
         , price = 0
         , discount = NoDiscount
+        , tag = Nothing
         }

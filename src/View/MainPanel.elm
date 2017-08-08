@@ -11,7 +11,7 @@ import SelectList
 import Util exposing (styles)
 import View.ProductList as ProductList
 import View.TabList as TabList exposing (Tab, TabState(..))
-import View.TagList as TagList exposing (Tag)
+import View.TagList as TagList
 
 
 viewProductSearch : Html Msg
@@ -58,10 +58,7 @@ view model =
                 (Tab "#1520" Editing)
                 [ Tab "#1521" Waiting, Tab "#1511" Done ]
         , viewProductSearch
-        , TagList.view
-            [ Tag "Pizza" (hex "faa")
-            , Tag "Déjeuner" (hex "aaf")
-            ]
+        , TagList.view model.tagStore
         , ProductList.view <|
             ProductStore.visibleProducts model.productStore
         ]

@@ -1,16 +1,14 @@
 module View.TagList exposing (..)
 
 import Css exposing (..)
+import Data.Tag as Tag exposing (Tag)
+import Data.TagStore exposing (TagStore)
+import Dict
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import Tuple
 import Util exposing (styles)
 import View.Colors as Colors
-
-
-type alias Tag =
-    { name : String
-    , color : Css.Color
-    }
 
 
 viewTag : Tag -> Html msg
@@ -20,18 +18,18 @@ viewTag tag =
             [ displayFlex
             , alignItems center
             , justifyContent center
-            , borderBottom3 (px 2) solid tag.color
+            , borderBottom3 (px 2) solid (tag |> Tag.toColor)
             , padding (px 10)
             , marginRight (px 5)
             , backgroundColor Colors.mainBg
             ]
         , Attributes.class "tag"
         ]
-        [ Html.text tag.name ]
+        [ Html.text (tag |> Tag.toName) ]
 
 
-view : List Tag -> Html msg
-view tags =
+view : TagStore -> Html msg
+view tagStore =
     div
         [ styles
             [ Css.property "grid-area" "tag-list"
@@ -40,4 +38,9 @@ view tags =
             ]
         , Attributes.class "tag-list"
         ]
-        (List.map viewTag tags)
+        (tagStore.tags
+            |> Dict.toList
+            |> List.map Tuple.second
+            |> List.map
+                viewTag
+        )

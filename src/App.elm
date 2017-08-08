@@ -8,6 +8,8 @@ import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId(..))
 import Data.OrderLineStore as OrderLineStore
 import Data.Product as Product exposing (Product, ProductId(..))
 import Data.ProductStore as ProductStore
+import Data.Tag as Tag exposing (Tag, TagId(..))
+import Data.TagStore as TagStore
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Util exposing (styles)
@@ -21,6 +23,7 @@ product1 =
     Product.fromId "product-id-1"
         |> Product.withName "Clavier AZERTY"
         |> Product.withPrice 22.5
+        |> Product.withTag (TagId "tag-id-1")
 
 
 product2 : Product
@@ -28,6 +31,7 @@ product2 =
     Product.fromId "product-id-2"
         |> Product.withName "Souris Gamer"
         |> Product.withPrice 41.2
+        |> Product.withTag (TagId "tag-id-2")
 
 
 product3 : Product
@@ -35,6 +39,7 @@ product3 =
     Product.fromId "product-id-3"
         |> Product.withName "Souris Gamer 2"
         |> Product.withPrice 41.2
+        |> Product.withTag (TagId "tag-id-12")
 
 
 product4 : Product
@@ -42,6 +47,7 @@ product4 =
     Product.fromId "product-id-4"
         |> Product.withName "Souris Gamer 3"
         |> Product.withPrice 41.2
+        |> Product.withTag (TagId "tag-id-1")
 
 
 product5 : Product
@@ -73,6 +79,20 @@ orderLine2 =
         |> OrderLine.withQuantity 4
 
 
+tag1 : Tag
+tag1 =
+    Tag.fromId (TagId "tag-id-1")
+        |> Tag.withName "Tag number one"
+        |> Tag.withColor (hex "faa")
+
+
+tag2 : Tag
+tag2 =
+    Tag.fromId (TagId "tag-id-2")
+        |> Tag.withName "Tag number two"
+        |> Tag.withColor (hex "fec")
+
+
 model : Model
 model =
     { productStore =
@@ -85,6 +105,7 @@ model =
             , product6
             ]
     , orderLineStore = OrderLineStore.fromList [ orderLine1, orderLine2 ]
+    , tagStore = TagStore.fromList [ tag1, tag2 ]
     , productSearchString = ""
     }
 
