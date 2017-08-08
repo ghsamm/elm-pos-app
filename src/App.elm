@@ -55,6 +55,7 @@ product5 =
     Product.fromId "product-id-5"
         |> Product.withName "Souris Gamer 5"
         |> Product.withPrice 41.2
+        |> Product.withTag (TagId "tag-id-2")
 
 
 product6 : Product
@@ -90,7 +91,7 @@ tag2 : Tag
 tag2 =
     Tag.fromId (TagId "tag-id-2")
         |> Tag.withName "Tag number two"
-        |> Tag.withColor (hex "fec")
+        |> Tag.withColor (hex "60c3ff")
 
 
 model : Model

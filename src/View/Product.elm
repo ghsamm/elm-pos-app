@@ -2,6 +2,7 @@ module View.Product exposing (..)
 
 import Css exposing (..)
 import Data.Product as Product exposing (Product, ProductErr, ProductId)
+import Data.Tag as Tag exposing (Tag)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events exposing (..)
@@ -38,8 +39,17 @@ viewProductName productName =
         [ Html.text productName ]
 
 
-view : (ProductId -> msg) -> Product -> Html msg
-view handleClick product =
+view : (ProductId -> msg) -> ( Product, Maybe Tag ) -> Html msg
+view handleClick ( product, maybeTag ) =
+    let
+        tagStyle =
+            case maybeTag of
+                Just tag ->
+                    [ border3 (px 2) solid (tag |> Tag.toColor) ]
+
+                Nothing ->
+                    []
+    in
     div
         [ styles
             [ position relative
@@ -47,6 +57,7 @@ view handleClick product =
             , displayFlex
             , alignItems center
             , justifyContent center
+            , mixin tagStyle
             ]
         , Attributes.class "product"
         , onClick <| handleClick (product |> Product.toId)

@@ -3,7 +3,9 @@ module View.MainPanel exposing (view)
 import Css exposing (..)
 import Data.Model exposing (Model)
 import Data.Msg exposing (..)
+import Data.Product as Product
 import Data.ProductStore as ProductStore
+import Data.TagStore as TagStore
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events exposing (..)
@@ -60,5 +62,21 @@ view model =
         , viewProductSearch
         , TagList.view model.tagStore
         , ProductList.view <|
-            ProductStore.visibleProducts model.productStore
+            (ProductStore.visibleProducts model.productStore
+                |> List.map
+                    (\product ->
+                        let
+                            maybeTagId =
+                                product |> Product.toTagId
+
+                            tag =
+                                maybeTagId
+                                    |> Maybe.andThen
+                                        (\tagId ->
+                                            TagStore.getTag tagId model.tagStore
+                                        )
+                        in
+                        ( product, tag )
+                    )
+            )
         ]

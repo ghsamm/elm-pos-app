@@ -10,6 +10,7 @@ module Data.Product
         , toId
         , toName
         , toPrice
+        , toTagId
         , withDiscount
         , withName
         , withPrice
@@ -91,6 +92,11 @@ withTag newTag (Product product) =
 withoutTag : Product -> Product
 withoutTag (Product product) =
     Product { product | tag = Nothing }
+
+
+toTagId : Product -> Maybe TagId
+toTagId (Product product) =
+    product.tag
 
 
 stringToProductId : String -> ProductId

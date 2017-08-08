@@ -3,13 +3,14 @@ module View.ProductList exposing (view)
 import Css exposing (..)
 import Data.Msg exposing (Msg(AddProductToLineOrderList))
 import Data.Product exposing (Product, stringToProductId)
+import Data.Tag exposing (Tag)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Util exposing (styles)
 import View.Product as ProductView exposing (view)
 
 
-view : List Product -> Html Msg
+view : List ( Product, Maybe Tag ) -> Html Msg
 view productList =
     div
         [ styles
