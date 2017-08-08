@@ -124,9 +124,6 @@ update msg model =
         NoOp ->
             ( model, Cmd.none )
 
-        --
-        -- SelectOrderLine orderLineId ->
-        --     ( { model | selectedOrderLine = SingleSelection orderLineId }, Cmd.none )
         SearchProduct searchString ->
             ( { model
                 | productSearchString = searchString
@@ -135,21 +132,6 @@ update msg model =
             , Cmd.none
             )
 
-        -- SetCurrentOrderLineQuantity newQuantity ->
-        --     let
-        --         updatedOrderLineStore =
-        --             Selection.toMaybe model.selectedOrderLine
-        --                 |> Maybe.map OrderLine.orderLineIdToString
-        --                 |> Maybe.map
-        --                     (\comparableOrderLineId ->
-        --                         Dict.update
-        --                             comparableOrderLineId
-        --                             (Maybe.map (OrderLine.withQuantity newQuantity))
-        --                             model.orderLineStore
-        --                     )
-        --                 |> Maybe.withDefault model.orderLineStore
-        --     in
-        --     ( { model | orderLineStore = updatedOrderLineStore }, Cmd.none )
         OrderLineStoreMsg msg ->
             ( { model | orderLineStore = OrderLineStore.update msg model.orderLineStore }, Cmd.none )
 
