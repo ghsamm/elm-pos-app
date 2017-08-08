@@ -5,7 +5,6 @@ module Data.Product
         , ProductId(..)
         , doesTitleMatch
         , fromId
-        , productIdToString
         , stringToProductId
         , toDiscount
         , toId
@@ -79,11 +78,6 @@ withDiscount newDiscount (Product product) =
 toDiscount : Product -> Discount
 toDiscount (Product product) =
     product.discount
-
-
-productIdToString : ProductId -> String
-productIdToString (ProductId productId) =
-    productId
 
 
 stringToProductId : String -> ProductId

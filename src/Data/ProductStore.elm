@@ -8,7 +8,7 @@ module Data.ProductStore
         , visibleProducts
         )
 
-import Data.Product as Product exposing (Product, ProductId(..), productIdToString)
+import Data.Product as Product exposing (Product, ProductId(..))
 import Dict exposing (Dict)
 import Set exposing (Set)
 import Util exposing (listToDict)
@@ -45,21 +45,21 @@ filterProductsToSet predicate productStore =
 
 fromList : List Product -> ProductStore
 fromList productList =
-    { products = listToDict (Product.toId >> productIdToString) productList
+    { products = listToDict (Product.toId >> (\(ProductId productId) -> productId)) productList
     , visibleProducts =
-        List.map (Product.toId >> productIdToString) productList
+        List.map (Product.toId >> (\(ProductId productId) -> productId)) productList
             |> Set.fromList
     }
 
 
 getProduct : ProductId -> ProductStore -> Maybe Product
-getProduct productId productStore =
-    Dict.get (productIdToString productId) productStore.products
+getProduct (ProductId productId) productStore =
+    Dict.get productId productStore.products
 
 
 isProductVisible : ProductId -> ProductStore -> Bool
-isProductVisible productId productStore =
-    Set.member (productId |> productIdToString) productStore.visibleProducts
+isProductVisible (ProductId productId) productStore =
+    Set.member productId productStore.visibleProducts
 
 
 visibleProducts : ProductStore -> List Product
