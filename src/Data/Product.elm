@@ -3,7 +3,7 @@ module Data.Product
         ( Product
         , ProductErr(..)
         , ProductId(..)
-        , doesTitleMatch
+        , doesTitleContain
         , fromId
         , stringToProductId
         , toDiscount
@@ -80,13 +80,18 @@ toDiscount (Product product) =
     product.discount
 
 
+withTag : Maybe TagId -> Product -> Product
+withTag newTag (Product product) =
+    Product { product | tag = newTag }
+
+
 stringToProductId : String -> ProductId
 stringToProductId productId =
     ProductId productId
 
 
-doesTitleMatch : String -> Product -> Bool
-doesTitleMatch searchString product =
+doesTitleContain : String -> Product -> Bool
+doesTitleContain searchString product =
     case searchString of
         "" ->
             True

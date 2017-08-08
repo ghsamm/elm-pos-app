@@ -31,7 +31,7 @@ update msg productStore =
             { productStore
                 | visibleProducts =
                     filterProductsToSet
-                        (Product.doesTitleMatch searchString)
+                        (Product.doesTitleContain searchString)
                         productStore
             }
 
