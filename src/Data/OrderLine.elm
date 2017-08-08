@@ -4,7 +4,6 @@ module Data.OrderLine
         , OrderLineErr(..)
         , OrderLineId(..)
         , fromId
-        , orderLineIdToString
         , stringToOrderLineId
         , toDiscount
         , toId
@@ -91,11 +90,6 @@ withDiscount newDiscount (OrderLine orderLine) =
 toDiscount : OrderLine -> Discount
 toDiscount (OrderLine orderLine) =
     orderLine.discount
-
-
-orderLineIdToString : OrderLineId -> String
-orderLineIdToString (OrderLineId orderLineId) =
-    orderLineId
 
 
 stringToOrderLineId : String -> OrderLineId

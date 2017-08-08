@@ -1,6 +1,6 @@
 module Data.OrderLineStore exposing (..)
 
-import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId(..), orderLineIdToString)
+import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId(..))
 import Data.Product as Product exposing (Product)
 import Dict exposing (Dict, insert)
 import Util exposing (listToDict)
@@ -48,14 +48,14 @@ update msg orderLineStore =
 
 fromList : List OrderLine -> OrderLineStore
 fromList orderLineList =
-    { orderLines = listToDict (OrderLine.toId >> orderLineIdToString) orderLineList
+    { orderLines = listToDict (OrderLine.toId >> (\(OrderLineId orderLineId) -> orderLineId)) orderLineList
     , selectedOrderLine = Nothing
     }
 
 
 getOrderLine : OrderLineId -> OrderLineStore -> Maybe OrderLine
-getOrderLine orderLineId orderLineStore =
-    Dict.get (orderLineIdToString orderLineId) orderLineStore.orderLines
+getOrderLine (OrderLineId orderLineId) orderLineStore =
+    Dict.get orderLineId orderLineStore.orderLines
 
 
 addProduct : Product -> OrderLineStore -> OrderLineStore
