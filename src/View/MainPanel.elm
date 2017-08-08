@@ -62,7 +62,7 @@ view model =
         , viewProductSearch
         , TagList.view
             (\maybeTagId -> ProductStoreMsg (SetTagFilter maybeTagId))
-            model.tagStore
+            ( model.tagStore, model.productStore.tagFilter )
         , ProductList.view <|
             (ProductStore.visibleProducts model.productStore
                 |> List.map
