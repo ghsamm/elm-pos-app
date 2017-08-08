@@ -1,7 +1,8 @@
 module Data.OrderLineStore exposing (..)
 
+-- import Data.Product as Product exposing (Product)
+
 import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId(..))
-import Data.Product as Product exposing (Product)
 import Dict exposing (Dict, insert)
 import Util exposing (listToDict)
 
@@ -58,11 +59,13 @@ getOrderLine (OrderLineId orderLineId) orderLineStore =
     Dict.get orderLineId orderLineStore.orderLines
 
 
-addProduct : Product -> OrderLineStore -> OrderLineStore
-addProduct product orderLineStore =
-    let
-        newOrderLine =
-            OrderLine.fromId "fff"
-                |> OrderLine.withProductId (product |> Product.toId)
-    in
-    { orderLineStore | orderLines = Dict.insert "ffff" newOrderLine orderLineStore.orderLines }
+
+--
+-- addProduct : Product -> OrderLineStore -> OrderLineStore
+-- addProduct product orderLineStore =
+--     let
+--         newOrderLine =
+--             OrderLine.fromId "fff"
+--                 |> OrderLine.withProductId (product |> Product.toId)
+--     in
+--     { orderLineStore | orderLines = Dict.insert "ffff" newOrderLine orderLineStore.orderLines }
