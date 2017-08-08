@@ -4,8 +4,8 @@ import Css exposing (..)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import SelectList exposing (SelectList)
+import Util exposing (styles)
 import View.Colors as Colors
-import View.Utils exposing (styles)
 
 
 view : SelectList String -> Html msg

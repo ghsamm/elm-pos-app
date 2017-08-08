@@ -8,9 +8,9 @@ import Data.OrderLineStore exposing (OrderLineStore)
 import Dict exposing (keys)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import Util exposing (styles)
 import View.Colors as Colors
 import View.OrderLineContainer as OrderLineContainer
-import View.Utils exposing (styles)
 
 
 view : OrderLineStore -> Model -> Html Msg

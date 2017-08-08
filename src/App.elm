@@ -10,14 +10,10 @@ import Data.Product as Product exposing (Product, ProductId(..))
 import Data.ProductStore as ProductStore
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import Util exposing (styles)
 import View.Colors as Colors
 import View.MainPanel as MainPanel
 import View.MainSidebar as MainSidebar
-
-
-styles : List Mixin -> Attribute msg
-styles =
-    Css.asPairs >> Attributes.style
 
 
 product1 : Product

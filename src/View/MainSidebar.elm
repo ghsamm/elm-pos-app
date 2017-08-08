@@ -9,11 +9,10 @@ import Dict
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Selector.OrderLine exposing (orderLinePrice)
-import Util exposing (formatPrice)
+import Util exposing (formatPrice, styles)
 import View.Colors as Colors
 import View.OrderActionPanel as OrderActionPanel
 import View.OrderLineList as OrderLineList
-import View.Utils exposing (styles)
 
 
 getTotal : Model -> Float

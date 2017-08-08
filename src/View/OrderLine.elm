@@ -7,9 +7,8 @@ import Data.Product as Product exposing (Product)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (class, classList)
 import Html.Events exposing (..)
-import Util exposing (formatPrice)
+import Util exposing (formatPrice, styles)
 import View.Colors as Colors
-import View.Utils exposing (styles)
 
 
 mixins : { boldText : Mixin }

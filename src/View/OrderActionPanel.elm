@@ -7,10 +7,10 @@ import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import SelectList
 import Selector.OrderLine as OrderLineSelector exposing (orderLineSelector)
+import Util exposing (styles)
 import View.Breadcrumb as Breadcrumb
 import View.Colors as Colors
 import View.Numpad as Numpad
-import View.Utils exposing (styles)
 
 
 renderButton : String -> String -> Html msg

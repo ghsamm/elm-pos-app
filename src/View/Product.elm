@@ -5,9 +5,8 @@ import Data.Product as Product exposing (Product, ProductErr, ProductId)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events exposing (..)
-import Util exposing (formatPrice)
+import Util exposing (formatPrice, styles)
 import View.Colors as Colors
-import View.Utils exposing (styles)
 
 
 viewProductPrice : Float -> Html msg

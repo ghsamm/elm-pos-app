@@ -8,10 +8,10 @@ import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events exposing (..)
 import SelectList
+import Util exposing (styles)
 import View.ProductList as ProductList
 import View.TabList as TabList exposing (Tab, TabState(..))
 import View.TagList as TagList exposing (Tag)
-import View.Utils exposing (styles)
 
 
 viewProductSearch : Html Msg

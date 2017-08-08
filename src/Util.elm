@@ -1,6 +1,9 @@
 module Util exposing (..)
 
+import Css exposing (Mixin)
 import Dict exposing (Dict)
+import Html exposing (Attribute)
+import Html.Attributes as Attributes
 import Round
 
 
@@ -13,6 +16,11 @@ import Round
 meaning you can use it at the end of a pipeline and have the precedence work out.
 -}
 infixl 0 =>
+
+
+styles : List Mixin -> Attribute msg
+styles =
+    Css.asPairs >> Attributes.style
 
 
 formatPrice : Float -> String

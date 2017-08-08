@@ -5,8 +5,8 @@ import Data.Msg exposing (Msg(AddProductToLineOrderList))
 import Data.Product exposing (Product, stringToProductId)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import Util exposing (styles)
 import View.Product as ProductView exposing (view)
-import View.Utils exposing (styles)
 
 
 view : List Product -> Html Msg

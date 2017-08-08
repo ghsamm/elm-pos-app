@@ -3,8 +3,8 @@ module View.TagList exposing (..)
 import Css exposing (..)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import Util exposing (styles)
 import View.Colors as Colors
-import View.Utils exposing (styles)
 
 
 type alias Tag =
