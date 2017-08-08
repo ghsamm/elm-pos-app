@@ -3,7 +3,7 @@ module Data.OrderLineStore exposing (..)
 import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId(..), orderLineIdToString)
 import Data.Product as Product exposing (Product)
 import Dict exposing (Dict, insert)
-import Util exposing (storeFromList)
+import Util exposing (listToDict)
 
 
 type alias OrderLineStore =
@@ -47,7 +47,7 @@ update msg orderLineStore =
 
 fromList : List OrderLine -> OrderLineStore
 fromList orderLineList =
-    { orderLines = storeFromList (OrderLine.toId >> orderLineIdToString) orderLineList
+    { orderLines = listToDict (OrderLine.toId >> orderLineIdToString) orderLineList
     , selectedOrderLine = Nothing
     }
 

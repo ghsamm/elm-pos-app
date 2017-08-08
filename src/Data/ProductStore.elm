@@ -3,7 +3,7 @@ module Data.ProductStore exposing (..)
 import Data.Product as Product exposing (Product, ProductId(..), productIdToString)
 import Dict exposing (Dict)
 import Set exposing (Set)
-import Util exposing (storeFromList)
+import Util exposing (listToDict)
 
 
 type alias ProductStore =
@@ -53,7 +53,7 @@ productsAsSet productStore =
 
 fromList : List Product -> ProductStore
 fromList productList =
-    { products = storeFromList (Product.toId >> productIdToString) productList
+    { products = listToDict (Product.toId >> productIdToString) productList
     , visibleProducts =
         List.map (Product.toId >> productIdToString) productList
             |> Set.fromList

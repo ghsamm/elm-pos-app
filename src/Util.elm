@@ -28,8 +28,8 @@ formatPrice price =
     Round.round 3 price ++ " DT"
 
 
-storeFromList : (v -> comparable) -> List v -> Dict comparable v
-storeFromList keyGetter list =
+listToDict : (v -> comparable) -> List v -> Dict comparable v
+listToDict keyGetter list =
     list
         |> List.map (\el -> ( keyGetter el, el ))
         |> Dict.fromList
