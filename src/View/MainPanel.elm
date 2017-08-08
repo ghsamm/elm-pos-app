@@ -60,7 +60,9 @@ view model =
                 (Tab "#1520" Editing)
                 [ Tab "#1521" Waiting, Tab "#1511" Done ]
         , viewProductSearch
-        , TagList.view model.tagStore
+        , TagList.view
+            (\maybeTagId -> ProductStoreMsg (SetTagFilter maybeTagId))
+            model.tagStore
         , ProductList.view <|
             (ProductStore.visibleProducts model.productStore
                 |> List.map

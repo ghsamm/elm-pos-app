@@ -1,18 +1,19 @@
 module View.TagList exposing (..)
 
 import Css exposing (..)
-import Data.Tag as Tag exposing (Tag)
+import Data.Tag as Tag exposing (Tag, TagId)
 import Data.TagStore exposing (TagStore)
 import Dict
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import Html.Events exposing (..)
 import Tuple
 import Util exposing (styles)
 import View.Colors as Colors
 
 
-viewTag : Tag -> Html msg
-viewTag tag =
+viewTag : (Maybe TagId -> msg) -> Tag -> Html msg
+viewTag handleClick tag =
     a
         [ styles
             [ displayFlex
@@ -25,12 +26,13 @@ viewTag tag =
             ]
         , Attributes.class "tag"
         , Attributes.href "#"
+        , onClick <| handleClick (tag |> Tag.toId |> Just)
         ]
         [ Html.text (tag |> Tag.toName) ]
 
 
-view : TagStore -> Html msg
-view tagStore =
+view : (Maybe TagId -> msg) -> TagStore -> Html msg
+view onClickTag tagStore =
     div
         [ styles
             [ Css.property "grid-area" "tag-list"
@@ -42,6 +44,5 @@ view tagStore =
         (tagStore.tags
             |> Dict.toList
             |> List.map Tuple.second
-            |> List.map
-                viewTag
+            |> List.map (viewTag onClickTag)
         )

@@ -5,6 +5,7 @@ module Data.Product
         , ProductId(..)
         , doesTitleContain
         , fromId
+        , hasTag
         , stringToProductId
         , toDiscount
         , toId
@@ -119,6 +120,16 @@ doesTitleContain searchString product =
                     searchString |> String.trim |> String.toLower
             in
             String.contains normalizedSearchString normalizedProductName
+
+
+hasTag : Maybe TagId -> Product -> Bool
+hasTag maybeTagId product =
+    case maybeTagId of
+        Nothing ->
+            True
+
+        Just _ ->
+            toTagId product == maybeTagId
 
 
 

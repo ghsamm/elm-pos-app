@@ -9,6 +9,7 @@ module Data.ProductStore
         )
 
 import Data.Product as Product exposing (Product, ProductId(..))
+import Data.Tag exposing (TagId)
 import Dict exposing (Dict)
 import Set exposing (Set)
 import Util exposing (listToDict)
@@ -17,11 +18,13 @@ import Util exposing (listToDict)
 type alias ProductStore =
     { products : Dict String Product
     , titleFilter : String
+    , tagFilter : Maybe TagId
     }
 
 
 type ProductStoreMsg
     = SetTitleFilter String
+    | SetTagFilter (Maybe TagId)
 
 
 update : ProductStoreMsg -> ProductStore -> ProductStore
@@ -30,6 +33,11 @@ update msg productStore =
         SetTitleFilter newTitleFilter ->
             { productStore
                 | titleFilter = newTitleFilter
+            }
+
+        SetTagFilter newTagFilter ->
+            { productStore
+                | tagFilter = newTagFilter
             }
 
 
@@ -44,6 +52,7 @@ fromList : List Product -> ProductStore
 fromList productList =
     { products = listToDict (Product.toId >> (\(ProductId productId) -> productId)) productList
     , titleFilter = ""
+    , tagFilter = Nothing
     }
 
 
@@ -53,8 +62,10 @@ getProduct (ProductId productId) productStore =
 
 
 isProductVisible : Product -> ProductStore -> Bool
-isProductVisible product { titleFilter } =
-    Product.doesTitleContain titleFilter product
+isProductVisible product { titleFilter, tagFilter } =
+    (&&)
+        (Product.doesTitleContain titleFilter product)
+        (Product.hasTag tagFilter product)
 
 
 visibleProducts : ProductStore -> List Product
