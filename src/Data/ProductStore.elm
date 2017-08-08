@@ -39,12 +39,12 @@ update msg productStore =
                                     in
                                     String.contains (searchString |> String.toLower) productName
                         )
-                        (productsAsSet productStore)
+                        (productIdsAsSet productStore)
             }
 
 
-productsAsSet : ProductStore -> Set String
-productsAsSet productStore =
+productIdsAsSet : ProductStore -> Set String
+productIdsAsSet productStore =
     productStore.products
         |> Dict.toList
         |> List.map Tuple.first
