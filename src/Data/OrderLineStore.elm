@@ -52,8 +52,8 @@ deleteOrderLine (OrderLineId orderLineId) orderLineStore =
     }
 
 
-deleteCurrentOrderLine : OrderLineStore -> OrderLineStore
-deleteCurrentOrderLine orderLineStore =
+deleteSelectedOrderLine : OrderLineStore -> OrderLineStore
+deleteSelectedOrderLine orderLineStore =
     case orderLineStore.selectedOrderLine of
         Just selectedOrderLine ->
             deleteOrderLine selectedOrderLine orderLineStore
@@ -100,7 +100,7 @@ update msg orderLineStore =
                 orderLineStore
 
         DeleteCurrentOrderLine ->
-            deleteCurrentOrderLine orderLineStore
+            deleteSelectedOrderLine orderLineStore
 
         AddProduct product ->
             addProduct product orderLineStore
