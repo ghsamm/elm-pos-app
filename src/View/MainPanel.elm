@@ -61,7 +61,9 @@ view model =
                 [ Tab "#1521" Waiting, Tab "#1511" Done ]
         , viewProductSearch
         , TagList.view
-            (\maybeTagId -> ProductStoreMsg (SetTagFilter maybeTagId))
+            { onClickTag = \maybeTagId -> ProductStoreMsg (SetTagFilter maybeTagId)
+            , onClickDefaultTag = \_ -> ProductStoreMsg (SetTagFilter Nothing)
+            }
             ( model.tagStore, model.productStore.tagFilter )
         , ProductList.view <|
             (ProductStore.visibleProducts model.productStore

@@ -1,7 +1,7 @@
 module View.TagList exposing (..)
 
 import Css exposing (..)
-import Data.Tag as Tag exposing (Tag, TagId)
+import Data.Tag as Tag exposing (Tag, TagId(..))
 import Data.TagStore as TagStore exposing (TagStore)
 import Dict
 import Html exposing (..)
@@ -10,6 +10,13 @@ import Html.Events exposing (..)
 import Tuple
 import Util exposing ((=>), styles)
 import View.Colors as Colors
+
+
+defaultTag : Tag
+defaultTag =
+    Tag.fromId (TagId "default-tag")
+        |> Tag.withName "All"
+        |> Tag.withColor (hex "ababab")
 
 
 viewTag : (Maybe TagId -> msg) -> ( Tag, Bool ) -> Html msg
@@ -40,14 +47,20 @@ viewTag handleClick ( tag, isSelected ) =
         [ Html.text (tag |> Tag.toName) ]
 
 
-view : (Maybe TagId -> msg) -> ( TagStore, Maybe TagId ) -> Html msg
-view onClickTag ( tagStore, tagFilter ) =
+type alias ViewListeners msg =
+    { onClickTag : Maybe TagId -> msg
+    , onClickDefaultTag : Maybe TagId -> msg
+    }
+
+
+view : ViewListeners msg -> ( TagStore, Maybe TagId ) -> Html msg
+view { onClickTag, onClickDefaultTag } ( tagStore, tagFilter ) =
     let
         isTagSelected : Tag -> Bool
         isTagSelected tag =
             case tagFilter of
                 Nothing ->
-                    False
+                    Tag.toId tag == Tag.toId defaultTag
 
                 Just tagId ->
                     Tag.toId tag == tagId
@@ -65,4 +78,5 @@ view onClickTag ( tagStore, tagFilter ) =
             |> List.map Tuple.second
             |> List.map (\tag -> ( tag, isTagSelected tag ))
             |> List.map (viewTag onClickTag)
+            |> (::) (viewTag onClickDefaultTag ( defaultTag, isTagSelected defaultTag ))
         )
