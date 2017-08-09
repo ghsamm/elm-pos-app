@@ -5,6 +5,7 @@ module Data.OrderLine
         , OrderLineId(..)
         , decrementQuantity
         , fromId
+        , fromProduct
         , incrementQuantity
         , stringToOrderLineId
         , toDiscount
@@ -18,7 +19,7 @@ module Data.OrderLine
         )
 
 import Data.Discount exposing (Discount(..))
-import Data.Product exposing (ProductId(..))
+import Data.Product as Product exposing (Product, ProductId(..))
 
 
 type OrderLineId
@@ -52,6 +53,21 @@ defaultOrderLine =
 fromId : String -> OrderLine
 fromId id =
     defaultOrderLine |> withId (OrderLineId id)
+
+
+fromProduct : Product -> OrderLine
+fromProduct product =
+    let
+        productId =
+            Product.toId product
+
+        productIdString =
+            case productId of
+                ProductId stringId ->
+                    stringId
+    in
+    fromId productIdString
+        |> withProductId productId
 
 
 withId : OrderLineId -> OrderLine -> OrderLine

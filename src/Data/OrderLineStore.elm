@@ -3,7 +3,7 @@ module Data.OrderLineStore exposing (..)
 -- import Data.Product as Product exposing (Product)
 
 import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId(..))
-import Data.Product as Product exposing (Product)
+import Data.Product as Product exposing (Product, ProductId(..))
 import Dict exposing (Dict, insert)
 import Util exposing (listToDict)
 
@@ -45,6 +45,26 @@ updateSelectedOrderLine updater orderLineStore =
             orderLineStore
 
 
+addOrderLineFromProduct : Product -> OrderLineStore -> OrderLineStore
+addOrderLineFromProduct product orderLineStore =
+    let
+        newOrderLine =
+            OrderLine.fromProduct product
+
+        productId =
+            product |> Product.toId
+
+        orderLineIdString =
+            case productId of
+                ProductId productIdString ->
+                    productIdString
+    in
+    { orderLineStore
+        | orderLines = Dict.insert orderLineIdString newOrderLine orderLineStore.orderLines
+        , selectedOrderLine = Just (OrderLineId orderLineIdString)
+    }
+
+
 deleteOrderLine : OrderLineId -> OrderLineStore -> OrderLineStore
 deleteOrderLine (OrderLineId orderLineId) orderLineStore =
     { orderLineStore
@@ -75,7 +95,7 @@ addProduct product orderLineStore =
             selectOrderLine (OrderLine.toId orderLine) orderLineStore
 
         Nothing ->
-            orderLineStore
+            addOrderLineFromProduct product orderLineStore
 
 
 update : OrderLineStoreMsg -> OrderLineStore -> OrderLineStore
