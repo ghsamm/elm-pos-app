@@ -119,8 +119,10 @@ container content =
             , flex (int 1)
             , Css.property "display" "grid"
             , Css.property "grid-template-columns" "400px 1fr"
+            , Css.property "grid-gap" "10px"
             , color Colors.mainText
             , backgroundColor Colors.secondaryBg
+            , padding (px 10)
             ]
         ]
         content

@@ -110,6 +110,7 @@ view model { onNumpadClick, onDecrement, onIncrement, onDelete } =
             , Css.property "grid-column-gap" "10px"
             , backgroundColor Colors.mainBg
             , padding (px 10)
+            , paddingBottom (px 20)
             ]
         , Attributes.class "order-action-panel"
         ]

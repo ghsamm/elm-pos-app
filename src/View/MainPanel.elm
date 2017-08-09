@@ -50,7 +50,6 @@ view model =
                 "'tab-list tab-list' 'product-search tag-list' 'product-list product-list'"
             , Css.property "grid-gap" "10px"
             , overflow Css.hidden
-            , padding (px 5)
             ]
         , Attributes.class "main-panel"
         ]
