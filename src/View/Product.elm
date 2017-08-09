@@ -50,7 +50,7 @@ view handleClick ( product, maybeTag ) =
                 Nothing ->
                     []
     in
-    div
+    a
         [ styles
             [ position relative
             , backgroundColor Colors.mainBg
@@ -58,9 +58,11 @@ view handleClick ( product, maybeTag ) =
             , alignItems center
             , justifyContent center
             , mixin tagStyle
+            , padding (px 10)
             ]
         , Attributes.class "product"
         , onClick <| handleClick product
+        , href "#"
         ]
         [ viewProductPrice (product |> Product.toPrice)
         , viewProductName (product |> Product.toName)
