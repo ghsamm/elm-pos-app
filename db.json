@@ -1,0 +1,46 @@
+{
+    "products" : [
+        {
+            "id": "product-id-1",
+            "name": "Pizza 4 Saisons",
+            "price": 4.5,
+            "tag_id": "tag-id-1"
+        },
+        {
+            "id": "product-id-2",
+            "name": "Pizza Thon",
+            "price": 3.5,
+            "tag_id": "tag-id-1"
+        },
+        {
+            "id": "product-id-3",
+            "name": "Petit Déj Le Prince",
+            "price": 3,
+            "tag_id": "tag-id-2"
+        }
+    ],
+    "tags" : [
+        {
+            "id": "tag-id-1",
+            "name": "Pizza",
+            "color": "e84f03"
+        },
+        {
+            "id": "tag-id-2",
+            "name": "Petit-Déj",
+            "color": "e6d927"
+        }
+    ],
+    "orderLines" : [
+        {
+            "id": "order-line-1",
+            "product_id": "product-id-2",
+            "quantity": 2
+        },
+        {
+            "id": "order-line-2",
+            "product_id": "product-id-3",
+            "quantity": 1
+        }
+    ]
+}
