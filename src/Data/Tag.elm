@@ -3,6 +3,7 @@ module Data.Tag
         ( Tag
         , TagId(..)
         , decode
+        , decodeId
         , fromId
         , toColor
         , toId

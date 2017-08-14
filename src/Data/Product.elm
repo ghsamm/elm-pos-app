@@ -20,9 +20,9 @@ module Data.Product
         )
 
 import Data.Discount exposing (Discount(..))
-import Data.Tag exposing (TagId)
-import Json.Decode as Json exposing (Decoder, float, string)
-import Json.Decode.Pipeline as JsonPipeline exposing (hardcoded, required)
+import Data.Tag as Tag exposing (TagId)
+import Json.Decode as Json exposing (Decoder, float, maybe, string)
+import Json.Decode.Pipeline as JsonPipeline exposing (hardcoded, optional, required)
 
 
 type alias ProductProps =
@@ -60,7 +60,7 @@ decode =
             |> required "name" string
             |> required "price" float
             |> hardcoded (defaultProduct |> toDiscount)
-            |> hardcoded (defaultProduct |> toTagId)
+            |> optional "tag_id" (Json.map Just Tag.decodeId) Nothing
         )
 
 
