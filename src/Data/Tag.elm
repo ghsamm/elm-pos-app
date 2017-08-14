@@ -2,6 +2,7 @@ module Data.Tag
     exposing
         ( Tag
         , TagId(..)
+        , decode
         , fromId
         , toColor
         , toId

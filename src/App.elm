@@ -18,25 +18,11 @@ import View.MainPanel as MainPanel
 import View.MainSidebar as MainSidebar
 
 
-tag1 : Tag
-tag1 =
-    Tag.fromId (TagId "tag-id-1")
-        |> Tag.withName "Tag number one"
-        |> Tag.withColor (hex "11b34c")
-
-
-tag2 : Tag
-tag2 =
-    Tag.fromId (TagId "tag-id-2")
-        |> Tag.withName "Tag number two"
-        |> Tag.withColor (hex "60c3ff")
-
-
 model : Model
 model =
     { productStore = ProductStore.fromList []
     , orderLineStore = OrderLineStore.fromList []
-    , tagStore = TagStore.fromList [ tag1, tag2 ]
+    , tagStore = TagStore.fromList []
     }
 
 
@@ -73,13 +59,25 @@ init =
         productsDecoder =
             Json.list Product.decode
 
+        tagsDecoder : Decoder (List Tag)
+        tagsDecoder =
+            Json.list Tag.decode
+
         initProductsRequest =
             Http.get "http://localhost:3001/products" productsDecoder
+
+        initTagsRequest =
+            Http.get "http://localhost:3001/tags" tagsDecoder
     in
     ( model
-    , Http.send
-        (\products -> ProductStoreMsg (ProductStore.Init products))
-        initProductsRequest
+    , Cmd.batch
+        [ Http.send
+            (\products -> ProductStoreMsg (ProductStore.Init products))
+            initProductsRequest
+        , Http.send
+            (\tags -> TagStoreMsg (TagStore.Init tags))
+            initTagsRequest
+        ]
     )
 
 
