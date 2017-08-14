@@ -89,13 +89,6 @@ update msg model =
         NoOp ->
             ( model, Cmd.none )
 
-        -- SearchProduct searchString ->
-        --     ( { model
-        --         | productSearchString = searchString
-        --         , productStore = ProductStore.update (ProductStore.FilterByString searchString) model.productStore
-        --       }
-        --     , Cmd.none
-        --     )
         OrderLineStoreMsg msg ->
             ( { model | orderLineStore = OrderLineStore.update msg model.orderLineStore }, Cmd.none )
 
