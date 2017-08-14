@@ -95,6 +95,9 @@ update msg model =
         ProductStoreMsg msg ->
             ( { model | productStore = ProductStore.update msg model.productStore }, Cmd.none )
 
+        TagStoreMsg msg ->
+            ( { model | tagStore = TagStore.update msg model.tagStore }, Cmd.none )
+
 
 main : Program Never Model Msg
 main =
