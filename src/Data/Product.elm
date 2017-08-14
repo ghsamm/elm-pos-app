@@ -3,6 +3,7 @@ module Data.Product
         ( Product
         , ProductErr(..)
         , ProductId(..)
+        , decode
         , doesTitleContain
         , fromId
         , hasTag
@@ -20,16 +21,21 @@ module Data.Product
 
 import Data.Discount exposing (Discount(..))
 import Data.Tag exposing (TagId)
+import Json.Decode as Json exposing (Decoder, float, string)
+import Json.Decode.Pipeline as JsonPipeline exposing (hardcoded, required)
+
+
+type alias ProductProps =
+    { id : ProductId
+    , name : String
+    , price : Float
+    , discount : Discount
+    , tag : Maybe TagId
+    }
 
 
 type Product
-    = Product
-        { id : ProductId
-        , name : String
-        , price : Float
-        , discount : Discount
-        , tag : Maybe TagId
-        }
+    = Product ProductProps
 
 
 type ProductErr
@@ -38,6 +44,24 @@ type ProductErr
 
 type ProductId
     = ProductId String
+
+
+decodeId : Decoder ProductId
+decodeId =
+    string
+        |> Json.map ProductId
+
+
+decode : Decoder Product
+decode =
+    Json.map Product
+        (JsonPipeline.decode ProductProps
+            |> required "id" decodeId
+            |> required "name" string
+            |> required "price" float
+            |> hardcoded (defaultProduct |> toDiscount)
+            |> hardcoded (defaultProduct |> toTagId)
+        )
 
 
 fromId : String -> Product

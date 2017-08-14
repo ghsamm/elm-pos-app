@@ -11,6 +11,7 @@ module Data.ProductStore
 import Data.Product as Product exposing (Product, ProductId(..))
 import Data.Tag exposing (TagId)
 import Dict exposing (Dict)
+import Http
 import Set exposing (Set)
 import Util exposing (listToDict)
 
@@ -23,13 +24,20 @@ type alias ProductStore =
 
 
 type ProductStoreMsg
-    = SetTitleFilter String
+    = Init (Result Http.Error (List Product))
+    | SetTitleFilter String
     | SetTagFilter (Maybe TagId)
 
 
 update : ProductStoreMsg -> ProductStore -> ProductStore
 update msg productStore =
     case msg of
+        Init (Err _) ->
+            fromList []
+
+        Init (Ok products) ->
+            fromList products
+
         SetTitleFilter newTitleFilter ->
             { productStore
                 | titleFilter = newTitleFilter
