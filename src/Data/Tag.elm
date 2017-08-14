@@ -10,24 +10,50 @@ module Data.Tag
         , withName
         )
 
-import Css exposing (..)
+import Css exposing (Color, hex)
+import Json.Decode as Json exposing (Decoder, string)
+import Json.Decode.Pipeline as JsonPipeline exposing (required)
 
 
 type TagId
     = TagId String
 
 
+type alias TagProps =
+    { id : TagId
+    , name : String
+    , color : Css.Color
+    }
+
+
 type Tag
-    = Tag
-        { id : TagId
-        , name : String
-        , color : Css.Color
-        }
+    = Tag TagProps
 
 
 defaultTag : Tag
 defaultTag =
     Tag { id = TagId "default-tag-id", name = "default-tag-name", color = hex "000" }
+
+
+decodeId : Decoder TagId
+decodeId =
+    string
+        |> Json.map TagId
+
+
+decodeColor : Decoder Css.Color
+decodeColor =
+    string |> Json.map hex
+
+
+decode : Decoder Tag
+decode =
+    Json.map Tag
+        (JsonPipeline.decode TagProps
+            |> required "id" decodeId
+            |> required "name" string
+            |> required "color" decodeColor
+        )
 
 
 fromId : TagId -> Tag
