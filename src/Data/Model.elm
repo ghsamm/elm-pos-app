@@ -9,4 +9,5 @@ type alias Model =
     { productStore : ProductStore
     , orderLineStore : OrderLineStore
     , tagStore : TagStore
+    , errors : List String
     }

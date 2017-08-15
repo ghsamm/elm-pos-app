@@ -12,9 +12,11 @@ import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Http
 import Json.Decode as Json exposing (Decoder)
+import List exposing ((::))
 import Task exposing (Task)
 import Util exposing (styles)
 import View.Colors as Colors
+import View.ErrorList as ErrorList
 import View.MainPanel as MainPanel
 import View.MainSidebar as MainSidebar
 
@@ -24,6 +26,7 @@ model =
     { productStore = ProductStore.fromList []
     , orderLineStore = OrderLineStore.fromList []
     , tagStore = TagStore.fromList []
+    , errors = []
     }
 
 
@@ -50,6 +53,7 @@ view model =
     container <|
         [ MainSidebar.view model
         , MainPanel.view model
+        , ErrorList.view model.errors
         ]
 
 
@@ -92,7 +96,11 @@ update msg model =
             ( model, Cmd.none )
 
         Init (Err _) ->
-            Debug.crash "http error on init not yet implemented" ( model, Cmd.none )
+            ( { model
+                | errors = (::) "Erreur d'accès à la base de donnés" model.errors
+              }
+            , Cmd.none
+            )
 
         Init (Ok ( products, tags )) ->
             ( { model
