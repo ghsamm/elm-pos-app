@@ -111,8 +111,9 @@ view model { onNumpadClick, onDecrement, onIncrement, onDelete } =
             , backgroundColor Colors.mainBg
             , padding (px 10)
             , paddingBottom (px 20)
+            , Css.property "animation-delay" "200ms"
             ]
-        , Attributes.class "order-action-panel"
+        , Attributes.class "order-action-panel slide-fade-in-to-right"
         ]
         [ Breadcrumb.view (SelectList.fromLists [] "Edit" [ "Method", "Payment" ])
         , viewNavigation

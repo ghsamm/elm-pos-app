@@ -32,7 +32,7 @@ getTotal model =
 viewTotal : Model -> Html Msg
 viewTotal model =
     div
-        [ Attributes.class "order-lines-total"
+        [ Attributes.class "order-lines-total slide-fade-in-to-right"
         , styles
             [ displayFlex
             , alignItems center
@@ -42,6 +42,7 @@ viewTotal model =
             , padding2 (px 5) (px 10)
             , backgroundColor Colors.mainBg
             , fontWeight bold
+            , Css.property "animation-delay" "100ms"
             ]
         ]
         [ div [] [ Html.text "TOTAL " ]

@@ -22,8 +22,9 @@ viewProductSearch =
         [ styles
             [ Css.property "grid-area" "product-search"
             , displayFlex
+            , Css.property "animation-delay" "400ms"
             ]
-        , Attributes.class "product-search"
+        , Attributes.class "product-search slide-fade-in-to-left"
         ]
         [ input
             [ styles

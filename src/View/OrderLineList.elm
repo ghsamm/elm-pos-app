@@ -21,7 +21,7 @@ view orderLineStore model =
             , backgroundColor Colors.mainBg
             , padding (px 5)
             ]
-        , Attributes.class "order-line-list"
+        , Attributes.class "order-line-list slide-fade-in-to-right"
         ]
     <|
         List.map
