@@ -12,16 +12,13 @@ type alias TagStore =
 
 
 type TagStoreMsg
-    = Init (Result Http.Error (List Tag))
+    = Init (List Tag)
 
 
 update : TagStoreMsg -> TagStore -> TagStore
 update msg tagStore =
     case msg of
-        Init (Err _) ->
-            fromList []
-
-        Init (Ok tags) ->
+        Init tags ->
             fromList tags
 
 

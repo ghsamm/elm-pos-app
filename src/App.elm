@@ -12,6 +12,7 @@ import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Http
 import Json.Decode as Json exposing (Decoder)
+import Task exposing (Task)
 import Util exposing (styles)
 import View.Colors as Colors
 import View.MainPanel as MainPanel
@@ -63,21 +64,24 @@ init =
         tagsDecoder =
             Json.list Tag.decode
 
-        initProductsRequest =
-            Http.get "http://localhost:3001/products" productsDecoder
+        initProductsRequestTask : Task Http.Error (List Product)
+        initProductsRequestTask =
+            Http.toTask <|
+                Http.get "http://localhost:3001/products" productsDecoder
 
-        initTagsRequest =
-            Http.get "http://localhost:3001/tags" tagsDecoder
+        initTagsRequestTask : Task Http.Error (List Tag)
+        initTagsRequestTask =
+            Http.toTask <|
+                Http.get "http://localhost:3001/tags" tagsDecoder
+
+        task : Task Http.Error ( List Product, List Tag )
+        task =
+            Task.map2 (\products tags -> ( products, tags ))
+                initProductsRequestTask
+                initTagsRequestTask
     in
     ( model
-    , Cmd.batch
-        [ Http.send
-            (\products -> ProductStoreMsg (ProductStore.Init products))
-            initProductsRequest
-        , Http.send
-            (\tags -> TagStoreMsg (TagStore.Init tags))
-            initTagsRequest
-        ]
+    , Task.attempt Init task
     )
 
 
@@ -86,6 +90,23 @@ update msg model =
     case msg of
         NoOp ->
             ( model, Cmd.none )
+
+        Init (Err _) ->
+            Debug.crash "http error on init not yet implemented" ( model, Cmd.none )
+
+        Init (Ok ( products, tags )) ->
+            ( { model
+                | productStore =
+                    ProductStore.update
+                        (ProductStore.Init products)
+                        model.productStore
+                , tagStore =
+                    TagStore.update
+                        (TagStore.Init tags)
+                        model.tagStore
+              }
+            , Cmd.none
+            )
 
         OrderLineStoreMsg msg ->
             ( { model | orderLineStore = OrderLineStore.update msg model.orderLineStore }, Cmd.none )

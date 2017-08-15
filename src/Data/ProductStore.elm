@@ -24,7 +24,7 @@ type alias ProductStore =
 
 
 type ProductStoreMsg
-    = Init (Result Http.Error (List Product))
+    = Init (List Product)
     | SetTitleFilter String
     | SetTagFilter (Maybe TagId)
 
@@ -32,10 +32,7 @@ type ProductStoreMsg
 update : ProductStoreMsg -> ProductStore -> ProductStore
 update msg productStore =
     case msg of
-        Init (Err _) ->
-            fromList []
-
-        Init (Ok products) ->
+        Init products ->
             fromList products
 
         SetTitleFilter newTitleFilter ->
