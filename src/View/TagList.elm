@@ -57,16 +57,11 @@ type alias ViewListeners msg =
 
 
 view : ViewListeners msg -> ( TagStore, Maybe TagId ) -> Html msg
-view { onClickTag, onClickDefaultTag } ( tagStore, tagFilter ) =
+view { onClickTag, onClickDefaultTag } ( tagStore, selectedTagId ) =
     let
         isTagSelected : Tag -> Bool
         isTagSelected tag =
-            case tagFilter of
-                Nothing ->
-                    Tag.toId tag == Tag.toId defaultTag
-
-                Just tagId ->
-                    Tag.toId tag == tagId
+            selectedTagId == Just (Tag.toId tag)
     in
     div
         [ styles
