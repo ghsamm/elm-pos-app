@@ -28,6 +28,14 @@ selectOrderLine orderLineId orderLineStore =
     { orderLineStore | selectedOrderLine = Just orderLineId }
 
 
+orderLineIdList : OrderLineStore -> List OrderLineId
+orderLineIdList orderLineStore =
+    orderLineStore.orderLines
+        |> Dict.toList
+        |> List.map Tuple.second
+        |> List.map OrderLine.toId
+
+
 updateOderLine : OrderLineId -> (OrderLine -> OrderLine) -> OrderLineStore -> OrderLineStore
 updateOderLine (OrderLineId orderLineId) updater orderLineStore =
     { orderLineStore

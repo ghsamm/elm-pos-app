@@ -1,20 +1,22 @@
 module View.OrderLineList exposing (view)
 
 import Css exposing (..)
-import Data.Model exposing (Model)
 import Data.Msg exposing (Msg)
-import Data.OrderLine exposing (stringToOrderLineId)
-import Data.OrderLineStore exposing (OrderLineStore)
-import Dict exposing (keys)
+import Data.OrderLine exposing (OrderLine, OrderLineId, toId)
+import Data.Product exposing (Product)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Util exposing (styles)
 import View.Colors as Colors
-import View.OrderLineContainer as OrderLineContainer
+import View.OrderLine as OrderLine
 
 
-view : OrderLineStore -> Model -> Html Msg
-view orderLineStore model =
+view : (OrderLineId -> Msg) -> Maybe OrderLineId -> List ( OrderLine, Product ) -> Html Msg
+view onClickOrderLine selectedId list =
+    let
+        isSelected orderLine =
+            Just (toId orderLine) == selectedId
+    in
     div
         [ styles
             [ overflowY auto
@@ -23,7 +25,11 @@ view orderLineStore model =
             ]
         , Attributes.class "order-line-list slide-fade-in-to-right"
         ]
-    <|
-        List.map
-            (\orderLineId -> OrderLineContainer.view orderLineId model)
-            (List.map stringToOrderLineId <| keys orderLineStore.orderLines)
+        (list
+            |> List.map
+                (\( orderLine, product ) ->
+                    OrderLine.view onClickOrderLine
+                        (isSelected orderLine)
+                        ( orderLine, product )
+                )
+        )

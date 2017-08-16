@@ -3,8 +3,6 @@ module Selector.Product exposing (..)
 import Data.Model exposing (Model)
 import Data.Product as Product exposing (Product, ProductErr(..), ProductId)
 import Data.ProductStore exposing (ProductStore, getProduct)
-import Dict exposing (Dict)
-import String exposing (contains, toLower, trim)
 
 
 productSelector : ProductId -> Model -> Result ProductErr Product

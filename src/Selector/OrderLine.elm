@@ -11,7 +11,7 @@ import Data.ProductStore exposing (getProduct)
 selectedOrderLine : Model -> Maybe OrderLine
 selectedOrderLine model =
     model.orderLineStore.selectedOrderLine
-        |> Maybe.andThen (\selectedOrderLineId -> Result.toMaybe <| orderLineSelector selectedOrderLineId model)
+        |> Maybe.andThen (\selectedOrderLineId -> orderLineSelector selectedOrderLineId model)
         |> Maybe.map Tuple.first
 
 
@@ -22,10 +22,10 @@ orderLinePrice orderLineId model =
             orderLineSelector orderLineId model
     in
     case orderLine of
-        Err _ ->
+        Nothing ->
             0
 
-        Ok ( orderLine, product ) ->
+        Just ( orderLine, product ) ->
             toFloat
                 (orderLine |> OrderLine.toQuantity)
                 * applyDiscount
@@ -40,14 +40,14 @@ orderLineQuantity orderLineId model =
             orderLineSelector orderLineId model
     in
     case orderLine of
-        Err _ ->
+        Nothing ->
             0
 
-        Ok ( orderLine, _ ) ->
+        Just ( orderLine, _ ) ->
             OrderLine.toQuantity orderLine
 
 
-orderLineSelector : OrderLineId -> Model -> Result OrderLineErr ( OrderLine, Product )
+orderLineSelector : OrderLineId -> Model -> Maybe ( OrderLine, Product )
 orderLineSelector orderLineId model =
     let
         orderLine : Maybe OrderLine
@@ -62,15 +62,20 @@ orderLineSelector orderLineId model =
                         getProduct (orderLine |> OrderLine.toProductId) model.productStore
                     )
     in
-    case ( orderLine, product ) of
-        ( Nothing, Nothing ) ->
-            Err OrderLineNotFound
+    Maybe.map2 (,) orderLine product
 
-        ( Nothing, Just _ ) ->
-            Err OrderLineNotFound
 
-        ( Just _, Nothing ) ->
-            Err ProductNotFound
+orderLineListSelector : List OrderLineId -> Model -> List ( OrderLine, Product )
+orderLineListSelector orderLineIdList model =
+    let
+        foldFunction cur res =
+            case cur of
+                Just val ->
+                    val :: res
 
-        ( Just orderLine, Just product ) ->
-            Ok ( orderLine, product )
+                Nothing ->
+                    res
+    in
+    orderLineIdList
+        |> List.map (\id -> orderLineSelector id model)
+        |> List.foldl foldFunction []

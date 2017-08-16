@@ -33,3 +33,13 @@ listToDict keyGetter list =
     list
         |> List.map (\el -> ( keyGetter el, el ))
         |> Dict.fromList
+
+
+isJust : Maybe a -> Bool
+isJust maybe =
+    case maybe of
+        Just _ ->
+            True
+
+        Nothing ->
+            False

@@ -127,53 +127,48 @@ viewInfo quantity unitPrice discount =
         ]
 
 
-view : (OrderLineId -> msg) -> Result OrderLineErr ( OrderLine, Product ) -> Bool -> Html msg
-view handleClick viewData isSelected =
-    case viewData of
-        Err _ ->
-            div [] [ Html.text "this line is invalid" ]
+view : (OrderLineId -> msg) -> Bool -> ( OrderLine, Product ) -> Html msg
+view handleClick isSelected ( orderLine, product ) =
+    let
+        id =
+            orderLine |> OrderLine.toId
 
-        Ok ( orderLine, product ) ->
-            let
-                id =
-                    orderLine |> OrderLine.toId
+        name =
+            product |> Product.toName
 
-                name =
-                    product |> Product.toName
+        price =
+            product |> Product.toPrice
 
-                price =
-                    product |> Product.toPrice
+        quantity =
+            orderLine |> OrderLine.toQuantity
 
-                quantity =
-                    orderLine |> OrderLine.toQuantity
-
-                discount =
-                    orderLine |> OrderLine.toDiscount
-            in
-            div
-                [ styles
-                    [ if isSelected then
-                        mixin
-                            [ backgroundColor Colors.accentBg
-                            , color Colors.secondaryText
-                            ]
-                      else
-                        mixin []
-                    , Css.property "display" "grid"
-                    , Css.property "grid-template-rows" "1fr 1fr"
-                    , Css.property "grid-template-columns" "1fr auto"
-                    , Css.property "grid-gap" "5px"
-                    , minHeight (px 50)
-                    , padding (px 5)
-                    , alignItems center
-                    , borderBottom3 (px 1) solid Colors.secondaryBg
-                    , cursor pointer
+        discount =
+            orderLine |> OrderLine.toDiscount
+    in
+    div
+        [ styles
+            [ if isSelected then
+                mixin
+                    [ backgroundColor Colors.accentBg
+                    , color Colors.secondaryText
                     ]
-                , Attributes.class "order-line"
-                , onClick <| handleClick id
-                ]
-                [ viewName name
-                , viewUnitPrice price discount
-                , viewDiscount discount
-                , viewBottomLine quantity price discount
-                ]
+              else
+                mixin []
+            , Css.property "display" "grid"
+            , Css.property "grid-template-rows" "1fr 1fr"
+            , Css.property "grid-template-columns" "1fr auto"
+            , Css.property "grid-gap" "5px"
+            , minHeight (px 50)
+            , padding (px 5)
+            , alignItems center
+            , borderBottom3 (px 1) solid Colors.secondaryBg
+            , cursor pointer
+            ]
+        , Attributes.class "order-line"
+        , onClick <| handleClick id
+        ]
+        [ viewName name
+        , viewUnitPrice price discount
+        , viewDiscount discount
+        , viewBottomLine quantity price discount
+        ]

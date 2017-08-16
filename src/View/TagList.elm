@@ -25,7 +25,10 @@ viewTag handleClick ( tag, isSelected ) =
         selectedStyleMixin =
             case isSelected of
                 True ->
-                    mixin [ border3 (px 2) solid (tag |> Tag.toColor) ]
+                    mixin
+                        [ border3 (px 2) solid (tag |> Tag.toColor)
+                        , color (tag |> Tag.toColor)
+                        ]
 
                 False ->
                     mixin [ borderBottom3 (px 2) solid (tag |> Tag.toColor) ]

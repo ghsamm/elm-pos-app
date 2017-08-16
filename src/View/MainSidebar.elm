@@ -4,11 +4,11 @@ import Css exposing (..)
 import Data.Model exposing (Model)
 import Data.Msg exposing (..)
 import Data.OrderLine as OrderLine
-import Data.OrderLineStore exposing (OrderLineStoreMsg(..))
+import Data.OrderLineStore as OrderLineStore exposing (OrderLineStoreMsg(..))
 import Dict
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
-import Selector.OrderLine exposing (orderLinePrice)
+import Selector.OrderLine exposing (orderLineListSelector, orderLinePrice, orderLineSelector)
 import Util exposing (formatPrice, styles)
 import View.Colors as Colors
 import View.OrderActionPanel as OrderActionPanel
@@ -61,7 +61,12 @@ view model =
             , overflowY Css.hidden
             ]
         ]
-        [ OrderLineList.view model.orderLineStore model
+        [ OrderLineList.view
+            (\orderLineId -> OrderLineStoreMsg (SelectOrderLine orderLineId))
+            model.orderLineStore.selectedOrderLine
+            (OrderLineStore.orderLineIdList model.orderLineStore
+                |> (\idList -> orderLineListSelector idList model)
+            )
         , viewTotal model
         , OrderActionPanel.view model
             { onNumpadClick = \newQuantity -> OrderLineStoreMsg (SetCurrentOrderLineQuantity newQuantity)
