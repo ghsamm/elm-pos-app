@@ -11,7 +11,6 @@ module Data.ProductStore
 import Data.Product as Product exposing (Product, ProductId(..))
 import Data.Tag exposing (TagId)
 import Dict exposing (Dict)
-import Http
 import Set exposing (Set)
 import Util exposing (listToDict)
 
@@ -66,15 +65,15 @@ getProduct (ProductId productId) productStore =
     Dict.get productId productStore.products
 
 
-isProductVisible : Product -> ProductStore -> Bool
-isProductVisible product { titleFilter, tagFilter } =
-    (&&)
-        (Product.doesTitleContain titleFilter product)
-        (Product.hasTag tagFilter product)
+isProductVisible : Product -> List ProductId -> ProductStore -> Bool
+isProductVisible product excludedProductIds { titleFilter, tagFilter } =
+    Product.doesTitleContain titleFilter product
+        && Product.hasTag tagFilter product
+        && not (List.member (Product.toId product) excludedProductIds)
 
 
-visibleProducts : ProductStore -> List Product
-visibleProducts productStore =
-    Dict.filter (\_ product -> isProductVisible product productStore) productStore.products
+visibleProducts : List ProductId -> ProductStore -> List Product
+visibleProducts excludedProductIds productStore =
+    Dict.filter (\_ product -> isProductVisible product excludedProductIds productStore) productStore.products
         |> Dict.toList
         |> List.map Tuple.second

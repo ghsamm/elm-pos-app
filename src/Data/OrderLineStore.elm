@@ -36,6 +36,14 @@ orderLineIdList orderLineStore =
         |> List.map OrderLine.toId
 
 
+productIdList : OrderLineStore -> List ProductId
+productIdList orderLineStore =
+    orderLineStore.orderLines
+        |> Dict.toList
+        |> List.map Tuple.second
+        |> List.map OrderLine.toProductId
+
+
 updateOderLine : OrderLineId -> (OrderLine -> OrderLine) -> OrderLineStore -> OrderLineStore
 updateOderLine (OrderLineId orderLineId) updater orderLineStore =
     { orderLineStore
@@ -100,7 +108,7 @@ addProduct product orderLineStore =
     in
     case maybeOrderLine of
         Just orderLine ->
-            selectOrderLine (OrderLine.toId orderLine) orderLineStore
+            orderLineStore
 
         Nothing ->
             addOrderLineFromProduct product orderLineStore

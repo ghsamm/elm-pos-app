@@ -3,6 +3,7 @@ module View.MainPanel exposing (view)
 import Css exposing (..)
 import Data.Model exposing (Model)
 import Data.Msg exposing (..)
+import Data.OrderLineStore as OrderLineStore
 import Data.Product as Product
 import Data.ProductStore as ProductStore exposing (ProductStoreMsg(..))
 import Data.TagStore as TagStore
@@ -66,7 +67,9 @@ view model =
             }
             ( model.tagStore, model.productStore.tagFilter )
         , ProductList.view <|
-            (ProductStore.visibleProducts model.productStore
+            (ProductStore.visibleProducts
+                (OrderLineStore.productIdList model.orderLineStore)
+                model.productStore
                 |> List.map
                     (\product ->
                         let
