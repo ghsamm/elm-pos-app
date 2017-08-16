@@ -104,13 +104,12 @@ view model { onNumpadClick, onDecrement, onIncrement, onDelete } =
     div
         [ styles
             [ Css.property "display" "grid"
-            , Css.property "grid-template-rows" "50px 150px"
+            , Css.property "grid-template-rows" "40px 150px"
             , Css.property "grid-template-columns" "2fr 1fr 1fr"
             , Css.property "grid-template-areas" "'breadcrumb breadcrumb breadcrumb' 'action-left action-right navigation'"
-            , Css.property "grid-column-gap" "10px"
+            , Css.property "grid-gap" "10px"
             , backgroundColor Colors.mainBg
-            , padding (px 10)
-            , paddingBottom (px 20)
+            , padding3 zero (px 10) (px 20)
             , Css.property "animation-delay" "200ms"
             ]
         , Attributes.class "order-action-panel slide-fade-in-to-right"

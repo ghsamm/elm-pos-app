@@ -41,13 +41,13 @@ view names =
     in
     div
         [ styles
-            [ Css.property "display" "grid"
+            [ Css.property "display" "flex"
             , Css.property "grid-area" "breadcrumb"
-            , Css.property "grid-auto-flow" "column"
-            , Css.property "grid-gap" "10px"
-            , Css.property "justify-items" "center"
-            , Css.property "align-items" "baseline"
-            , margin2 auto (px 60)
+            , Css.property "justify-content" "space-evenly"
+            , alignItems center
+            , borderBottom3 (px 1) solid Colors.secondaryBg
+            , marginLeft (px -10)
+            , marginRight (px -10)
             ]
         , Attributes.class "breadcrumb"
         ]
