@@ -36,6 +36,8 @@
     "installed-by-yarn-globally": "^0.1.2",
     "minimist": "1.2.0",
     "postcss-loader": "^2.0.5",
+    "postcss-scss": "^1.0.2",
+    "precss": "^2.0.0",
     "react-dev-utils": "^3.0.0",
     "react-error-overlay": "^1.0.7",
     "style-loader": "^0.18.1",

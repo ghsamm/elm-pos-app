@@ -1,4 +1,5 @@
 const autoprefixer = require('autoprefixer')
+const precss = require('precss')
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin')
 const DefinePlugin = require('webpack/lib/DefinePlugin')
 const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin')
@@ -104,7 +105,8 @@ module.exports = {
                     'Firefox ESR',
                     'not ie < 9'
                   ]
-                })
+                }),
+                precss()
               ]
             }
           }
