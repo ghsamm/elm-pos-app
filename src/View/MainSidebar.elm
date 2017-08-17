@@ -8,7 +8,7 @@ import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Util exposing (formatPrice, styles)
 import View.OrderActionPanel as OrderActionPanel
-import View.OrderLineListContainer as OrderLineListContainer
+import View.Order as OrderLineListContainer
 
 
 view : Model -> Html Msg

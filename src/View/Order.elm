@@ -1,4 +1,4 @@
-module View.OrderLineListContainer exposing (..)
+module View.Order exposing (..)
 
 import Css exposing (..)
 import Data.Model exposing (Model)
@@ -57,7 +57,7 @@ view model =
             , Css.property "grid-template-rows" "1fr 40px"
             , overflowY Css.hidden
             ]
-        , Attributes.class "order-line-list-container"
+        , Attributes.class "order"
         ]
         [ OrderLineList.view
             (\orderLineId -> OrderLineStoreMsg (SelectOrderLine orderLineId))
