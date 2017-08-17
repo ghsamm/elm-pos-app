@@ -8,48 +8,49 @@ import Util exposing (styles)
 import View.Colors as Colors
 
 
+viewSection : Bool -> String -> Html msg
+viewSection isSelected name =
+    let
+        selectedMixin isSelected =
+            if isSelected then
+                mixin
+                    [ borderBottom3 (px 2) solid Colors.accentBg
+                    , fontWeight bold
+                    ]
+            else
+                mixin []
+    in
+    div
+        [ styles
+            [ selectedMixin isSelected
+            , displayFlex
+            , alignItems center
+            , justifyContent center
+            , flex (int 1)
+            ]
+        , Attributes.class "breadcrumb__section"
+        ]
+        [ Html.text name ]
+
+
 view : SelectList String -> Html msg
 view names =
     let
-        divider =
-            div [ Attributes.class "breadcrumb__divider" ]
-                [ Html.text ">" ]
-
         selected =
             SelectList.selected names
-
-        nameToSection name =
-            let
-                isSelected =
-                    name == selected
-            in
-            div
-                [ styles
-                    (if isSelected then
-                        [ borderBottom3 (px 2) solid Colors.accentBg
-                        , fontWeight bold
-                        ]
-                     else
-                        []
-                    )
-                , Attributes.class "breadcrumb__section"
-                ]
-                [ Html.text name ]
-
-        sections =
-            SelectList.map nameToSection names
     in
     div
         [ styles
             [ Css.property "display" "flex"
             , Css.property "grid-area" "breadcrumb"
             , Css.property "justify-content" "space-evenly"
-            , alignItems center
             , borderBottom3 (px 1) solid Colors.secondaryBg
             , marginLeft (px -10)
             , marginRight (px -10)
             ]
         , Attributes.class "breadcrumb"
         ]
-    <|
-        List.intersperse divider (sections |> SelectList.toList)
+        (names
+            |> SelectList.toList
+            |> List.map (\name -> viewSection (name == selected) name)
+        )
