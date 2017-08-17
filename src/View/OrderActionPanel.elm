@@ -74,6 +74,7 @@ viewNavigation =
             , Css.property "grid-template-areas" "'next' 'next' 'cancel'"
             , Css.property "grid-gap" "2px"
             ]
+        , Attributes.class "order-action-panel__navigation"
         ]
         [ renderButton "Next" "next"
         , renderButton "Cancel" "cancel"

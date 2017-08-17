@@ -54,30 +54,34 @@
     animation-delay: $delay;
 }
 
-.order-line-list {
-    @mixin fade-in right, 200ms;
+.order-header {
+    @mixin fade-in right, 200ms
 }
 
-.order-lines-total {
+.order-line-list {
     @mixin fade-in right, 300ms;
 }
 
-.order-action-panel {
+.order-total {
     @mixin fade-in right, 400ms;
 }
 
+.order-action-panel {
+    @mixin fade-in right, 500ms;
+}
+
 .tab-list {
-    @mixin fade-in bottom, 500ms;
+    @mixin fade-in bottom, 600ms;
 }
 
 .product-search {
-    @mixin fade-in left, 600ms;
+    @mixin fade-in left, 700ms;
 }
 
 .tag-list {
-    @mixin fade-in left, 600ms;
+    @mixin fade-in left, 800ms;
 }
 
 .product-list {
-    @mixin fade-in left, 700ms;
+    @mixin fade-in left, 900ms;
 }

@@ -14,6 +14,23 @@ import View.Colors as Colors
 import View.OrderLineList as OrderLineList
 
 
+viewHeader : Html Msg
+viewHeader =
+    div
+        [ Attributes.class "order-header"
+        , styles
+            [ displayFlex
+            , alignItems center
+            , justifyContent center
+            , backgroundColor Colors.mainBg
+            , fontSize (Css.em 1.2)
+            , fontWeight bold
+            , borderBottom3 (px 1) solid Colors.secondaryBg
+            ]
+        ]
+        [ Html.text "TICKET #1520" ]
+
+
 getTotal : Model -> Float
 getTotal model =
     let
@@ -31,7 +48,7 @@ getTotal model =
 viewTotal : Model -> Html Msg
 viewTotal model =
     div
-        [ Attributes.class "order-lines-total"
+        [ Attributes.class "order-total"
         , styles
             [ displayFlex
             , alignItems center
@@ -54,12 +71,13 @@ view model =
     div
         [ styles
             [ Css.property "display" "grid"
-            , Css.property "grid-template-rows" "1fr 40px"
+            , Css.property "grid-template-rows" "40px 1fr 40px"
             , overflowY Css.hidden
             ]
         , Attributes.class "order"
         ]
-        [ OrderLineList.view
+        [ viewHeader
+        , OrderLineList.view
             (\orderLineId -> OrderLineStoreMsg (SelectOrderLine orderLineId))
             model.orderLineStore.selectedOrderLine
             (OrderLineStore.orderLineIdList model.orderLineStore
