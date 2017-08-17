@@ -11,8 +11,9 @@ import Data.TagStore as TagStore
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Http
-import Json.Decode as Json exposing (Decoder)
 import List exposing ((::))
+import Request.Product
+import Request.Tag
 import Task exposing (Task)
 import Util exposing (styles)
 import View.Colors as Colors
@@ -60,23 +61,15 @@ view model =
 init : ( Model, Cmd Msg )
 init =
     let
-        productsDecoder : Decoder (List Product)
-        productsDecoder =
-            Json.list Product.decode
-
-        tagsDecoder : Decoder (List Tag)
-        tagsDecoder =
-            Json.list Tag.decode
-
         initProductsRequestTask : Task Http.Error (List Product)
         initProductsRequestTask =
             Http.toTask <|
-                Http.get "http://localhost:3001/products" productsDecoder
+                Request.Product.allProducts
 
         initTagsRequestTask : Task Http.Error (List Tag)
         initTagsRequestTask =
             Http.toTask <|
-                Http.get "http://localhost:3001/tags" tagsDecoder
+                Request.Tag.allTags
 
         task : Task Http.Error ( List Product, List Tag )
         task =
