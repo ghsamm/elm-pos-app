@@ -56,9 +56,8 @@ view tabs =
             , Css.height (pct 100)
             , Css.property "justify-items" "stretch"
             , Css.property "align-items" "stretch"
-            , Css.property "animation-delay" "300ms"
             ]
-        , Attributes.class "tab-list slide-fade-in-to-bottom"
+        , Attributes.class "tab-list"
         ]
     <|
         SelectList.toList <|

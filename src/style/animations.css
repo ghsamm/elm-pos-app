@@ -1,0 +1,83 @@
+
+@keyframes slide-fade-in-to-left {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-fade-in-to-right {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-fade-in-to-bottom {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-fade-in-to-top {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@define-mixin fade-in $direction, $delay{
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-name: slide-fade-in-to-$(direction);
+    animation-duration: 200ms;
+    animation-delay: $delay;
+}
+
+.order-line-list {
+    @mixin fade-in right, 200ms;
+}
+
+.order-lines-total {
+    @mixin fade-in right, 300ms;
+}
+
+.order-action-panel {
+    @mixin fade-in right, 400ms;
+}
+
+.tab-list {
+    @mixin fade-in bottom, 500ms;
+}
+
+.product-search {
+    @mixin fade-in left, 600ms;
+}
+
+.tag-list {
+    @mixin fade-in left, 600ms;
+}
+
+.product-list {
+    @mixin fade-in left, 700ms;
+}

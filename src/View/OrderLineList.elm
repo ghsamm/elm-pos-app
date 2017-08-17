@@ -23,7 +23,7 @@ view onClickOrderLine selectedId list =
             , backgroundColor Colors.mainBg
             , padding (px 5)
             ]
-        , Attributes.class "order-line-list slide-fade-in-to-right"
+        , Attributes.class "order-line-list"
         ]
         (list
             |> List.map

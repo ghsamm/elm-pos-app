@@ -68,9 +68,8 @@ view { onClickTag, onClickDefaultTag } ( tagStore, selectedTagId ) =
             [ Css.property "grid-area" "tag-list"
             , displayFlex
             , alignItems stretch
-            , Css.property "animation-delay" "500ms"
             ]
-        , Attributes.class "tag-list slide-fade-in-to-left"
+        , Attributes.class "tag-list"
         ]
         (tagStore.tags
             |> Dict.toList

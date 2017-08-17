@@ -1,4 +1,5 @@
 @import 'normalize.css';
+@import 'animations.css';
 * {box-sizing: border-box;}
 body {
   font-family: 'Source Sans Pro', 'Trebuchet MS', 'Lucida Grande', 'Bitstream Vera Sans', 'Helvetica Neue', sans-serif;
@@ -8,79 +9,4 @@ body {
 a {
     text-decoration: none;
     color: inherit;
-}
-
-@keyframes slide-fade-in-to-left {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slide-fade-in-to-right {
-    0% {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slide-fade-in-to-bottom {
-    0% {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slide-fade-in-to-top {
-    0% {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.slide-fade-in-to-left {
-    opacity: 0;
-    animation-fill-mode: forwards;
-    animation-name: "slide-fade-in-to-left";
-    animation-duration: 200ms;
-}
-
-.slide-fade-in-to-right {
-    opacity: 0;
-    animation-fill-mode: forwards;
-    animation-name: "slide-fade-in-to-right";
-    animation-duration: 200ms;
-}
-
-.slide-fade-in-to-bottom {
-    opacity: 0;
-    animation-fill-mode: forwards;
-    animation-name: "slide-fade-in-to-bottom";
-    animation-duration: 200ms;
-}
-
-.slide-fade-in-to-top {
-    opacity: 0;
-    animation-fill-mode: forwards;
-    animation-name: "slide-fade-in-to-top";
-    animation-duration: 200ms;
 }

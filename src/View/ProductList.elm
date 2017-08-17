@@ -20,9 +20,8 @@ view productList =
             , Css.property "grid-auto-rows" "120px"
             , Css.property "grid-gap" "5px"
             , Css.property "grid-area" "product-list"
-            , Css.property "animation-delay" "600ms"
             ]
-        , Attributes.class "product-list slide-fade-in-to-left"
+        , Attributes.class "product-list"
         ]
     <|
         List.map
