@@ -71,7 +71,7 @@ view model =
     div
         [ styles
             [ Css.property "display" "grid"
-            , Css.property "grid-template-rows" "40px 1fr 40px"
+            , Css.property "grid-template-rows" "50px 1fr 40px"
             , overflowY Css.hidden
             ]
         , Attributes.class "order"
