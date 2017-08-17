@@ -1,4 +1,4 @@
-require('./main.css')
+require('./style/main.css')
 const Elm = require('./App.elm')
 
 const root = document.getElementById('root')
