@@ -29,8 +29,8 @@ type alias ViewRightActionsListener msg =
     }
 
 
-buttonAttributs : String -> List (Attribute msg)
-buttonAttributs gridArea =
+buttonAttributes : String -> List (Attribute msg)
+buttonAttributes gridArea =
     [ styles
         [ Css.property "grid-area" gridArea
         , Css.property "display" "grid"
@@ -50,7 +50,7 @@ buttonAttributs gridArea =
 renderButton : String -> String -> Html msg
 renderButton text gridArea =
     a
-        (buttonAttributs gridArea)
+        (buttonAttributes gridArea)
         [ Html.text text ]
 
 
@@ -58,7 +58,7 @@ renderButtonWithListener : String -> String -> msg -> Html msg
 renderButtonWithListener text gridArea handleClick =
     a
         (List.append
-            (buttonAttributs gridArea)
+            (buttonAttributes gridArea)
             [ onClick handleClick ]
         )
         [ Html.text text ]
