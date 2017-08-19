@@ -29,6 +29,8 @@ type OrderLine
     = OrderLine
         { id : OrderLineId
         , productId : ProductId
+        , productName : String
+        , productPrice : Float
         , quantity : Int
         , discount : Discount
         }
@@ -38,7 +40,9 @@ defaultOrderLine : OrderLine
 defaultOrderLine =
     OrderLine
         { id = OrderLineId "no-id"
-        , productId = ProductId "no-i"
+        , productId = ProductId "no-id"
+        , productName = ""
+        , productPrice = 0
         , quantity = 1
         , discount = NoDiscount
         }
