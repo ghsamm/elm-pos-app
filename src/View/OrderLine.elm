@@ -2,7 +2,7 @@ module View.OrderLine exposing (view)
 
 import Css exposing (..)
 import Data.Discount exposing (Discount(..), applyDiscount, discountToString)
-import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineErr, OrderLineId)
+import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId)
 import Data.Product as Product exposing (Product)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (class, classList)

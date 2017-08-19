@@ -2,7 +2,7 @@ module Selector.OrderLine exposing (..)
 
 import Data.Discount exposing (applyDiscount)
 import Data.Model exposing (Model)
-import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineErr(..), OrderLineId)
+import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId)
 import Data.OrderLineStore exposing (getOrderLine)
 import Data.Product as Product exposing (Product)
 import Data.ProductStore exposing (getProduct)

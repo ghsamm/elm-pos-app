@@ -1,7 +1,6 @@
 module Data.OrderLine
     exposing
         ( OrderLine
-        , OrderLineErr(..)
         , OrderLineId(..)
         , decrementQuantity
         , fromId
@@ -33,11 +32,6 @@ type OrderLine
         , quantity : Int
         , discount : Discount
         }
-
-
-type OrderLineErr
-    = OrderLineNotFound
-    | ProductNotFound
 
 
 defaultOrderLine : OrderLine
