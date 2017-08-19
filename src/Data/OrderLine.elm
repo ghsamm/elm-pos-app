@@ -10,6 +10,8 @@ module Data.OrderLine
         , toDiscount
         , toId
         , toProductId
+        , toProductName
+        , toProductPrice
         , toQuantity
         , withDiscount
         , withId
@@ -101,9 +103,19 @@ withProductName newProductName (OrderLine orderLine) =
     OrderLine { orderLine | productName = newProductName }
 
 
+toProductName : OrderLine -> String
+toProductName (OrderLine orderLine) =
+    orderLine.productName
+
+
 withProductPrice : Float -> OrderLine -> OrderLine
 withProductPrice newProductPrice (OrderLine orderLine) =
     OrderLine { orderLine | productPrice = newProductPrice }
+
+
+toProductPrice : OrderLine -> Float
+toProductPrice (OrderLine orderLine) =
+    orderLine.productPrice
 
 
 withQuantity : Int -> OrderLine -> OrderLine

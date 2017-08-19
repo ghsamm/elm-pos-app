@@ -80,8 +80,9 @@ view model =
         , OrderLineList.view
             (\orderLineId -> OrderLineStoreMsg (SelectOrderLine orderLineId))
             model.orderLineStore.selectedOrderLine
-            (OrderLineStore.orderLineIdList model.orderLineStore
-                |> (\idList -> orderLineListSelector idList model)
+            (model.orderLineStore.orderLines
+                |> Dict.toList
+                |> List.map Tuple.second
             )
         , viewTotal model
         ]

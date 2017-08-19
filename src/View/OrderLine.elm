@@ -3,7 +3,6 @@ module View.OrderLine exposing (view)
 import Css exposing (..)
 import Data.Discount exposing (Discount(..), applyDiscount, discountToString)
 import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId)
-import Data.Product as Product exposing (Product)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (class, classList)
 import Html.Events exposing (..)
@@ -127,17 +126,17 @@ viewInfo quantity unitPrice discount =
         ]
 
 
-view : (OrderLineId -> msg) -> Bool -> ( OrderLine, Product ) -> Html msg
-view handleClick isSelected ( orderLine, product ) =
+view : (OrderLineId -> msg) -> Bool -> OrderLine -> Html msg
+view handleClick isSelected orderLine =
     let
         id =
             orderLine |> OrderLine.toId
 
         name =
-            product |> Product.toName
+            orderLine |> OrderLine.toProductName
 
         price =
-            product |> Product.toPrice
+            orderLine |> OrderLine.toProductPrice
 
         quantity =
             orderLine |> OrderLine.toQuantity
