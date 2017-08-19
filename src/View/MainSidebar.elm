@@ -7,8 +7,8 @@ import Data.OrderLineStore as OrderLineStore exposing (OrderLineStoreMsg(..))
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Util exposing (formatPrice, styles)
-import View.OrderActionPanel as OrderActionPanel
 import View.Order as OrderLineListContainer
+import View.OrderActionPanel as OrderActionPanel
 
 
 view : Model -> Html Msg
@@ -17,7 +17,7 @@ view model =
         [ Attributes.class "main-sidebar"
         , styles
             [ Css.property "display" "grid"
-            , Css.property "grid-template-rows" "1fr auto"
+            , Css.property "grid-template-rows" "1fr 220px"
             , Css.property "grid-row-gap" "10px"
             , overflowY Css.hidden
             ]
