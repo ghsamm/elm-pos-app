@@ -8,6 +8,7 @@ import Data.OrderLineStore as OrderLineStore exposing (OrderLineStoreMsg(..))
 import Dict
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import Intl exposing (intl)
 import Util exposing (formatPrice, styles)
 import View.Colors as Colors
 import View.OrderLineList as OrderLineList
@@ -27,7 +28,7 @@ viewHeader =
             , borderBottom3 (px 1) solid Colors.secondaryBg
             ]
         ]
-        [ Html.text "TICKET #1520" ]
+        [ Html.text (intl.ticket ++ " #1520") ]
 
 
 getTotal : Model -> Float
@@ -55,7 +56,7 @@ viewTotal model =
             , borderTop3 (px 1) solid Colors.secondaryBg
             ]
         ]
-        [ div [] [ Html.text "TOTAL " ]
+        [ div [] [ Html.text intl.total ]
         , div [] [ Html.text <| formatPrice <| getTotal <| model ]
         ]
 

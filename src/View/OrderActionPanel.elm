@@ -6,6 +6,7 @@ import Data.OrderLine as OrderLine
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events exposing (..)
+import Intl exposing (intl)
 import Selector.OrderLine as OrderLineSelector exposing (orderLineSelector)
 import Util exposing (styles)
 import View.Colors as Colors
@@ -74,8 +75,8 @@ viewNavigation =
             ]
         , Attributes.class "order-action-panel__navigation"
         ]
-        [ renderButton "Save" "next"
-        , renderButton "Cancel" "cancel"
+        [ renderButton intl.save "next"
+        , renderButton intl.cancel "cancel"
         ]
 
 
@@ -94,7 +95,7 @@ viewRightActions { onDecrement, onIncrement, onDelete } =
         ]
         [ renderButtonWithListener "-" "minus" onDecrement
         , renderButtonWithListener "+" "plus" onIncrement
-        , renderButtonWithListener "Delete" "delete" onDelete
+        , renderButtonWithListener intl.delete "delete" onDelete
         ]
 
 

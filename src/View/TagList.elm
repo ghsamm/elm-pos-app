@@ -7,6 +7,7 @@ import Dict
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Html.Events exposing (..)
+import Intl exposing (intl)
 import Tuple
 import Util exposing ((=>), styles)
 import View.Colors as Colors
@@ -15,7 +16,7 @@ import View.Colors as Colors
 defaultTag : Tag
 defaultTag =
     Tag.fromId (TagId "default-tag")
-        |> Tag.withName "All"
+        |> Tag.withName intl.allCategories
         |> Tag.withColor (hex "ababab")
 
 
