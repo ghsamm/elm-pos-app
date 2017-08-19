@@ -70,18 +70,10 @@
     @mixin fade-in right, 500ms;
 }
 
-.tab-list {
-    @mixin fade-in bottom, 600ms;
-}
-
-.product-search {
-    @mixin fade-in left, 700ms;
-}
-
 .tag-list {
-    @mixin fade-in left, 800ms;
+    @mixin fade-in right, 600ms;
 }
 
 .product-list {
-    @mixin fade-in left, 900ms;
+    @mixin fade-in right, 700ms;
 }
