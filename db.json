@@ -23,12 +23,17 @@
         {
             "id": "tag-id-1",
             "name": "Pizza",
-            "color": "e84f03"
+            "color": "ff9c43"
         },
         {
             "id": "tag-id-2",
             "name": "Petit-Déj",
             "color": "e6d927"
+        },
+        {
+            "id": "tag-id-3",
+            "name": "Boisson",
+            "color": "14bfec"
         }
     ],
     "orderLines" : [
