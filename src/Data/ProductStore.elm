@@ -11,7 +11,6 @@ module Data.ProductStore
 import Data.Product as Product exposing (Product, ProductId(..))
 import Data.Tag exposing (TagId)
 import Dict exposing (Dict)
-import Set exposing (Set)
 import Util exposing (listToDict)
 
 
@@ -43,13 +42,6 @@ update msg productStore =
             { productStore
                 | tagFilter = newTagFilter
             }
-
-
-filterProductsToSet : (Product -> Bool) -> ProductStore -> Set String
-filterProductsToSet predicate productStore =
-    Dict.filter (\_ product -> predicate product) productStore.products
-        |> Dict.keys
-        |> Set.fromList
 
 
 fromList : List Product -> ProductStore
