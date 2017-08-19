@@ -8,7 +8,6 @@ import Data.OrderLineStore as OrderLineStore exposing (OrderLineStoreMsg(..))
 import Dict
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
-import Selector.OrderLine exposing (orderLineListSelector, orderLinePrice)
 import Util exposing (formatPrice, styles)
 import View.Colors as Colors
 import View.OrderLineList as OrderLineList
@@ -33,16 +32,11 @@ viewHeader =
 
 getTotal : Model -> Float
 getTotal model =
-    let
-        lineTotals =
-            Dict.values <|
-                Dict.map
-                    (\str orderLine ->
-                        orderLinePrice (orderLine |> OrderLine.toId) model
-                    )
-                    model.orderLineStore.orderLines
-    in
-    List.foldl (+) 0 lineTotals
+    model.orderLineStore.orderLines
+        |> Dict.toList
+        |> List.map Tuple.second
+        |> List.map OrderLine.toPrice
+        |> List.foldl (+) 0
 
 
 viewTotal : Model -> Html Msg

@@ -9,6 +9,7 @@ module Data.OrderLine
         , stringToOrderLineId
         , toDiscount
         , toId
+        , toPrice
         , toProductId
         , toProductName
         , toProductPrice
@@ -121,6 +122,11 @@ toProductPrice (OrderLine orderLine) =
 withQuantity : Int -> OrderLine -> OrderLine
 withQuantity newQuantity (OrderLine orderLine) =
     OrderLine { orderLine | quantity = newQuantity }
+
+
+toPrice : OrderLine -> Float
+toPrice (OrderLine orderLine) =
+    orderLine.productPrice * toFloat orderLine.quantity
 
 
 incrementQuantity : OrderLine -> OrderLine
