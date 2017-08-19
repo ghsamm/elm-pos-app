@@ -1,7 +1,6 @@
 module Data.Product
     exposing
         ( Product
-        , ProductErr(..)
         , ProductId(..)
         , decode
         , doesTitleContain
@@ -36,10 +35,6 @@ type alias ProductProps =
 
 type Product
     = Product ProductProps
-
-
-type ProductErr
-    = ProductNotFound
 
 
 type ProductId

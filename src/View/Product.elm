@@ -1,7 +1,7 @@
 module View.Product exposing (..)
 
 import Css exposing (..)
-import Data.Product as Product exposing (Product, ProductErr, ProductId)
+import Data.Product as Product exposing (Product, ProductId)
 import Data.Tag as Tag exposing (Tag)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
