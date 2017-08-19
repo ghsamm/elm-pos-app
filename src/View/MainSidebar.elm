@@ -6,7 +6,7 @@ import Data.Msg exposing (..)
 import Data.OrderLineStore as OrderLineStore exposing (OrderLineStoreMsg(..))
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
-import Util exposing (formatPrice, styles)
+import Util exposing (styles)
 import View.Order as OrderLineListContainer
 import View.OrderActionPanel as OrderActionPanel
 

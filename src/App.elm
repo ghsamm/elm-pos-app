@@ -6,6 +6,7 @@ import Data.Msg exposing (Msg(..))
 import Data.OrderLineStore as OrderLineStore
 import Data.Product as Product exposing (Product, ProductId(..))
 import Data.ProductStore as ProductStore
+import Data.SideBarRoute as SideBarRoute
 import Data.Tag as Tag exposing (Tag, TagId(..))
 import Data.TagStore as TagStore
 import Html exposing (..)
@@ -28,6 +29,7 @@ model =
     , orderLineStore = OrderLineStore.fromList []
     , tagStore = TagStore.fromList []
     , errors = []
+    , sideBarView = SideBarRoute.EditingOrder
     }
 
 
