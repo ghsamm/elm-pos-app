@@ -23,7 +23,7 @@ english =
     , save = "Save"
     , delete = "Delete"
     , cancel = "Cancel"
-    , allCategories = "All Categories"
+    , allCategories = "All Products"
     }
 
 
@@ -34,5 +34,5 @@ french =
     , save = "Enreg."
     , delete = "Suppr."
     , cancel = "Annul."
-    , allCategories = "Toutes Catégories"
+    , allCategories = "Tous les produits"
     }
