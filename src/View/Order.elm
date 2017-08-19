@@ -28,7 +28,25 @@ viewHeader =
             , borderBottom3 (px 1) solid Colors.secondaryBg
             ]
         ]
-        [ Html.text (intl.ticket ++ " #1520") ]
+        [ a
+            [ Attributes.class "order-header__more-button"
+            , href "#"
+            , styles
+                [ position absolute
+                , top zero
+                , bottom zero
+                , left zero
+                , Css.width (px 50)
+                , displayFlex
+                , alignItems center
+                , justifyContent center
+                , borderRight3 (px 1) solid Colors.secondaryBg
+                ]
+            ]
+            [ Html.text "..."
+            ]
+        , div [] [ Html.text (intl.ticket ++ " #1520") ]
+        ]
 
 
 getTotal : Model -> Float
