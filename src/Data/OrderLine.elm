@@ -59,6 +59,12 @@ fromProduct product =
         productId =
             Product.toId product
 
+        productName =
+            Product.toName product
+
+        productPrice =
+            Product.toPrice product
+
         productIdString =
             case productId of
                 ProductId stringId ->
@@ -66,6 +72,8 @@ fromProduct product =
     in
     fromId productIdString
         |> withProductId productId
+        |> withProductName productName
+        |> withProductPrice productPrice
 
 
 withId : OrderLineId -> OrderLine -> OrderLine
@@ -86,6 +94,16 @@ withProductId newProductId (OrderLine orderLine) =
 toProductId : OrderLine -> ProductId
 toProductId (OrderLine orderLine) =
     orderLine.productId
+
+
+withProductName : String -> OrderLine -> OrderLine
+withProductName newProductName (OrderLine orderLine) =
+    OrderLine { orderLine | productName = newProductName }
+
+
+withProductPrice : Float -> OrderLine -> OrderLine
+withProductPrice newProductPrice (OrderLine orderLine) =
+    OrderLine { orderLine | productPrice = newProductPrice }
 
 
 withQuantity : Int -> OrderLine -> OrderLine
