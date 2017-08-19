@@ -24,7 +24,7 @@ view model =
         ]
         [ OrderLineListContainer.view model
         , OrderActionPanel.view model
-            { onNumpadClick = \newQuantity -> OrderLineStoreMsg (SetCurrentOrderLineQuantity newQuantity)
+            { onNumpadClick = OrderLineStoreMsg << SetCurrentOrderLineQuantity
             , onDecrement = OrderLineStoreMsg DecrementCurrentOrderLineQunatity
             , onIncrement = OrderLineStoreMsg IncrementCurrentOrderLineQunatity
             , onDelete = OrderLineStoreMsg DeleteCurrentOrderLine

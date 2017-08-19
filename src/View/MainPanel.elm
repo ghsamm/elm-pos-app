@@ -3,7 +3,7 @@ module View.MainPanel exposing (view)
 import Css exposing (..)
 import Data.Model exposing (Model)
 import Data.Msg exposing (..)
-import Data.OrderLineStore as OrderLineStore
+import Data.OrderLineStore as OrderLineStore exposing (OrderLineStoreMsg(..))
 import Data.Product as Product
 import Data.ProductStore as ProductStore exposing (ProductStoreMsg(..))
 import Data.TagStore as TagStore
@@ -30,11 +30,12 @@ view model =
         , Attributes.class "main-panel"
         ]
         [ TagList.view
-            { onClickTag = \maybeTagId -> ProductStoreMsg (SetTagFilter maybeTagId)
-            , onClickDefaultTag = \_ -> ProductStoreMsg (SetTagFilter Nothing)
+            { onClickTag = ProductStoreMsg << SetTagFilter
+            , onClickDefaultTag = always <| ProductStoreMsg (SetTagFilter Nothing)
             }
             ( model.tagStore, model.productStore.tagFilter )
-        , ProductList.view <|
+        , ProductList.view
+            (OrderLineStoreMsg << AddProduct)
             (ProductStore.visibleProducts
                 (OrderLineStore.productIdList model.orderLineStore)
                 model.productStore

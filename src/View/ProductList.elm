@@ -2,7 +2,6 @@ module View.ProductList exposing (view)
 
 import Css exposing (..)
 import Data.Msg exposing (Msg(..))
-import Data.OrderLineStore exposing (OrderLineStoreMsg(..))
 import Data.Product exposing (Product, stringToProductId)
 import Data.Tag exposing (Tag)
 import Html exposing (..)
@@ -11,8 +10,8 @@ import Util exposing (styles)
 import View.Product as ProductView exposing (view)
 
 
-view : List ( Product, Maybe Tag ) -> Html Msg
-view productList =
+view : (Product -> Msg) -> List ( Product, Maybe Tag ) -> Html Msg
+view onClickProduct productList =
     div
         [ styles
             [ Css.property "display" "grid"
@@ -26,6 +25,6 @@ view productList =
     <|
         List.map
             (ProductView.view
-                (\product -> OrderLineStoreMsg (AddProduct product))
+                onClickProduct
             )
             productList
