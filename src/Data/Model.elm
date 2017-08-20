@@ -11,5 +11,5 @@ type alias Model =
     , orderLineStore : OrderLineStore
     , tagStore : TagStore
     , errors : List String
-    , sideBarView : SideBarRoute
+    , sideBarRoute : SideBarRoute
     }

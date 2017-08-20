@@ -4,15 +4,16 @@ import Css exposing (..)
 import Data.Model exposing (Model)
 import Data.Msg exposing (..)
 import Data.OrderLineStore as OrderLineStore exposing (OrderLineStoreMsg(..))
+import Data.SideBarRoute exposing (SideBarRoute(..))
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import Util exposing (styles)
-import View.Order as OrderLineListContainer
+import View.Order as Order
 import View.OrderActionPanel as OrderActionPanel
 
 
-view : Model -> Html Msg
-view model =
+viewWhenEditingOrder : Model -> Html Msg
+viewWhenEditingOrder model =
     div
         [ Attributes.class "main-sidebar"
         , styles
@@ -22,7 +23,7 @@ view model =
             , overflowY Css.hidden
             ]
         ]
-        [ OrderLineListContainer.view model
+        [ Order.view model
         , OrderActionPanel.view model
             { onNumpadClick = OrderLineStoreMsg << SetCurrentOrderLineQuantity
             , onDecrement = OrderLineStoreMsg DecrementCurrentOrderLineQunatity
@@ -30,3 +31,13 @@ view model =
             , onDelete = OrderLineStoreMsg DeleteCurrentOrderLine
             }
         ]
+
+
+view : Model -> Html Msg
+view model =
+    case model.sideBarRoute of
+        EditingOrder ->
+            viewWhenEditingOrder model
+
+        _ ->
+            div [] []
