@@ -54,7 +54,7 @@
     animation-delay: $delay;
 }
 
-.order-header {
+.sidebar-header {
     @mixin fade-in right, 200ms
 }
 
