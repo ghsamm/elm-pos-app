@@ -8,14 +8,15 @@ import Data.OrderLineStore as OrderLineStore exposing (OrderLineStoreMsg(..))
 import Dict
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import Html.Events exposing (..)
 import Intl exposing (intl)
 import Util exposing (formatPrice, styles)
 import View.Colors as Colors
 import View.OrderLineList as OrderLineList
 
 
-viewHeader : Html Msg
-viewHeader =
+viewHeader : Msg -> Html Msg
+viewHeader onMoreButtonClick =
     div
         [ Attributes.class "order-header"
         , styles
@@ -42,6 +43,7 @@ viewHeader =
                 , justifyContent center
                 , borderRight3 (px 1) solid Colors.secondaryBg
                 ]
+            , onClick onMoreButtonClick
             ]
             [ Html.text "..."
             ]
@@ -79,8 +81,8 @@ viewTotal model =
         ]
 
 
-view : Model -> Html Msg
-view model =
+view : Msg -> Model -> Html Msg
+view onMoreButtonClick model =
     div
         [ styles
             [ Css.property "display" "grid"
@@ -89,7 +91,7 @@ view model =
             ]
         , Attributes.class "order"
         ]
-        [ viewHeader
+        [ viewHeader onMoreButtonClick
         , OrderLineList.view
             (\orderLineId -> OrderLineStoreMsg (SelectOrderLine orderLineId))
             model.orderLineStore.selectedOrderLine
