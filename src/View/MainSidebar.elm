@@ -4,55 +4,91 @@ import Css exposing (..)
 import Data.Model exposing (Model)
 import Data.Msg exposing (..)
 import Data.OrderLineStore as OrderLineStore exposing (OrderLineStoreMsg(..))
-import Data.SideBarRoute exposing (SideBarRoute(..))
+import Data.SideBarRoute as SideBarRoute
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
+import Html.Events exposing (..)
+import Intl exposing (intl)
 import Util exposing (styles)
+import View.Colors as Colors
 import View.Order as Order
 import View.OrderActionPanel as OrderActionPanel
 import View.OrderHistory as OrderHistory
 
 
-viewWhenEditingOrder : Model -> Html Msg
-viewWhenEditingOrder model =
+viewHeader : Html Msg
+viewHeader =
     div
-        [ Attributes.class "main-sidebar"
+        [ Attributes.class "sidebar-header"
         , styles
-            [ Css.property "display" "grid"
-            , Css.property "grid-template-rows" "1fr 220px"
-            , Css.property "grid-row-gap" "10px"
-            , overflowY Css.hidden
+            [ position relative
+            , displayFlex
+            , alignItems center
+            , justifyContent center
+            , backgroundColor Colors.mainBg
+            , fontSize (Css.em 1.2)
+            , fontWeight bold
+            , borderBottom3 (px 1) solid Colors.secondaryBg
             ]
         ]
-        [ Order.view (SetMainSideBarRoute ViewingHistory) model
-        , OrderActionPanel.view model
-            { onNumpadClick = OrderLineStoreMsg << SetCurrentOrderLineQuantity
-            , onDecrement = OrderLineStoreMsg DecrementCurrentOrderLineQunatity
-            , onIncrement = OrderLineStoreMsg IncrementCurrentOrderLineQunatity
-            , onDelete = OrderLineStoreMsg DeleteCurrentOrderLine
-            }
+        [ a
+            [ Attributes.class "sidebar-header__more-button"
+            , href "#"
+            , styles
+                [ position absolute
+                , top zero
+                , bottom zero
+                , left zero
+                , Css.width (px 50)
+                , displayFlex
+                , alignItems center
+                , justifyContent center
+                , borderRight3 (px 1) solid Colors.secondaryBg
+                ]
+            , onClick <| SetMainSideBarRoute SideBarRoute.ViewingHistory
+            ]
+            [ Html.text "..."
+            ]
+        , div [] [ Html.text (intl.ticket ++ " #1520") ]
         ]
 
 
-viewWhenViewingHistory : Model -> Html Msg
-viewWhenViewingHistory model =
-    div
-        [ Attributes.class "main-sidebar"
-        , styles
-            [ Css.property "display" "grid"
-            , Css.property "grid-template-rows" "1fr"
-            , Css.property "grid-row-gap" "10px"
-            , overflowY Css.hidden
-            ]
-        ]
-        [ OrderHistory.view model ]
+viewBody : Model -> Html Msg
+viewBody model =
+    case model.sideBarRoute of
+        SideBarRoute.EditingOrder ->
+            div
+                [ Attributes.class "main-sidebar__body"
+                , styles
+                    [ Css.property "display" "grid"
+                    , Css.property "grid-template-rows" "1fr 220px"
+                    , Css.property "grid-row-gap" "10px"
+                    ]
+                ]
+                [ Order.view model
+                , OrderActionPanel.view model
+                    { onNumpadClick = OrderLineStoreMsg << SetCurrentOrderLineQuantity
+                    , onDecrement = OrderLineStoreMsg DecrementCurrentOrderLineQunatity
+                    , onIncrement = OrderLineStoreMsg IncrementCurrentOrderLineQunatity
+                    , onDelete = OrderLineStoreMsg DeleteCurrentOrderLine
+                    }
+                ]
+
+        SideBarRoute.ViewingHistory ->
+            OrderHistory.view model
 
 
 view : Model -> Html Msg
 view model =
-    case model.sideBarRoute of
-        EditingOrder ->
-            viewWhenEditingOrder model
-
-        ViewingHistory ->
-            viewWhenViewingHistory model
+    div
+        [ Attributes.class "main-sidebar"
+        , styles
+            [ Css.property "display" "grid"
+            , Css.property "grid-template-rows" "50px 1fr"
+            , Css.property "grid-row-gap" "10px"
+            , overflowY Css.hidden
+            ]
+        ]
+        [ viewHeader
+        , viewBody model
+        ]
