@@ -42,11 +42,8 @@ view names =
     div
         [ styles
             [ Css.property "display" "flex"
-            , Css.property "grid-area" "breadcrumb"
             , Css.property "justify-content" "space-evenly"
             , borderBottom3 (px 1) solid Colors.secondaryBg
-            , marginLeft (px -10)
-            , marginRight (px -10)
             ]
         , Attributes.class "breadcrumb"
         ]

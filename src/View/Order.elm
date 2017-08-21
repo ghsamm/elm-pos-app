@@ -18,6 +18,7 @@ view =
             , Css.property "grid-template-areas" "'title time' 'content content'"
             , Css.property "align-items" "baseline"
             , padding (px 5)
+            , marginBottom (px 5)
             , borderBottom3 (px 1) solid Colors.secondaryBg
             ]
         ]
