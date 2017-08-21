@@ -54,6 +54,7 @@
     animation-delay: $delay;
 }
 
+/*
 .sidebar-header {
     @mixin fade-in right, 200ms
 }
@@ -77,3 +78,4 @@
 .product-list {
     @mixin fade-in right, 700ms;
 }
+*/
