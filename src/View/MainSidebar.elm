@@ -45,7 +45,7 @@ viewHeader =
                 , justifyContent center
                 , borderRight3 (px 1) solid Colors.secondaryBg
                 ]
-            , onClick <| SetMainSideBarRoute SideBarRoute.ViewingHistory
+            , onClick <| ToggleMainSideBarRoute
             ]
             [ Html.text "..."
             ]

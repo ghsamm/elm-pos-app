@@ -3,7 +3,6 @@ module Data.Msg exposing (..)
 import Data.OrderLineStore exposing (OrderLineStoreMsg)
 import Data.Product exposing (Product)
 import Data.ProductStore exposing (ProductStoreMsg)
-import Data.SideBarRoute exposing (SideBarRoute)
 import Data.Tag exposing (Tag)
 import Data.TagStore exposing (TagStoreMsg)
 import Http
@@ -15,4 +14,4 @@ type Msg
     | ProductStoreMsg ProductStoreMsg
     | OrderLineStoreMsg OrderLineStoreMsg
     | TagStoreMsg TagStoreMsg
-    | SetMainSideBarRoute SideBarRoute
+    | ToggleMainSideBarRoute

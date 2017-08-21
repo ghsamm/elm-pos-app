@@ -120,8 +120,8 @@ update msg model =
         TagStoreMsg msg ->
             ( { model | tagStore = TagStore.update msg model.tagStore }, Cmd.none )
 
-        SetMainSideBarRoute route ->
-            ( { model | sideBarRoute = route }, Cmd.none )
+        ToggleMainSideBarRoute ->
+            ( { model | sideBarRoute = SideBarRoute.toggle model.sideBarRoute }, Cmd.none )
 
 
 main : Program Never Model Msg
