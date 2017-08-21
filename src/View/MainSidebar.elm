@@ -13,7 +13,7 @@ import Util exposing (styles)
 import View.Colors as Colors
 import View.CurrentOrder as Order
 import View.OrderActionPanel as OrderActionPanel
-import View.OrderHistory as OrderHistory
+import View.OrderList as OrderHistory
 
 
 viewHeader : Html Msg

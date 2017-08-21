@@ -1,4 +1,4 @@
-module View.OrderHistory exposing (..)
+module View.OrderList exposing (..)
 
 import Css exposing (..)
 import Data.Model exposing (Model)
