@@ -11,7 +11,7 @@ import Html.Events exposing (..)
 import Intl exposing (intl)
 import Util exposing (styles)
 import View.Colors as Colors
-import View.Order as Order
+import View.CurrentOrder as Order
 import View.OrderActionPanel as OrderActionPanel
 import View.OrderHistory as OrderHistory
 

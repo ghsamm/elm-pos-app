@@ -1,4 +1,4 @@
-module View.Order exposing (..)
+module View.CurrentOrder exposing (..)
 
 import Css exposing (..)
 import Data.Model exposing (Model)
@@ -52,7 +52,7 @@ view model =
             , Css.property "grid-template-rows" "1fr 40px"
             , overflowY Css.hidden
             ]
-        , Attributes.class "order"
+        , Attributes.class "current-order"
         ]
         [ OrderLineList.view
             (\orderLineId -> OrderLineStoreMsg (SelectOrderLine orderLineId))
