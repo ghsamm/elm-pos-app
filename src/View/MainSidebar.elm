@@ -74,8 +74,8 @@ viewBody model =
                     }
                 ]
 
-        SideBarRoute.ViewHistory ->
-            OrderHistory.view model
+        SideBarRoute.ViewHistory subRoute ->
+            OrderHistory.view subRoute model
 
 
 view : Model -> Html Msg

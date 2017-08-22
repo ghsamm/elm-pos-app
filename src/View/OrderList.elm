@@ -3,6 +3,7 @@ module View.OrderList exposing (..)
 import Css exposing (..)
 import Data.Model exposing (Model)
 import Data.Msg exposing (Msg)
+import Data.SideBarRoute as SideBarRoute
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (..)
 import SelectList
@@ -12,8 +13,8 @@ import View.Colors as Colors
 import View.Order as Order
 
 
-view : Model -> Html Msg
-view model =
+view : SideBarRoute.ViewHistorySubRoute -> Model -> Html Msg
+view subRoute model =
     div
         [ Attributes.class "order-list"
         , styles
