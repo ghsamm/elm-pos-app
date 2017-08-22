@@ -56,7 +56,7 @@ viewHeader =
 viewBody : Model -> Html Msg
 viewBody model =
     case model.sideBarRoute of
-        SideBarRoute.EditingOrder ->
+        SideBarRoute.EditCurrentOrder ->
             div
                 [ Attributes.class "main-sidebar__body"
                 , styles

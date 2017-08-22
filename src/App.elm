@@ -29,7 +29,7 @@ model =
     , orderLineStore = OrderLineStore.fromList []
     , tagStore = TagStore.fromList []
     , errors = []
-    , sideBarRoute = SideBarRoute.EditingOrder
+    , sideBarRoute = SideBarRoute.EditCurrentOrder
     }
 
 
