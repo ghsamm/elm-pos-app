@@ -3,14 +3,14 @@ module Data.SideBarRoute exposing (..)
 
 type SideBarRoute
     = EditCurrentOrder
-    | ViewingHistory
+    | ViewHistory
 
 
 toggle : SideBarRoute -> SideBarRoute
 toggle route =
     case route of
         EditCurrentOrder ->
-            ViewingHistory
+            ViewHistory
 
-        ViewingHistory ->
+        ViewHistory ->
             EditCurrentOrder

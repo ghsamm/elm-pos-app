@@ -74,7 +74,7 @@ viewBody model =
                     }
                 ]
 
-        SideBarRoute.ViewingHistory ->
+        SideBarRoute.ViewHistory ->
             OrderHistory.view model
 
 
