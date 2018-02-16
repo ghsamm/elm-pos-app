@@ -3,6 +3,7 @@ module Request.Tag exposing (..)
 import Data.Tag as Tag exposing (Tag)
 import Http
 import Json.Decode as Json exposing (Decoder)
+import Request.Api as Api
 
 
 tagsDecoder : Decoder (List Tag)
@@ -12,4 +13,4 @@ tagsDecoder =
 
 allTags : Http.Request (List Tag)
 allTags =
-    Http.get "http://localhost:3001/tags" tagsDecoder
+    Http.get (Api.url ++ "/tags") tagsDecoder

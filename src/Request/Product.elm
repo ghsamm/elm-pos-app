@@ -3,6 +3,7 @@ module Request.Product exposing (..)
 import Data.Product as Product exposing (Product)
 import Http
 import Json.Decode as Json exposing (Decoder)
+import Request.Api as Api
 
 
 productsDecoder : Decoder (List Product)
@@ -12,4 +13,4 @@ productsDecoder =
 
 allProducts : Http.Request (List Product)
 allProducts =
-    Http.get "http://localhost:3001/products" productsDecoder
+    Http.get (Api.url ++ "/products") productsDecoder
