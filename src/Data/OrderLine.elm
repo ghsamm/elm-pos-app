@@ -1,26 +1,22 @@
-module Data.OrderLine
-    exposing
-        ( OrderLine
-        , OrderLineId(..)
-        , decrementQuantity
-        , fromId
-        , fromProduct
-        , incrementQuantity
-        , stringToOrderLineId
-        , toDiscount
-        , toId
-        , toPrice
-        , toProductId
-        , toProductName
-        , toProductPrice
-        , toQuantity
-        , withDiscount
-        , withId
-        , withProductId
-        , withQuantity
-        )
+module Data.OrderLine exposing
+    ( OrderLine
+    , OrderLineId(..)
+    , decrementQuantity
+    , fromId
+    , fromProduct
+    , incrementQuantity
+    , stringToOrderLineId
+    , toId
+    , toPrice
+    , toProductId
+    , toProductName
+    , toProductPrice
+    , toQuantity
+    , withId
+    , withProductId
+    , withQuantity
+    )
 
-import Data.Discount exposing (Discount(..))
 import Data.Product as Product exposing (Product, ProductId(..))
 
 
@@ -35,7 +31,6 @@ type OrderLine
         , productName : String
         , productPrice : Float
         , quantity : Int
-        , discount : Discount
         }
 
 
@@ -47,7 +42,6 @@ defaultOrderLine =
         , productName = ""
         , productPrice = 0
         , quantity = 1
-        , discount = NoDiscount
         }
 
 
@@ -146,16 +140,6 @@ decrementQuantity orderLine =
 toQuantity : OrderLine -> Int
 toQuantity (OrderLine orderLine) =
     orderLine.quantity
-
-
-withDiscount : Discount -> OrderLine -> OrderLine
-withDiscount newDiscount (OrderLine orderLine) =
-    OrderLine { orderLine | discount = newDiscount }
-
-
-toDiscount : OrderLine -> Discount
-toDiscount (OrderLine orderLine) =
-    orderLine.discount
 
 
 stringToOrderLineId : String -> OrderLineId

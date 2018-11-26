@@ -1,7 +1,6 @@
 module View.OrderLine exposing (view)
 
 import Css exposing (..)
-import Data.Discount exposing (Discount(..), applyDiscount, discountToString)
 import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId)
 import Html exposing (..)
 import Html.Attributes as Attributes exposing (class, classList)
@@ -22,88 +21,36 @@ viewName name =
         [ Html.text <| name ]
 
 
-viewUnitPriceBeforeDiscount : Float -> Discount -> Html msg
-viewUnitPriceBeforeDiscount price discount =
-    let
-        attributes =
-            case discount of
-                NoDiscount ->
-                    [ Attributes.class "order-line__unit-price--new" ]
-
-                _ ->
-                    [ Attributes.class "order-line__unit-price--old"
+viewUnitPrice : Float  -> Html msg
+viewUnitPrice price  =
+    div
+        [ styles [ mixins.boldText, Css.property "justify-self" "flex-end" ]
+        , Attributes.class "order-line__unit-price"
+        ]
+        [ span [ Attributes.class "order-line__unit-price--old"
                     , styles
                         [ textDecoration lineThrough
                         , fontSize (Css.em 0.8)
                         , fontWeight normal
                         ]
-                    ]
-    in
-    span attributes [ Html.text <| formatPrice price ]
-
-
-viewUnitPriceAfterDiscount : Float -> Discount -> Html msg
-viewUnitPriceAfterDiscount price discount =
-    case discount of
-        NoDiscount ->
-            Html.text ""
-
-        _ ->
-            span [ Attributes.class "order-line__unit-price--new" ] [ Html.text <| formatPrice <| applyDiscount discount price ]
-
-
-viewUnitPrice : Float -> Discount -> Html msg
-viewUnitPrice price discount =
-    div
-        [ styles [ mixins.boldText, Css.property "justify-self" "flex-end" ]
-        , Attributes.class "order-line__unit-price"
-        ]
-        [ viewUnitPriceBeforeDiscount price discount
+                    ] [ Html.text <| formatPrice price ]
         , Html.text " "
-        , viewUnitPriceAfterDiscount price discount
         ]
 
 
 
--- ,Html.text <| formatPrice price ]
 
-
-viewDiscount : Discount -> Html msg
-viewDiscount discount =
-    let
-        textData =
-            case discount of
-                NoDiscount ->
-                    Html.text ""
-
-                _ ->
-                    span []
-                        [ Html.text "* with a discount of "
-                        , span [ styles [ mixins.boldText ] ]
-                            [ Html.text <| discountToString discount ]
-                        ]
-    in
-    div
-        [ styles
-            [ fontSize (Css.em 0.8)
-            , fontStyle italic
-            ]
-        , Attributes.class "order-line__discount"
-        ]
-        [ textData ]
-
-
-viewTotalPrice : Int -> Float -> Discount -> Html msg
-viewTotalPrice quantity unitPrice discount =
+viewTotalPrice : Int -> Float -> Html msg
+viewTotalPrice quantity unitPrice  =
     span
         [ styles [ mixins.boldText ]
         , Attributes.class "order-line__total-price"
         ]
-        [ Html.text <| formatPrice <| applyDiscount discount <| toFloat quantity * unitPrice ]
+        [ Html.text <| formatPrice  <| toFloat quantity * unitPrice ]
 
 
-viewBottomLine : Int -> Float -> Discount -> Html msg
-viewBottomLine quantity unitPrice discount =
+viewBottomLine : Int -> Float -> Html msg
+viewBottomLine quantity unitPrice  =
     div
         [ styles [ Css.property "justify-self" "flex-end" ]
         , Attributes.class "order-line__bottom-line"
@@ -113,16 +60,15 @@ viewBottomLine quantity unitPrice discount =
             [ styles [ mixins.boldText ] ]
             [ Html.text <| toString quantity ]
         , Html.text " = "
-        , viewTotalPrice quantity unitPrice discount
+        , viewTotalPrice quantity unitPrice 
         ]
 
 
-viewInfo : Int -> Float -> Discount -> Html msg
-viewInfo quantity unitPrice discount =
+viewInfo : Int -> Float  -> Html msg
+viewInfo quantity unitPrice  =
     div
         [ Attributes.class "order-line__info order-line__row" ]
-        [ viewDiscount discount
-        , viewBottomLine quantity unitPrice discount
+        [  viewBottomLine quantity unitPrice 
         ]
 
 
@@ -141,8 +87,6 @@ view handleClick isSelected orderLine =
         quantity =
             orderLine |> OrderLine.toQuantity
 
-        discount =
-            orderLine |> OrderLine.toDiscount
     in
     div
         [ styles
@@ -167,7 +111,6 @@ view handleClick isSelected orderLine =
         , onClick <| handleClick id
         ]
         [ viewName name
-        , viewUnitPrice price discount
-        , viewDiscount discount
-        , viewBottomLine quantity price discount
+        , viewUnitPrice price
+        , viewBottomLine quantity price 
         ]

@@ -1,6 +1,5 @@
-module Selector.OrderLine exposing (..)
+module Selector.OrderLine exposing (orderLineListSelector, orderLinePrice, orderLineQuantity, orderLineSelector, selectedOrderLine)
 
-import Data.Discount exposing (applyDiscount)
 import Data.Model exposing (Model)
 import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId)
 import Data.OrderLineStore exposing (getOrderLine)
@@ -28,9 +27,6 @@ orderLinePrice orderLineId model =
         Just ( orderLine, product ) ->
             toFloat
                 (orderLine |> OrderLine.toQuantity)
-                * applyDiscount
-                    (orderLine |> OrderLine.toDiscount)
-                    (product |> Product.toPrice)
 
 
 orderLineQuantity : OrderLineId -> Model -> Int

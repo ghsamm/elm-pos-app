@@ -1,24 +1,20 @@
-module Data.Product
-    exposing
-        ( Product
-        , ProductId(..)
-        , decode
-        , doesTitleContain
-        , fromId
-        , hasTag
-        , stringToProductId
-        , toDiscount
-        , toId
-        , toName
-        , toPrice
-        , toTagId
-        , withDiscount
-        , withName
-        , withPrice
-        , withTag
-        )
+module Data.Product exposing
+    ( Product
+    , ProductId(..)
+    , decode
+    , doesTitleContain
+    , fromId
+    , hasTag
+    , stringToProductId
+    , toId
+    , toName
+    , toPrice
+    , toTagId
+    , withName
+    , withPrice
+    , withTag
+    )
 
-import Data.Discount exposing (Discount(..))
 import Data.Tag as Tag exposing (TagId)
 import Json.Decode as Json exposing (Decoder, float, maybe, string)
 import Json.Decode.Pipeline as JsonPipeline exposing (hardcoded, optional, required)
@@ -28,7 +24,6 @@ type alias ProductProps =
     { id : ProductId
     , name : String
     , price : Float
-    , discount : Discount
     , tag : Maybe TagId
     }
 
@@ -54,7 +49,6 @@ decode =
             |> required "id" decodeId
             |> required "name" string
             |> required "price" float
-            |> hardcoded (defaultProduct |> toDiscount)
             |> optional "tag_id" (Json.map Just Tag.decodeId) Nothing
         )
 
@@ -92,16 +86,6 @@ withPrice newPrice (Product product) =
 toPrice : Product -> Float
 toPrice (Product product) =
     product.price
-
-
-withDiscount : Discount -> Product -> Product
-withDiscount newDiscount (Product product) =
-    Product { product | discount = newDiscount }
-
-
-toDiscount : Product -> Discount
-toDiscount (Product product) =
-    product.discount
 
 
 withTag : TagId -> Product -> Product
@@ -161,6 +145,5 @@ defaultProduct =
         { id = ProductId "default-product"
         , name = "(no name)"
         , price = 0
-        , discount = NoDiscount
         , tag = Nothing
         }
