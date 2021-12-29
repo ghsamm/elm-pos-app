@@ -1,19 +1,20 @@
 module View.Product exposing (..)
 
 import Css exposing (..)
-import Data.Product as Product exposing (Product, ProductId)
+import Data.Product as Product exposing (Product)
 import Data.Tag as Tag exposing (Tag)
-import Html exposing (..)
-import Html.Attributes as Attributes exposing (..)
-import Html.Events exposing (..)
-import Util exposing (formatPrice, styles)
+import Html
+import Html.Styled exposing (..)
+import Html.Styled.Attributes as Attributes exposing (..)
+import Html.Styled.Events exposing (onClick)
+import Util exposing (formatPrice)
 import View.Colors as Colors
 
 
 viewProductPrice : Float -> Html msg
 viewProductPrice productPrice =
     div
-        [ styles
+        [ css
             [ position absolute
             , top zero
             , right zero
@@ -24,19 +25,19 @@ viewProductPrice productPrice =
             ]
         , Attributes.class "product__price"
         ]
-        [ Html.text <| formatPrice productPrice ]
+        [ text <| formatPrice productPrice ]
 
 
 viewProductName : String -> Html msg
 viewProductName productName =
     div
-        [ styles
+        [ css
             [ fontSize (Css.em 1.2)
             , textAlign center
             ]
         , Attributes.class "product__name"
         ]
-        [ Html.text productName ]
+        [ text productName ]
 
 
 view : (Product -> msg) -> ( Product, Maybe Tag ) -> Html msg
@@ -51,15 +52,16 @@ view handleClick ( product, maybeTag ) =
                     []
     in
     a
-        [ styles
-            [ position relative
-            , backgroundColor Colors.mainBg
-            , displayFlex
-            , alignItems center
-            , justifyContent center
-            , mixin tagStyle
-            , padding (px 10)
-            ]
+        [ css
+            (List.append tagStyle
+                [ position relative
+                , backgroundColor Colors.mainBg
+                , displayFlex
+                , alignItems center
+                , justifyContent center
+                , padding (px 10)
+                ]
+            )
         , Attributes.class "product"
         , onClick <| handleClick product
         , href "#"

@@ -5,11 +5,11 @@ import Data.Model exposing (Model)
 import Data.Msg exposing (..)
 import Data.OrderLineStore as OrderLineStore exposing (OrderLineStoreMsg(..))
 import Data.SideBarRoute as SideBarRoute
-import Html exposing (..)
-import Html.Attributes as Attributes exposing (..)
-import Html.Events exposing (..)
+import Html
+import Html.Styled exposing (..)
+import Html.Styled.Attributes as Attributes exposing (..)
+import Html.Styled.Events exposing (..)
 import Intl exposing (intl)
-import Util exposing (styles)
 import View.Colors as Colors
 import View.CurrentOrder as Order
 import View.OrderActionPanel as OrderActionPanel
@@ -20,7 +20,7 @@ viewHeader : Html Msg
 viewHeader =
     div
         [ Attributes.class "sidebar-header"
-        , styles
+        , css
             [ position relative
             , displayFlex
             , alignItems center
@@ -34,7 +34,7 @@ viewHeader =
         [ a
             [ Attributes.class "sidebar-header__more-button"
             , href "#"
-            , styles
+            , css
                 [ position absolute
                 , top zero
                 , bottom zero
@@ -47,9 +47,9 @@ viewHeader =
                 ]
             , onClick <| ToggleMainSideBarRoute
             ]
-            [ Html.text "..."
+            [ text "..."
             ]
-        , div [] [ Html.text (intl.ticket ++ " #1520") ]
+        , div [] [ text (intl.ticket ++ " #1520") ]
         ]
 
 
@@ -59,7 +59,7 @@ viewBody model =
         SideBarRoute.EditCurrentOrder ->
             div
                 [ Attributes.class "main-sidebar__body"
-                , styles
+                , css
                     [ Css.property "display" "grid"
                     , Css.property "grid-template-rows" "1fr 220px"
                     , Css.property "grid-row-gap" "10px"
@@ -82,7 +82,7 @@ view : Model -> Html Msg
 view model =
     div
         [ Attributes.class "main-sidebar"
-        , styles
+        , css
             [ Css.property "display" "grid"
             , Css.property "grid-template-rows" "50px 1fr"
             , Css.property "grid-row-gap" "10px"

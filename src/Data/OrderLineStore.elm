@@ -4,7 +4,7 @@ module Data.OrderLineStore exposing (..)
 
 import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId(..))
 import Data.Product as Product exposing (Product, ProductId(..))
-import Dict exposing (Dict, insert)
+import Dict exposing (Dict)
 import Util exposing (listToDict)
 
 

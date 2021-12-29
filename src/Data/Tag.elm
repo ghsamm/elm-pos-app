@@ -1,20 +1,19 @@
-module Data.Tag
-    exposing
-        ( Tag
-        , TagId(..)
-        , decode
-        , decodeId
-        , fromId
-        , toColor
-        , toId
-        , toName
-        , withColor
-        , withName
-        )
+module Data.Tag exposing
+    ( Tag
+    , TagId(..)
+    , decode
+    , decodeId
+    , fromId
+    , toColor
+    , toId
+    , toName
+    , withColor
+    , withName
+    )
 
 import Css exposing (Color, hex)
-import Json.Decode as Json exposing (Decoder, string)
-import Json.Decode.Pipeline as JsonPipeline exposing (required)
+import Json.Decode as Decode exposing (Decoder, string)
+import Json.Decode.Pipeline exposing (required)
 
 
 type TagId
@@ -40,22 +39,21 @@ defaultTag =
 decodeId : Decoder TagId
 decodeId =
     string
-        |> Json.map TagId
+        |> Decode.map TagId
 
 
 decodeColor : Decoder Css.Color
 decodeColor =
-    string |> Json.map hex
+    string |> Decode.map hex
 
 
 decode : Decoder Tag
 decode =
-    Json.map Tag
-        (JsonPipeline.decode TagProps
-            |> required "id" decodeId
-            |> required "name" string
-            |> required "color" decodeColor
-        )
+    Decode.succeed TagProps
+        |> required "id" decodeId
+        |> required "name" string
+        |> required "color" decodeColor
+        |> Decode.map Tag
 
 
 fromId : TagId -> Tag

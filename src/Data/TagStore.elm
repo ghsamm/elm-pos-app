@@ -2,7 +2,6 @@ module Data.TagStore exposing (..)
 
 import Data.Tag as Tag exposing (Tag, TagId(..))
 import Dict exposing (Dict)
-import Http
 import Util exposing (listToDict)
 
 

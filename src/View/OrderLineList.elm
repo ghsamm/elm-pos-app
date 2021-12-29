@@ -3,9 +3,9 @@ module View.OrderLineList exposing (view)
 import Css exposing (..)
 import Data.Msg exposing (Msg)
 import Data.OrderLine exposing (OrderLine, OrderLineId, toId)
-import Html exposing (..)
-import Html.Attributes as Attributes exposing (..)
-import Util exposing (styles)
+import Html
+import Html.Styled exposing (..)
+import Html.Styled.Attributes as Attributes exposing (..)
 import View.Colors as Colors
 import View.OrderLine as OrderLine
 
@@ -17,7 +17,7 @@ view onClickOrderLine selectedId list =
             Just (toId orderLine) == selectedId
     in
     div
-        [ styles
+        [ css
             [ overflowY auto
             , backgroundColor Colors.mainBg
             , padding (px 5)

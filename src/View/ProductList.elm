@@ -2,18 +2,18 @@ module View.ProductList exposing (view)
 
 import Css exposing (..)
 import Data.Msg exposing (Msg(..))
-import Data.Product exposing (Product, stringToProductId)
+import Data.Product exposing (Product)
 import Data.Tag exposing (Tag)
-import Html exposing (..)
-import Html.Attributes as Attributes exposing (..)
-import Util exposing (styles)
-import View.Product as ProductView exposing (view)
+import Html
+import Html.Styled exposing (..)
+import Html.Styled.Attributes as Attributes exposing (..)
+import View.Product as ProductView
 
 
 view : (Product -> Msg) -> List ( Product, Maybe Tag ) -> Html Msg
 view onClickProduct productList =
     div
-        [ styles
+        [ css
             [ Css.property "display" "grid"
             , Css.property "grid-template-columns" "repeat(auto-fit, 160px)"
             , Css.property "grid-auto-rows" "120px"

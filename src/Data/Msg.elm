@@ -10,8 +10,9 @@ import Http
 
 type Msg
     = NoOp
-    | Init (Result Http.Error ( List Product, List Tag ))
     | ProductStoreMsg ProductStoreMsg
     | OrderLineStoreMsg OrderLineStoreMsg
     | TagStoreMsg TagStoreMsg
     | ToggleMainSideBarRoute
+    | GotProducts (Result Http.Error (List Product))
+    | GotTags (Result Http.Error (List Tag))

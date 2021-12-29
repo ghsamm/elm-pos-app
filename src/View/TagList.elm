@@ -2,14 +2,14 @@ module View.TagList exposing (..)
 
 import Css exposing (..)
 import Data.Tag as Tag exposing (Tag, TagId(..))
-import Data.TagStore as TagStore exposing (TagStore)
+import Data.TagStore exposing (TagStore)
 import Dict
-import Html exposing (..)
-import Html.Attributes as Attributes exposing (..)
-import Html.Events exposing (..)
+import Html
+import Html.Styled exposing (..)
+import Html.Styled.Attributes as Attributes exposing (..)
+import Html.Styled.Events exposing (..)
 import Intl exposing (intl)
 import Tuple
-import Util exposing ((=>), styles)
 import View.Colors as Colors
 
 
@@ -23,32 +23,31 @@ defaultTag =
 viewTag : (Maybe TagId -> msg) -> ( Tag, Bool ) -> Html msg
 viewTag handleClick ( tag, isSelected ) =
     let
-        selectedStyleMixin =
-            case isSelected of
-                True ->
-                    mixin
-                        [ border3 (px 2) solid (tag |> Tag.toColor)
-                        , color (tag |> Tag.toColor)
-                        ]
+        selectedStyle =
+            if isSelected then
+                [ border3 (px 2) solid (tag |> Tag.toColor)
+                , color (tag |> Tag.toColor)
+                ]
 
-                False ->
-                    mixin [ borderBottom3 (px 2) solid (tag |> Tag.toColor) ]
+            else
+                [ borderBottom3 (px 2) solid (tag |> Tag.toColor) ]
     in
     a
-        [ styles
-            [ displayFlex
-            , alignItems center
-            , justifyContent center
-            , padding (px 10)
-            , marginRight (px 5)
-            , backgroundColor Colors.mainBg
-            , selectedStyleMixin
-            ]
+        [ css
+            (List.append selectedStyle
+                [ displayFlex
+                , alignItems center
+                , justifyContent center
+                , padding (px 10)
+                , marginRight (px 5)
+                , backgroundColor Colors.mainBg
+                ]
+            )
         , Attributes.class "tag"
         , Attributes.href "#"
         , onClick <| handleClick (tag |> Tag.toId |> Just)
         ]
-        [ Html.text (tag |> Tag.toName) ]
+        [ text (tag |> Tag.toName) ]
 
 
 type alias ViewListeners msg =
@@ -65,7 +64,7 @@ view { onClickTag, onClickDefaultTag } ( tagStore, selectedTagId ) =
             selectedTagId == Just (Tag.toId tag)
     in
     div
-        [ styles
+        [ css
             [ Css.property "grid-area" "tag-list"
             , displayFlex
             , alignItems stretch

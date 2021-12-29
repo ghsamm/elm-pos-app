@@ -1,5 +1,6 @@
 module Data.Product exposing
     ( Product
+    , ProductErr(..)
     , ProductId(..)
     , decode
     , doesTitleContain
@@ -16,8 +17,8 @@ module Data.Product exposing
     )
 
 import Data.Tag as Tag exposing (TagId)
-import Json.Decode as Json exposing (Decoder, float, maybe, string)
-import Json.Decode.Pipeline as JsonPipeline exposing (hardcoded, optional, required)
+import Json.Decode as Decode exposing (Decoder, float, string)
+import Json.Decode.Pipeline exposing (optional, required)
 
 
 type alias ProductProps =
@@ -32,6 +33,10 @@ type Product
     = Product ProductProps
 
 
+type ProductErr
+    = ProductNotFound
+
+
 type ProductId
     = ProductId String
 
@@ -39,18 +44,18 @@ type ProductId
 decodeId : Decoder ProductId
 decodeId =
     string
-        |> Json.map ProductId
+        |> Decode.map ProductId
 
 
 decode : Decoder Product
 decode =
-    Json.map Product
-        (JsonPipeline.decode ProductProps
-            |> required "id" decodeId
-            |> required "name" string
-            |> required "price" float
-            |> optional "tag_id" (Json.map Just Tag.decodeId) Nothing
-        )
+    (Decode.succeed ProductProps
+        |> required "id" decodeId
+        |> required "name" string
+        |> required "price" float
+        |> optional "tag_id" (Decode.map Just Tag.decodeId) Nothing
+    )
+        |> Decode.map Product
 
 
 fromId : String -> Product

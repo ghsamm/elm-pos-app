@@ -1,41 +1,45 @@
 module View.Numpad exposing (view)
 
 import Css exposing (..)
-import Html exposing (..)
-import Html.Attributes as Attributes exposing (..)
-import Html.Events exposing (..)
-import Util exposing (styles)
+import Html.Styled exposing (..)
+import Html.Styled.Attributes as Attributes exposing (..)
+import Html.Styled.Events exposing (..)
 import View.Colors as Colors
 
 
 renderNumber : Bool -> Int -> msg -> Html msg
 renderNumber isSelected number handleClick =
+    let
+        selectedStyle =
+            if isSelected then
+                [ color Colors.secondaryText
+                , backgroundColor Colors.accentBg
+                ]
+
+            else
+                []
+    in
     a
-        [ styles
-            [ Css.property "display" "grid"
-            , Css.property "justify-content" "center"
-            , Css.property "align-content" "center"
-            , fontWeight bold
-            , backgroundColor Colors.secondaryBg
-            , if isSelected then
-                mixin
-                    [ color Colors.secondaryText
-                    , backgroundColor Colors.accentBg
-                    ]
-              else
-                mixin []
-            ]
+        [ css
+            (List.append selectedStyle
+                [ Css.property "display" "grid"
+                , Css.property "justify-content" "center"
+                , Css.property "align-content" "center"
+                , fontWeight bold
+                , backgroundColor Colors.secondaryBg
+                ]
+            )
         , href "#"
         , onClick handleClick
         , Attributes.class "numpad__number"
         ]
-        [ Html.text <| toString number ]
+        [ text <| String.fromInt number ]
 
 
 view : Maybe Int -> (Int -> msg) -> Html msg
 view selectedNumber handleClick =
     div
-        [ styles
+        [ css
             [ Css.property "display" "grid"
             , Css.property "grid-area" "action-left"
             , Css.property "grid-template-columns" "repeat(3, 1fr)"
