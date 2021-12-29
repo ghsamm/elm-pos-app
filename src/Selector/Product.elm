@@ -1,17 +1,17 @@
 module Selector.Product exposing (..)
 
 import Data.Model exposing (Model)
-import Data.Product as Product exposing (Product, ProductErr(..), ProductId)
-import Data.ProductStore exposing (ProductStore, getProduct)
+import Data.Product exposing (Product, ProductErr(..), ProductId)
+import Data.ProductStore exposing (getProduct)
 
 
 productSelector : ProductId -> Model -> Result ProductErr Product
 productSelector productId model =
     let
-        product =
+        maybeProduct =
             getProduct productId model.productStore
     in
-    case product of
+    case maybeProduct of
         Nothing ->
             Err ProductNotFound
 

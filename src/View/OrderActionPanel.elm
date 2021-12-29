@@ -3,12 +3,12 @@ module View.OrderActionPanel exposing (view)
 import Css exposing (..)
 import Data.Model exposing (Model)
 import Data.OrderLine as OrderLine
-import Html exposing (..)
-import Html.Attributes as Attributes exposing (..)
-import Html.Events exposing (..)
+import Html
+import Html.Styled exposing (..)
+import Html.Styled.Attributes as Attributes exposing (..)
+import Html.Styled.Events exposing (..)
 import Intl exposing (intl)
 import Selector.OrderLine as OrderLineSelector exposing (orderLineSelector)
-import Util exposing (styles)
 import View.Colors as Colors
 import View.Numpad as Numpad
 
@@ -30,7 +30,7 @@ type alias ViewRightActionsListener msg =
 
 buttonAttributes : String -> List (Attribute msg)
 buttonAttributes gridArea =
-    [ styles
+    [ css
         [ Css.property "grid-area" gridArea
         , Css.property "display" "grid"
         , Css.property "align-content" "center"
@@ -47,26 +47,26 @@ buttonAttributes gridArea =
 
 
 renderButton : String -> String -> Html msg
-renderButton text gridArea =
+renderButton buttonText gridArea =
     a
         (buttonAttributes gridArea)
-        [ Html.text text ]
+        [ text buttonText ]
 
 
 renderButtonWithListener : String -> String -> msg -> Html msg
-renderButtonWithListener text gridArea handleClick =
+renderButtonWithListener buttonText gridArea handleClick =
     a
         (List.append
             (buttonAttributes gridArea)
             [ onClick handleClick ]
         )
-        [ Html.text text ]
+        [ text buttonText ]
 
 
 viewNavigation : Html msg
 viewNavigation =
     div
-        [ styles
+        [ css
             [ Css.property "display" "grid"
             , Css.property "grid-area" "navigation"
             , Css.property "grid-template-rows" "repeat(3, 1fr)"
@@ -83,7 +83,7 @@ viewNavigation =
 viewRightActions : ViewRightActionsListener msg -> Html msg
 viewRightActions { onDecrement, onIncrement, onDelete } =
     div
-        [ styles
+        [ css
             [ Css.property "display" "grid"
             , Css.property "gridArea" "action-right"
             , Css.property "grid-template-rows" "repeat(3, 1fr)"
@@ -102,7 +102,7 @@ viewRightActions { onDecrement, onIncrement, onDelete } =
 view : Model -> ViewListeners msg -> Html msg
 view model { onNumpadClick, onDecrement, onIncrement, onDelete } =
     div
-        [ styles
+        [ css
             [ Css.property "display" "grid"
             , Css.property "grid-template-rows" "1fr"
             , Css.property "grid-template-columns" "2fr 1fr 1fr"

@@ -1,15 +1,16 @@
 module View.ErrorList exposing (..)
 
 import Css exposing (..)
-import Html exposing (..)
-import Html.Attributes as Attributes exposing (..)
-import Util exposing (styles)
+import Html
+import Html.Styled exposing (..)
+import Html.Styled.Attributes as Attributes exposing (css, href, src)
+import Html.Styled.Events exposing (onClick)
 
 
 viewError : String -> Html msg
 viewError errorText =
     div
-        [ styles
+        [ css
             [ Css.width (px 500)
             , backgroundColor (hex "fff")
             , color (hex "e64141")
@@ -21,13 +22,13 @@ viewError errorText =
             ]
         , Attributes.class "error"
         ]
-        [ Html.text errorText ]
+        [ text errorText ]
 
 
 view : List String -> Html msg
 view errorList =
     div
-        [ styles
+        [ css
             [ position absolute
             , top zero
             , right zero

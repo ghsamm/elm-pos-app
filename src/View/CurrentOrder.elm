@@ -4,12 +4,12 @@ import Css exposing (..)
 import Data.Model exposing (Model)
 import Data.Msg exposing (..)
 import Data.OrderLine as OrderLine
-import Data.OrderLineStore as OrderLineStore exposing (OrderLineStoreMsg(..))
+import Data.OrderLineStore exposing (OrderLineStoreMsg(..))
 import Dict
-import Html exposing (..)
-import Html.Attributes as Attributes exposing (..)
+import Html.Styled exposing (..)
+import Html.Styled.Attributes as Attributes exposing (..)
 import Intl exposing (intl)
-import Util exposing (formatPrice, styles)
+import Util exposing (formatPrice)
 import View.Colors as Colors
 import View.OrderLineList as OrderLineList
 
@@ -27,7 +27,7 @@ viewTotal : Model -> Html Msg
 viewTotal model =
     div
         [ Attributes.class "order-total"
-        , styles
+        , css
             [ displayFlex
             , alignItems center
             , justifyContent spaceBetween
@@ -39,15 +39,15 @@ viewTotal model =
             , borderTop3 (px 1) solid Colors.secondaryBg
             ]
         ]
-        [ div [] [ Html.text intl.total ]
-        , div [] [ Html.text <| formatPrice <| getTotal <| model ]
+        [ div [] [ text "intl.total" ]
+        , div [] [ text <| formatPrice <| getTotal <| model ]
         ]
 
 
 view : Model -> Html Msg
 view model =
     div
-        [ styles
+        [ css
             [ Css.property "display" "grid"
             , Css.property "grid-template-rows" "1fr 40px"
             , overflowY Css.hidden

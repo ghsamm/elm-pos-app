@@ -1,5 +1,6 @@
 module Request.Product exposing (..)
 
+import Data.Msg exposing (Msg(..))
 import Data.Product as Product exposing (Product)
 import Http
 import Json.Decode as Json exposing (Decoder)
@@ -11,6 +12,9 @@ productsDecoder =
     Json.list Product.decode
 
 
-allProducts : Http.Request (List Product)
+allProducts : Cmd Msg
 allProducts =
-    Http.get (Api.url ++ "/products") productsDecoder
+    Http.get
+        { url = Api.url ++ "/products"
+        , expect = Http.expectJson GotProducts productsDecoder
+        }

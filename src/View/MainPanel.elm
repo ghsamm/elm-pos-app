@@ -7,9 +7,9 @@ import Data.OrderLineStore as OrderLineStore exposing (OrderLineStoreMsg(..))
 import Data.Product as Product
 import Data.ProductStore as ProductStore exposing (ProductStoreMsg(..))
 import Data.TagStore as TagStore
-import Html exposing (..)
-import Html.Attributes as Attributes exposing (..)
-import Util exposing (styles)
+import Html
+import Html.Styled exposing (..)
+import Html.Styled.Attributes as Attributes exposing (..)
 import View.ProductList as ProductList
 import View.TagList as TagList
 
@@ -17,7 +17,7 @@ import View.TagList as TagList
 view : Model -> Html Msg
 view model =
     div
-        [ styles
+        [ css
             [ Css.property "display" "grid"
             , Css.property "grid-template-rows" "50px 1fr"
             , Css.property "grid-template-columns" "1fr"

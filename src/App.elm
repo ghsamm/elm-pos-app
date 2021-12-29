@@ -1,5 +1,6 @@
 module App exposing (..)
 
+import Browser
 import Css exposing (..)
 import Data.Model exposing (Model)
 import Data.Msg exposing (Msg(..))
@@ -9,22 +10,23 @@ import Data.ProductStore as ProductStore
 import Data.SideBarRoute as SideBarRoute
 import Data.Tag as Tag exposing (Tag, TagId(..))
 import Data.TagStore as TagStore
-import Html exposing (..)
-import Html.Attributes as Attributes exposing (..)
+import Html
+import Html.Styled exposing (..)
+import Html.Styled.Attributes as Attributes exposing (..)
 import Http
 import List exposing ((::))
+import Procedure
 import Request.Product
 import Request.Tag
 import Task exposing (Task)
-import Util exposing (styles)
 import View.Colors as Colors
 import View.ErrorList as ErrorList
 import View.MainPanel as MainPanel
 import View.MainSidebar as MainSidebar
 
 
-model : Model
-model =
+initialModel : Model
+initialModel =
     { productStore = ProductStore.fromList []
     , orderLineStore = OrderLineStore.fromList []
     , tagStore = TagStore.fromList []
@@ -37,7 +39,7 @@ container : List (Html msg) -> Html msg
 container content =
     div
         [ Attributes.class "app-container"
-        , styles
+        , css
             [ Css.height (vh 100)
             , flex (Css.int 1)
             , Css.property "display" "grid"
@@ -60,27 +62,10 @@ view model =
         ]
 
 
-init : ( Model, Cmd Msg )
-init =
-    let
-        initProductsRequestTask : Task Http.Error (List Product)
-        initProductsRequestTask =
-            Http.toTask <|
-                Request.Product.allProducts
-
-        initTagsRequestTask : Task Http.Error (List Tag)
-        initTagsRequestTask =
-            Http.toTask <|
-                Request.Tag.allTags
-
-        task : Task Http.Error ( List Product, List Tag )
-        task =
-            Task.map2 (\products tags -> ( products, tags ))
-                initProductsRequestTask
-                initTagsRequestTask
-    in
-    ( model
-    , Task.attempt Init task
+init : () -> ( Model, Cmd Msg )
+init _ =
+    ( initialModel
+    , Cmd.batch [ Request.Product.allProducts, Request.Tag.allTags ]
     )
 
 
@@ -90,20 +75,33 @@ update msg model =
         NoOp ->
             ( model, Cmd.none )
 
-        Init (Err _) ->
+        GotProducts (Err _) ->
             ( { model
                 | errors = (::) "Erreur d'accès à la base de donnés" model.errors
               }
             , Cmd.none
             )
 
-        Init (Ok ( products, tags )) ->
+        GotProducts (Ok products) ->
             ( { model
                 | productStore =
                     ProductStore.update
                         (ProductStore.Init products)
                         model.productStore
-                , tagStore =
+              }
+            , Cmd.none
+            )
+
+        GotTags (Err _) ->
+            ( { model
+                | errors = (::) "Erreur d'accès à la base de donnés" model.errors
+              }
+            , Cmd.none
+            )
+
+        GotTags (Ok tags) ->
+            ( { model
+                | tagStore =
                     TagStore.update
                         (TagStore.Init tags)
                         model.tagStore
@@ -111,23 +109,22 @@ update msg model =
             , Cmd.none
             )
 
-        OrderLineStoreMsg msg ->
-            ( { model | orderLineStore = OrderLineStore.update msg model.orderLineStore }, Cmd.none )
+        OrderLineStoreMsg pageMsg ->
+            ( { model | orderLineStore = OrderLineStore.update pageMsg model.orderLineStore }, Cmd.none )
 
-        ProductStoreMsg msg ->
-            ( { model | productStore = ProductStore.update msg model.productStore }, Cmd.none )
+        ProductStoreMsg pageMsg ->
+            ( { model | productStore = ProductStore.update pageMsg model.productStore }, Cmd.none )
 
-        TagStoreMsg msg ->
-            ( { model | tagStore = TagStore.update msg model.tagStore }, Cmd.none )
+        TagStoreMsg pageMsg ->
+            ( { model | tagStore = TagStore.update pageMsg model.tagStore }, Cmd.none )
 
         ToggleMainSideBarRoute ->
             ( { model | sideBarRoute = SideBarRoute.toggle model.sideBarRoute }, Cmd.none )
 
 
-main : Program Never Model Msg
 main =
-    Html.program
-        { view = view
+    Browser.element
+        { view = view >> toUnstyled
         , init = init
         , update = update
         , subscriptions = \_ -> Sub.none

@@ -3,8 +3,9 @@ module Selector.OrderLine exposing (orderLineListSelector, orderLinePrice, order
 import Data.Model exposing (Model)
 import Data.OrderLine as OrderLine exposing (OrderLine, OrderLineId)
 import Data.OrderLineStore exposing (getOrderLine)
-import Data.Product as Product exposing (Product)
+import Data.Product exposing (Product)
 import Data.ProductStore exposing (getProduct)
+import Tuple exposing (pair)
 
 
 selectedOrderLine : Model -> Maybe OrderLine
@@ -17,10 +18,10 @@ selectedOrderLine model =
 orderLinePrice : OrderLineId -> Model -> Float
 orderLinePrice orderLineId model =
     let
-        orderLine =
+        maybeOrderLine =
             orderLineSelector orderLineId model
     in
-    case orderLine of
+    case maybeOrderLine of
         Nothing ->
             0
 
@@ -32,10 +33,10 @@ orderLinePrice orderLineId model =
 orderLineQuantity : OrderLineId -> Model -> Int
 orderLineQuantity orderLineId model =
     let
-        orderLine =
+        maybeOrderLine =
             orderLineSelector orderLineId model
     in
-    case orderLine of
+    case maybeOrderLine of
         Nothing ->
             0
 
@@ -46,19 +47,19 @@ orderLineQuantity orderLineId model =
 orderLineSelector : OrderLineId -> Model -> Maybe ( OrderLine, Product )
 orderLineSelector orderLineId model =
     let
-        orderLine : Maybe OrderLine
-        orderLine =
+        maybeOrderLine : Maybe OrderLine
+        maybeOrderLine =
             getOrderLine orderLineId model.orderLineStore
 
         product : Maybe Product
         product =
-            orderLine
+            maybeOrderLine
                 |> Maybe.andThen
                     (\orderLine ->
                         getProduct (orderLine |> OrderLine.toProductId) model.productStore
                     )
     in
-    Maybe.map2 (,) orderLine product
+    Maybe.map2 pair maybeOrderLine product
 
 
 orderLineListSelector : List OrderLineId -> Model -> List ( OrderLine, Product )
